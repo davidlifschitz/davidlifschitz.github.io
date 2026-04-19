@@ -14,16 +14,14 @@
       --bg-2: #ffffff;
       --text: #1d1d1f;
       --muted: #6e6e73;
-      --line: rgba(0,0,0,0.08);
-      --card: rgba(255,255,255,0.68);
-      --shadow: 0 20px 60px rgba(0,0,0,0.08);
+      --card: rgba(255,255,255,0.64);
+      --shadow: 0 25px 80px rgba(31, 38, 135, 0.12);
       --blue: #0071e3;
       --purple: #7c5cff;
       --pink: #ff5fa2;
       --teal: #3dd6d0;
       --radius-xl: 32px;
       --radius-lg: 24px;
-      --radius-md: 18px;
       --max: 1180px;
     }
 
@@ -40,6 +38,20 @@
         linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 45%, #eef1f5 100%);
       min-height: 100vh;
       overflow-x: hidden;
+      perspective: 1200px;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 100%;
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      z-index: 999;
+      background: linear-gradient(90deg, var(--blue), var(--purple), var(--pink));
+      box-shadow: 0 0 20px rgba(124,92,255,0.5);
     }
 
     .noise,
@@ -51,7 +63,7 @@
     }
 
     .noise {
-      opacity: 0.035;
+      opacity: 0.03;
       background-image: radial-gradient(#000 0.5px, transparent 0.5px);
       background-size: 12px 12px;
     }
@@ -64,7 +76,9 @@
       height: 34rem;
       filter: blur(70px);
       border-radius: 50%;
-      opacity: 0.28;
+      opacity: 0.3;
+      transition: transform 120ms linear;
+      will-change: transform;
     }
 
     .blur-orb::before {
@@ -131,24 +145,16 @@
       background: rgba(255,255,255,0.55);
       border: 1px solid rgba(255,255,255,0.7);
       box-shadow: 0 8px 24px rgba(255,255,255,0.2) inset;
-      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+      transition: transform 220ms ease, background 220ms ease, box-shadow 220ms ease;
     }
 
-    .nav-links a:hover,
-    .pill:hover,
-    .button:hover,
-    .card:hover {
-      transform: translateY(-2px);
-    }
-
-    section {
-      padding: 36px 0;
-    }
+    section { padding: 36px 0; }
 
     .hero {
       padding-top: 72px;
       padding-bottom: 48px;
       text-align: center;
+      transform-style: preserve-3d;
     }
 
     .eyebrow {
@@ -163,6 +169,9 @@
       color: var(--muted);
       font-size: 0.92rem;
       font-weight: 600;
+      opacity: 0;
+      transform: translateY(22px) scale(.98);
+      animation: riseIn 900ms cubic-bezier(.2,.8,.2,1) 120ms forwards;
     }
 
     h1 {
@@ -172,7 +181,18 @@
       line-height: 0.93;
       letter-spacing: -0.065em;
       font-weight: 800;
+      transform-style: preserve-3d;
     }
+
+    .hero-line {
+      display: block;
+      opacity: 0;
+      transform: translateY(40px) rotateX(18deg);
+      animation: riseIn3D 1000ms cubic-bezier(.16,1,.3,1) forwards;
+    }
+
+    .hero-line:nth-child(1) { animation-delay: 160ms; }
+    .hero-line:nth-child(2) { animation-delay: 300ms; }
 
     .gradient-text {
       background: linear-gradient(135deg, #0a84ff 0%, #7c5cff 45%, #ff5fa2 100%);
@@ -187,6 +207,9 @@
       font-size: clamp(1.06rem, 2vw, 1.28rem);
       line-height: 1.7;
       color: var(--muted);
+      opacity: 0;
+      transform: translateY(24px);
+      animation: riseIn 900ms cubic-bezier(.2,.8,.2,1) 420ms forwards;
     }
 
     .cta-row {
@@ -195,6 +218,9 @@
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: riseIn 900ms cubic-bezier(.2,.8,.2,1) 540ms forwards;
     }
 
     .button {
@@ -207,8 +233,13 @@
       border-radius: 999px;
       font-weight: 600;
       font-size: 0.98rem;
-      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
       border: 1px solid transparent;
+    }
+
+    .button:hover,
+    .nav-links a:hover {
+      transform: translateY(-2px) scale(1.02);
     }
 
     .button.primary {
@@ -234,15 +265,11 @@
     .hero-grid {
       margin-top: 42px;
       grid-template-columns: 1.2fr 0.8fr;
+      transform-style: preserve-3d;
     }
 
-    .projects-grid {
-      grid-template-columns: repeat(12, 1fr);
-    }
-
-    .social-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    .projects-grid { grid-template-columns: repeat(12, 1fr); }
+    .social-grid { grid-template-columns: repeat(3, 1fr); }
 
     .card {
       position: relative;
@@ -254,15 +281,40 @@
       backdrop-filter: blur(24px) saturate(150%);
       -webkit-backdrop-filter: blur(24px) saturate(150%);
       box-shadow: var(--shadow);
-      transition: transform 180ms ease, box-shadow 180ms ease;
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .card::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.28), transparent 35%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent 35%);
       pointer-events: none;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.55), transparent 28%);
+      opacity: 0;
+      transition: opacity 220ms ease;
+      pointer-events: none;
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(44px) rotateX(12deg) scale(0.98);
+      transition: opacity 900ms cubic-bezier(.16,1,.3,1), transform 900ms cubic-bezier(.16,1,.3,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg) scale(1);
     }
 
     .hero-card-large {
@@ -308,6 +360,7 @@
       font-size: 0.92rem;
       font-weight: 600;
       color: #4a4a50;
+      transform: translateZ(28px);
     }
 
     .hero-card-side {
@@ -322,6 +375,7 @@
       border-radius: 22px;
       background: rgba(255,255,255,0.62);
       border: 1px solid rgba(255,255,255,0.8);
+      transform: translateZ(24px);
     }
 
     .metric .label {
@@ -364,10 +418,7 @@
     .span-4 { grid-column: span 4; }
     .span-6 { grid-column: span 6; }
 
-    .project-top {
-      display: grid;
-      gap: 14px;
-    }
+    .project-top { display: grid; gap: 14px; }
 
     .kicker {
       color: var(--muted);
@@ -400,12 +451,13 @@
       color: var(--blue);
       font-weight: 600;
       text-decoration: none;
+      transform: translateZ(18px);
     }
 
-    .accent-purple { background: linear-gradient(135deg, rgba(124,92,255,0.14), rgba(255,255,255,0.55)); }
-    .accent-pink { background: linear-gradient(135deg, rgba(255,95,162,0.14), rgba(255,255,255,0.55)); }
-    .accent-blue { background: linear-gradient(135deg, rgba(10,132,255,0.12), rgba(255,255,255,0.55)); }
-    .accent-teal { background: linear-gradient(135deg, rgba(61,214,208,0.16), rgba(255,255,255,0.55)); }
+    .accent-purple { background: linear-gradient(135deg, rgba(124,92,255,0.16), rgba(255,255,255,0.56)); }
+    .accent-pink { background: linear-gradient(135deg, rgba(255,95,162,0.16), rgba(255,255,255,0.56)); }
+    .accent-blue { background: linear-gradient(135deg, rgba(10,132,255,0.14), rgba(255,255,255,0.56)); }
+    .accent-teal { background: linear-gradient(135deg, rgba(61,214,208,0.18), rgba(255,255,255,0.56)); }
 
     .social-card {
       min-height: 190px;
@@ -419,6 +471,23 @@
       color: var(--muted);
       text-align: center;
       font-size: 0.95rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: riseIn 1000ms cubic-bezier(.2,.8,.2,1) 900ms forwards;
+    }
+
+    @keyframes riseIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes riseIn3D {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+      }
     }
 
     @media (max-width: 960px) {
@@ -434,39 +503,38 @@
         grid-column: span 12;
       }
 
-      h1 {
-        font-size: clamp(2.8rem, 13vw, 4.5rem);
-      }
+      h1 { font-size: clamp(2.8rem, 13vw, 4.5rem); }
     }
 
     @media (max-width: 640px) {
       .wrap,
-      .nav-inner {
-        width: min(calc(100% - 20px), var(--max));
-      }
+      .nav-inner { width: min(calc(100% - 20px), var(--max)); }
+      .card { padding: 22px; border-radius: 24px; }
+      .hero { padding-top: 48px; }
+      .section-head { align-items: start; flex-direction: column; }
+      .nav-inner { align-items: flex-start; flex-direction: column; }
+    }
 
-      .card {
-        padding: 22px;
-        border-radius: 24px;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
       }
-
-      .hero {
-        padding-top: 48px;
-      }
-
-      .section-head {
-        align-items: start;
-        flex-direction: column;
-      }
-
-      .nav-inner {
-        align-items: flex-start;
-        flex-direction: column;
+      .reveal,
+      .eyebrow,
+      .hero-line,
+      .hero p,
+      .cta-row,
+      footer {
+        opacity: 1 !important;
+        transform: none !important;
       }
     }
   </style>
 </head>
 <body>
+  <div class="scroll-progress"></div>
   <div class="noise"></div>
   <div class="blur-orb"></div>
 
@@ -485,8 +553,8 @@
     <section class="hero">
       <div class="eyebrow">Applied AI/ML Engineer • Building thoughtful software</div>
       <h1>
-        Personal systems,<br />
-        <span class="gradient-text">beautifully engineered.</span>
+        <span class="hero-line">Personal systems,</span>
+        <span class="hero-line gradient-text">beautifully engineered.</span>
       </h1>
       <p>
         I build agentic AI tools, automation systems, and product ideas that turn ambitious workflows into something elegant, usable, and real.
@@ -497,7 +565,7 @@
       </div>
 
       <div class="hero-grid">
-        <div class="card hero-card-large accent-blue">
+        <div class="card hero-card-large accent-blue reveal tilt-card">
           <div>
             <h2>Shipping AI products with an automation-first mindset.</h2>
             <p>
@@ -514,7 +582,7 @@
           </div>
         </div>
 
-        <div class="card hero-card-side accent-purple">
+        <div class="card hero-card-side accent-purple reveal tilt-card">
           <div class="metric">
             <div class="label">Current focus</div>
             <div class="value">Agentic systems, developer tools, personal AI</div>
@@ -532,7 +600,7 @@
     </section>
 
     <section id="projects">
-      <div class="section-head">
+      <div class="section-head reveal">
         <div>
           <h2 class="section-title">Current projects</h2>
           <p class="section-intro">A few things I’m actively building and exploring right now.</p>
@@ -540,7 +608,7 @@
       </div>
 
       <div class="projects-grid">
-        <article class="card project accent-purple span-7">
+        <article class="card project accent-purple span-7 reveal tilt-card">
           <div class="project-top">
             <div class="kicker">Swift • iOS automation</div>
             <h3>ShortcutForge</h3>
@@ -551,7 +619,7 @@
           </div>
         </article>
 
-        <article class="card project accent-teal span-5">
+        <article class="card project accent-teal span-5 reveal tilt-card">
           <div class="project-top">
             <div class="kicker">Self-hosted AI</div>
             <h3>ScheduleOS</h3>
@@ -562,7 +630,7 @@
           </div>
         </article>
 
-        <article class="card project accent-pink span-4">
+        <article class="card project accent-pink span-4 reveal tilt-card">
           <div class="project-top">
             <div class="kicker">Behavioral product</div>
             <h3>Bttr</h3>
@@ -573,7 +641,7 @@
           </div>
         </article>
 
-        <article class="card project accent-blue span-4">
+        <article class="card project accent-blue span-4 reveal tilt-card">
           <div class="project-top">
             <div class="kicker">Career automation</div>
             <h3>ML Job Autopilot</h3>
@@ -584,7 +652,7 @@
           </div>
         </article>
 
-        <article class="card project accent-purple span-4">
+        <article class="card project accent-purple span-4 reveal tilt-card">
           <div class="project-top">
             <div class="kicker">Developer tooling</div>
             <h3>Spec to Repo</h3>
@@ -595,7 +663,7 @@
           </div>
         </article>
 
-        <article class="card project accent-teal span-6">
+        <article class="card project accent-teal span-6 reveal tilt-card">
           <div class="project-top">
             <div class="kicker">Finance visualization</div>
             <h3>Finance Sankey</h3>
@@ -606,7 +674,7 @@
           </div>
         </article>
 
-        <article class="card project accent-pink span-6">
+        <article class="card project accent-pink span-6 reveal tilt-card">
           <div class="project-top">
             <div class="kicker">LLM experiment</div>
             <h3>NFA</h3>
@@ -620,7 +688,7 @@
     </section>
 
     <section id="links">
-      <div class="section-head">
+      <div class="section-head reveal">
         <div>
           <h2 class="section-title">Around the web</h2>
           <p class="section-intro">Find me where I post, build, and connect.</p>
@@ -628,7 +696,7 @@
       </div>
 
       <div class="social-grid">
-        <article class="card social-card accent-blue">
+        <article class="card social-card accent-blue reveal tilt-card">
           <div>
             <div class="kicker">Social</div>
             <h3>X</h3>
@@ -639,7 +707,7 @@
           </div>
         </article>
 
-        <article class="card social-card accent-purple">
+        <article class="card social-card accent-purple reveal tilt-card">
           <div>
             <div class="kicker">Professional</div>
             <h3>LinkedIn</h3>
@@ -650,7 +718,7 @@
           </div>
         </article>
 
-        <article class="card social-card accent-teal">
+        <article class="card social-card accent-teal reveal tilt-card">
           <div>
             <div class="kicker">Code</div>
             <h3>GitHub</h3>
@@ -667,5 +735,60 @@
   <footer class="wrap">
     Designed with an Apple-inspired visual language — soft glass, strong typography, and a focus on clarity.
   </footer>
+
+  <script>
+    const progress = document.querySelector('.scroll-progress');
+    const orbLayer = document.querySelector('.blur-orb');
+    const reveals = document.querySelectorAll('.reveal');
+    const tiltCards = document.querySelectorAll('.tilt-card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.16 });
+
+    reveals.forEach((el, i) => {
+      el.style.transitionDelay = `${Math.min(i * 60, 320)}ms`;
+      observer.observe(el);
+    });
+
+    const updateScrollFx = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progressValue = docHeight > 0 ? scrollTop / docHeight : 0;
+      progress.style.transform = `scaleX(${progressValue})`;
+
+      const y1 = scrollTop * 0.12;
+      const y2 = scrollTop * -0.08;
+      orbLayer.style.transform = `translate3d(0, ${scrollTop * 0.02}px, 0)`;
+      orbLayer.style.setProperty('--orb1', `${y1}px`);
+      orbLayer.style.setProperty('--orb2', `${y2}px`);
+    };
+
+    updateScrollFx();
+    window.addEventListener('scroll', updateScrollFx, { passive: true });
+
+    tiltCards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rx = ((y / rect.height) - 0.5) * -10;
+        const ry = ((x / rect.width) - 0.5) * 12;
+        card.style.setProperty('--mx', `${(x / rect.width) * 100}%`);
+        card.style.setProperty('--my', `${(y / rect.height) * 100}%`);
+        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+        card.style.boxShadow = '0 30px 90px rgba(31, 38, 135, 0.18)';
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.boxShadow = '';
+      });
+    });
+  </script>
 </body>
 </html>
