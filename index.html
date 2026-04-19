@@ -10,26 +10,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f5f7;
-      --bg-2: #ffffff;
       --text: #1d1d1f;
       --muted: #6e6e73;
       --card: rgba(255,255,255,0.64);
-      --shadow: 0 25px 80px rgba(31, 38, 135, 0.12);
+      --shadow: 0 25px 80px rgba(31,38,135,0.12);
       --blue: #0071e3;
       --purple: #7c5cff;
       --pink: #ff5fa2;
       --teal: #3dd6d0;
       --radius-xl: 32px;
-      --radius-lg: 24px;
       --max: 1180px;
     }
-
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       color: var(--text);
       background:
         radial-gradient(circle at 15% 20%, rgba(124,92,255,0.18), transparent 22%),
@@ -38,498 +33,288 @@
         linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 45%, #eef1f5 100%);
       min-height: 100vh;
       overflow-x: hidden;
-      perspective: 1200px;
     }
 
+    /* ── Scroll progress ── */
     .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      width: 100%;
-      transform-origin: 0 50%;
-      transform: scaleX(0);
+      position: fixed; top: 0; left: 0;
+      height: 3px; width: 100%;
+      transform-origin: 0 50%; transform: scaleX(0);
       z-index: 999;
       background: linear-gradient(90deg, var(--blue), var(--purple), var(--pink));
-      box-shadow: 0 0 20px rgba(124,92,255,0.5);
+      box-shadow: 0 0 18px rgba(124,92,255,0.55);
     }
 
-    .noise,
-    .blur-orb {
-      position: fixed;
-      pointer-events: none;
-      inset: 0;
-      z-index: 0;
+    /* ── Fixed orbs ── */
+    .blur-orb { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .blur-orb::before, .blur-orb::after {
+      content: ""; position: absolute;
+      width: 34rem; height: 34rem;
+      filter: blur(70px); border-radius: 50%; opacity: 0.3;
     }
+    .blur-orb::before { top: 3rem; left: -8rem; background: linear-gradient(135deg,rgba(124,92,255,.55),rgba(61,214,208,.4)); }
+    .blur-orb::after  { right: -10rem; top: 30rem; background: linear-gradient(135deg,rgba(255,95,162,.45),rgba(0,113,227,.35)); }
 
-    .noise {
-      opacity: 0.03;
-      background-image: radial-gradient(#000 0.5px, transparent 0.5px);
-      background-size: 12px 12px;
-    }
+    .noise { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity:.03; background-image: radial-gradient(#000 .5px,transparent .5px); background-size: 12px 12px; }
 
-    .blur-orb::before,
-    .blur-orb::after {
-      content: "";
-      position: absolute;
-      width: 34rem;
-      height: 34rem;
-      filter: blur(70px);
-      border-radius: 50%;
-      opacity: 0.3;
-      transition: transform 120ms linear;
-      will-change: transform;
-    }
-
-    .blur-orb::before {
-      top: 3rem;
-      left: -8rem;
-      background: linear-gradient(135deg, rgba(124,92,255,0.55), rgba(61,214,208,0.4));
-    }
-
-    .blur-orb::after {
-      right: -10rem;
-      top: 30rem;
-      background: linear-gradient(135deg, rgba(255,95,162,0.45), rgba(0,113,227,0.35));
-    }
-
-    .wrap {
-      position: relative;
-      z-index: 1;
-      width: min(calc(100% - 32px), var(--max));
-      margin: 0 auto;
-    }
-
+    /* ── Nav ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      position: sticky; top: 0; z-index: 10;
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       background: rgba(255,255,255,0.58);
       border-bottom: 1px solid rgba(255,255,255,0.5);
     }
-
     .nav-inner {
       width: min(calc(100% - 32px), var(--max));
-      margin: 0 auto;
-      padding: 14px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      margin: 0 auto; padding: 14px 0;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
-
-    .brand {
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 1rem;
+    .brand { font-weight: 700; letter-spacing: -.03em; text-decoration: none; color: var(--text); font-size: 1rem; }
+    .nav-links { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: var(--text); font-size: .95rem;
+      padding: 10px 14px; border-radius: 999px;
+      background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.7);
+      transition: transform 220ms ease;
     }
+    .nav-links a:hover { transform: translateY(-2px) scale(1.02); }
 
-    .nav-links {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+    /* ── Wrap ── */
+    .wrap { position: relative; z-index: 1; width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    section { padding: 60px 0; }
 
-    .nav-links a,
-    .pill {
-      text-decoration: none;
-      color: var(--text);
-      font-size: 0.95rem;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.55);
-      border: 1px solid rgba(255,255,255,0.7);
-      box-shadow: 0 8px 24px rgba(255,255,255,0.2) inset;
-      transition: transform 220ms ease, background 220ms ease, box-shadow 220ms ease;
-    }
-
-    section { padding: 36px 0; }
-
-    .hero {
-      padding-top: 72px;
-      padding-bottom: 48px;
-      text-align: center;
-      transform-style: preserve-3d;
-    }
-
+    /* ── Hero ── */
+    .hero { padding-top: 80px; padding-bottom: 56px; text-align: center; }
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.62);
-      border: 1px solid rgba(255,255,255,0.75);
-      box-shadow: var(--shadow);
-      color: var(--muted);
-      font-size: 0.92rem;
-      font-weight: 600;
-      opacity: 0;
-      transform: translateY(22px) scale(.98);
-      animation: riseIn 900ms cubic-bezier(.2,.8,.2,1) 120ms forwards;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 999px;
+      background: rgba(255,255,255,.62); border: 1px solid rgba(255,255,255,.75);
+      box-shadow: var(--shadow); color: var(--muted); font-size: .92rem; font-weight: 600;
+      opacity: 0; transform: translateY(20px);
+      animation: riseIn 900ms cubic-bezier(.2,.8,.2,1) 100ms forwards;
     }
-
     h1 {
-      margin: 22px auto 18px;
-      max-width: 900px;
+      margin: 22px auto 18px; max-width: 900px;
       font-size: clamp(3rem, 8vw, 6.4rem);
-      line-height: 0.93;
-      letter-spacing: -0.065em;
-      font-weight: 800;
-      transform-style: preserve-3d;
+      line-height: .93; letter-spacing: -.065em; font-weight: 800;
     }
-
     .hero-line {
-      display: block;
-      opacity: 0;
+      display: block; opacity: 0;
       transform: translateY(40px) rotateX(18deg);
       animation: riseIn3D 1000ms cubic-bezier(.16,1,.3,1) forwards;
     }
-
     .hero-line:nth-child(1) { animation-delay: 160ms; }
     .hero-line:nth-child(2) { animation-delay: 300ms; }
-
     .gradient-text {
       background: linear-gradient(135deg, #0a84ff 0%, #7c5cff 45%, #ff5fa2 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-
-    .hero p {
-      max-width: 760px;
-      margin: 0 auto;
-      font-size: clamp(1.06rem, 2vw, 1.28rem);
-      line-height: 1.7;
-      color: var(--muted);
-      opacity: 0;
-      transform: translateY(24px);
+    .hero > p {
+      max-width: 700px; margin: 0 auto;
+      font-size: clamp(1.06rem, 2vw, 1.28rem); line-height: 1.7; color: var(--muted);
+      opacity: 0; transform: translateY(24px);
       animation: riseIn 900ms cubic-bezier(.2,.8,.2,1) 420ms forwards;
     }
-
     .cta-row {
-      margin-top: 28px;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      opacity: 0;
-      transform: translateY(24px);
+      margin-top: 28px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+      opacity: 0; transform: translateY(24px);
       animation: riseIn 900ms cubic-bezier(.2,.8,.2,1) 540ms forwards;
     }
-
     .button {
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px 22px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.98rem;
-      transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
-      border: 1px solid transparent;
+      text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 15px 22px; border-radius: 999px; font-weight: 600; font-size: .98rem;
+      transition: transform 220ms ease, box-shadow 220ms ease; border: 1px solid transparent;
     }
+    .button:hover { transform: translateY(-2px) scale(1.02); }
+    .button.primary { background: linear-gradient(135deg, var(--blue), var(--purple)); color: #fff; box-shadow: 0 18px 40px rgba(88,86,214,.26); }
+    .button.secondary { color: var(--text); background: rgba(255,255,255,.68); border-color: rgba(255,255,255,.78); box-shadow: var(--shadow); }
 
-    .button:hover,
-    .nav-links a:hover {
-      transform: translateY(-2px) scale(1.02);
-    }
-
-    .button.primary {
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      color: white;
-      box-shadow: 0 18px 40px rgba(88, 86, 214, 0.26);
-    }
-
-    .button.secondary {
-      color: var(--text);
-      background: rgba(255,255,255,0.68);
-      border-color: rgba(255,255,255,0.78);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-grid,
-    .projects-grid,
-    .social-grid {
+    /* ── Identity strip ── */
+    .identity-strip {
+      margin-top: 52px;
       display: grid;
-      gap: 18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      opacity: 0; transform: translateY(30px);
+      animation: riseIn 1000ms cubic-bezier(.2,.8,.2,1) 660ms forwards;
     }
-
-    .hero-grid {
-      margin-top: 42px;
-      grid-template-columns: 1.2fr 0.8fr;
-      transform-style: preserve-3d;
-    }
-
-    .projects-grid { grid-template-columns: repeat(12, 1fr); }
-    .social-grid { grid-template-columns: repeat(3, 1fr); }
-
-    .card {
-      position: relative;
-      overflow: hidden;
-      padding: 28px;
-      border-radius: var(--radius-xl);
+    .id-card {
+      padding: 26px 24px;
+      border-radius: 28px;
       background: var(--card);
-      border: 1px solid rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,.82);
       backdrop-filter: blur(24px) saturate(150%);
       -webkit-backdrop-filter: blur(24px) saturate(150%);
       box-shadow: var(--shadow);
+      text-align: left;
       transition: transform 220ms ease, box-shadow 220ms ease;
+      will-change: transform;
+      transform-style: preserve-3d;
+    }
+    .id-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 30px 90px rgba(31,38,135,.16); }
+    .id-label {
+      font-size: .78rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+    }
+    .id-value {
+      font-size: 1.18rem; font-weight: 700; letter-spacing: -.03em; line-height: 1.3;
+    }
+    .id-card.accent-blue  { background: linear-gradient(135deg,rgba(10,132,255,.13),rgba(255,255,255,.6)); }
+    .id-card.accent-purple{ background: linear-gradient(135deg,rgba(124,92,255,.15),rgba(255,255,255,.6)); }
+    .id-card.accent-teal  { background: linear-gradient(135deg,rgba(61,214,208,.17),rgba(255,255,255,.6)); }
+
+    /* ── Tech tags ── */
+    .tech-row {
+      margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      opacity: 0; transform: translateY(20px);
+      animation: riseIn 900ms cubic-bezier(.2,.8,.2,1) 760ms forwards;
+    }
+    .tech-tag {
+      padding: 9px 16px; border-radius: 999px;
+      background: rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.85);
+      font-size: .9rem; font-weight: 600; color: #4a4a50;
+      transition: transform 200ms ease;
+    }
+    .tech-tag:hover { transform: translateY(-2px) scale(1.04); }
+
+    /* ── Section chrome ── */
+    .section-head { margin-bottom: 28px; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 800; letter-spacing: -.05em; }
+    .section-intro { margin-top: 6px; color: var(--muted); font-size: 1rem; line-height: 1.7; }
+
+    /* ════════════════════════════════
+       3-D COVERFLOW CAROUSEL
+    ════════════════════════════════ */
+    .carousel-scene {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      perspective: 1100px;
+      overflow: visible;
+    }
+    .carousel-track {
+      position: absolute;
+      left: 50%; top: 0;
+      width: 0; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 520ms cubic-bezier(.4,0,.2,1);
+    }
+    .cf-card {
+      position: absolute;
+      width: 340px;
+      height: 380px;
+      left: -170px; /* half width */
+      top: 20px;
+      border-radius: 28px;
+      padding: 30px 26px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.82);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      transition: box-shadow 520ms ease, filter 520ms ease;
       transform-style: preserve-3d;
       will-change: transform;
     }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent 35%);
-      pointer-events: none;
+    .cf-card::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg,rgba(255,255,255,.32),transparent 38%);
+      border-radius: 28px; pointer-events: none;
     }
+    .cf-card.is-active { box-shadow: 0 40px 100px rgba(31,38,135,.2); filter: none; }
+    .cf-card.is-side   { filter: brightness(.88) saturate(.8); }
+    .cf-card.is-far    { filter: brightness(.7) saturate(.55); }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -20%;
-      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.55), transparent 28%);
-      opacity: 0;
-      transition: opacity 220ms ease;
-      pointer-events: none;
+    .cf-kicker { font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .cf-title  { font-size: 1.75rem; font-weight: 800; letter-spacing: -.045em; line-height: 1.1; margin-top: 10px; }
+    .cf-desc   { font-size: .97rem; color: var(--muted); line-height: 1.65; margin-top: 12px; }
+    .cf-link   { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); font-weight: 600; text-decoration: none; font-size: .95rem; }
+    .cf-link:hover { text-decoration: underline; }
+
+    /* dot nav */
+    .carousel-dots {
+      display: flex; justify-content: center; gap: 8px;
+      margin-top: 28px;
     }
-
-    .card:hover::before { opacity: 1; }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(44px) rotateX(12deg) scale(0.98);
-      transition: opacity 900ms cubic-bezier(.16,1,.3,1), transform 900ms cubic-bezier(.16,1,.3,1);
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(0,0,0,.18);
+      cursor: pointer; transition: background 280ms ease, transform 280ms ease;
+      border: none;
     }
+    .dot.active { background: var(--purple); transform: scale(1.4); }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0) rotateX(0deg) scale(1);
+    /* arrow buttons */
+    .carousel-arrows { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
+    .arrow-btn {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.85);
+      box-shadow: var(--shadow); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: transform 200ms ease, background 200ms ease;
+      color: var(--text);
     }
+    .arrow-btn:hover { transform: scale(1.1); background: #fff; }
 
-    .hero-card-large {
-      min-height: 330px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-align: left;
-    }
-
-    .hero-card-large h2,
-    .section-title {
-      margin: 0;
-      letter-spacing: -0.05em;
-    }
-
-    .hero-card-large h2 {
-      font-size: clamp(2rem, 3vw, 3.3rem);
-      max-width: 520px;
-    }
-
-    .hero-card-large p,
-    .card p,
-    .section-intro {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 1rem;
-    }
-
-    .mini-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .mini-stack span {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.75);
-      border: 1px solid rgba(255,255,255,0.85);
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: #4a4a50;
-      transform: translateZ(28px);
-    }
-
-    .hero-card-side {
-      min-height: 330px;
-      display: grid;
-      gap: 16px;
-      align-content: space-between;
-    }
-
-    .metric {
-      padding: 18px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.62);
-      border: 1px solid rgba(255,255,255,0.8);
-      transform: translateZ(24px);
-    }
-
-    .metric .label {
-      font-size: 0.88rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .metric .value {
-      font-size: 1.55rem;
-      line-height: 1.1;
-      letter-spacing: -0.04em;
-      font-weight: 750;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 3vw, 3rem);
-      font-weight: 800;
-    }
-
-    .project {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 260px;
-    }
-
-    .span-7 { grid-column: span 7; }
-    .span-5 { grid-column: span 5; }
-    .span-4 { grid-column: span 4; }
-    .span-6 { grid-column: span 6; }
-
-    .project-top { display: grid; gap: 14px; }
-
-    .kicker {
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .project h3,
-    .social-card h3 {
-      margin: 0;
-      font-size: clamp(1.35rem, 2vw, 2rem);
-      letter-spacing: -0.04em;
-      line-height: 1.1;
-    }
-
-    .project-links,
-    .social-link-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-
-    .text-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--blue);
-      font-weight: 600;
-      text-decoration: none;
-      transform: translateZ(18px);
-    }
-
-    .accent-purple { background: linear-gradient(135deg, rgba(124,92,255,0.16), rgba(255,255,255,0.56)); }
-    .accent-pink { background: linear-gradient(135deg, rgba(255,95,162,0.16), rgba(255,255,255,0.56)); }
-    .accent-blue { background: linear-gradient(135deg, rgba(10,132,255,0.14), rgba(255,255,255,0.56)); }
-    .accent-teal { background: linear-gradient(135deg, rgba(61,214,208,0.18), rgba(255,255,255,0.56)); }
-
+    /* ── Social grid ── */
+    .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .social-card {
-      min-height: 190px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      min-height: 190px; padding: 28px; border-radius: var(--radius-xl);
+      background: var(--card); border: 1px solid rgba(255,255,255,.82);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      transform-style: preserve-3d; will-change: transform;
     }
+    .social-card:hover { transform: translateY(-4px) rotateX(2deg); box-shadow: 0 32px 90px rgba(31,38,135,.16); }
+    .social-card h3 { font-size: clamp(1.35rem, 2vw, 2rem); letter-spacing: -.04em; line-height: 1.1; margin-top: 8px; }
+    .social-card p  { color: var(--muted); line-height: 1.7; font-size: 1rem; }
+    .kicker { font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .text-link { display: inline-flex; align-items: center; gap: 6px; color: var(--blue); font-weight: 600; text-decoration: none; margin-top: 18px; }
+    .text-link:hover { text-decoration: underline; }
+    .accent-purple-card { background: linear-gradient(135deg,rgba(124,92,255,.15),rgba(255,255,255,.58)); }
+    .accent-pink-card   { background: linear-gradient(135deg,rgba(255,95,162,.14),rgba(255,255,255,.58)); }
+    .accent-blue-card   { background: linear-gradient(135deg,rgba(10,132,255,.12),rgba(255,255,255,.58)); }
+    .accent-teal-card   { background: linear-gradient(135deg,rgba(61,214,208,.16),rgba(255,255,255,.58)); }
 
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(40px) rotateX(10deg) scale(.98);
+      transition: opacity 880ms cubic-bezier(.16,1,.3,1), transform 880ms cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Footer ── */
     footer {
-      padding: 28px 0 64px;
-      color: var(--muted);
-      text-align: center;
-      font-size: 0.95rem;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: riseIn 1000ms cubic-bezier(.2,.8,.2,1) 900ms forwards;
+      padding: 28px 0 64px; color: var(--muted); text-align: center; font-size: .95rem;
+      opacity: 0; transform: translateY(30px);
+      animation: riseIn 1000ms cubic-bezier(.2,.8,.2,1) 800ms forwards;
     }
 
-    @keyframes riseIn {
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    @keyframes riseIn   { to { opacity: 1; transform: none; } }
+    @keyframes riseIn3D { to { opacity: 1; transform: translateY(0) rotateX(0deg); } }
+
+    @media (max-width: 860px) {
+      .identity-strip { grid-template-columns: 1fr; }
+      .social-grid    { grid-template-columns: 1fr; }
+      .carousel-scene { height: 360px; }
+      .cf-card { width: 290px; left: -145px; height: 330px; }
     }
-
-    @keyframes riseIn3D {
-      to {
-        opacity: 1;
-        transform: translateY(0) rotateX(0deg);
-      }
-    }
-
-    @media (max-width: 960px) {
-      .hero-grid,
-      .social-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .span-7,
-      .span-6,
-      .span-5,
-      .span-4 {
-        grid-column: span 12;
-      }
-
+    @media (max-width: 600px) {
+      .wrap, .nav-inner { width: min(calc(100% - 20px), var(--max)); }
       h1 { font-size: clamp(2.8rem, 13vw, 4.5rem); }
-    }
-
-    @media (max-width: 640px) {
-      .wrap,
-      .nav-inner { width: min(calc(100% - 20px), var(--max)); }
-      .card { padding: 22px; border-radius: 24px; }
       .hero { padding-top: 48px; }
-      .section-head { align-items: start; flex-direction: column; }
-      .nav-inner { align-items: flex-start; flex-direction: column; }
+      .nav-inner { flex-direction: column; align-items: flex-start; }
     }
-
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-      }
-      .reveal,
-      .eyebrow,
-      .hero-line,
-      .hero p,
-      .cta-row,
-      footer {
-        opacity: 1 !important;
-        transform: none !important;
-      }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal, .eyebrow, .hero-line, .hero > p, .cta-row, .identity-strip, .tech-row, footer { opacity: 1 !important; transform: none !important; }
     }
   </style>
 </head>
@@ -550,245 +335,268 @@
   </nav>
 
   <main class="wrap" id="top">
+
+    <!-- ── Hero ── -->
     <section class="hero">
-      <div class="eyebrow">Applied AI/ML Engineer • Building thoughtful software</div>
+      <div class="eyebrow">Applied AI/ML Engineer &bull; Building thoughtful software</div>
       <h1>
         <span class="hero-line">Personal systems,</span>
         <span class="hero-line gradient-text">beautifully engineered.</span>
       </h1>
-      <p>
-        I build agentic AI tools, automation systems, and product ideas that turn ambitious workflows into something elegant, usable, and real.
-      </p>
+      <p>I build agentic AI tools, automation systems, and product ideas that turn ambitious workflows into something elegant, usable, and real.</p>
       <div class="cta-row">
         <a class="button primary" href="#projects">See current projects</a>
         <a class="button secondary" href="https://www.linkedin.com/in/david-lifschitz" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
       </div>
 
-      <div class="hero-grid">
-        <div class="card hero-card-large accent-blue reveal tilt-card">
-          <div>
-            <h2>Shipping AI products with an automation-first mindset.</h2>
-            <p>
-              My recent work spans self-hosted AI agents, finance automation, repo scaffolding from specs, Siri shortcut generation, and experimental consumer products.
-            </p>
-          </div>
-          <div class="mini-stack">
-            <span>LLM Agents</span>
-            <span>Automation</span>
-            <span>Python</span>
-            <span>Rust</span>
-            <span>JavaScript</span>
-            <span>Swift</span>
-          </div>
+      <div class="identity-strip">
+        <div class="id-card accent-blue">
+          <div class="id-label">Current focus</div>
+          <div class="id-value">Agentic systems, developer tools &amp; personal AI</div>
         </div>
+        <div class="id-card accent-purple">
+          <div class="id-label">Build style</div>
+          <div class="id-value">Fast prototypes &rarr; durable systems</div>
+        </div>
+        <div class="id-card accent-teal">
+          <div class="id-label">Aesthetic</div>
+          <div class="id-value">Clarity, motion, and polished simplicity</div>
+        </div>
+      </div>
 
-        <div class="card hero-card-side accent-purple reveal tilt-card">
-          <div class="metric">
-            <div class="label">Current focus</div>
-            <div class="value">Agentic systems, developer tools, personal AI</div>
-          </div>
-          <div class="metric">
-            <div class="label">Build style</div>
-            <div class="value">Fast prototypes → durable systems</div>
-          </div>
-          <div class="metric">
-            <div class="label">Aesthetic</div>
-            <div class="value">Clarity, motion, and polished simplicity</div>
-          </div>
-        </div>
+      <div class="tech-row">
+        <span class="tech-tag">LLM Agents</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Rust</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">Swift</span>
+        <span class="tech-tag">Go</span>
+        <span class="tech-tag">Automation</span>
+        <span class="tech-tag">OpenRouter</span>
       </div>
     </section>
 
+    <!-- ── Projects Carousel ── -->
     <section id="projects">
       <div class="section-head reveal">
-        <div>
-          <h2 class="section-title">Current projects</h2>
-          <p class="section-intro">A few things I’m actively building and exploring right now.</p>
+        <h2 class="section-title">Current projects</h2>
+        <p class="section-intro">Swipe or use the arrows to explore what I&rsquo;m building.</p>
+      </div>
+
+      <div class="carousel-scene reveal">
+        <div class="carousel-track" id="track">
+
+          <div class="cf-card accent-purple-card" data-index="0">
+            <div>
+              <div class="cf-kicker">Swift &bull; iOS automation</div>
+              <div class="cf-title">ShortcutForge</div>
+              <div class="cf-desc">Natural language to Siri Shortcut generator &mdash; an iOS app aimed at making powerful automation feel effortless for everyone.</div>
+            </div>
+            <a class="cf-link" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">View on GitHub &rarr;</a>
+          </div>
+
+          <div class="cf-card accent-teal-card" data-index="1">
+            <div>
+              <div class="cf-kicker">Self-hosted AI</div>
+              <div class="cf-title">ScheduleOS</div>
+              <div class="cf-desc">A personal AI agent stack powered by Ollama, Telegram, Tailscale, and Google Calendar MCP for day-to-day orchestration.</div>
+            </div>
+            <a class="cf-link" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">View on GitHub &rarr;</a>
+          </div>
+
+          <div class="cf-card accent-pink-card" data-index="2">
+            <div>
+              <div class="cf-kicker">Behavioral product</div>
+              <div class="cf-title">Bttr</div>
+              <div class="cf-desc">A habit prediction market app &mdash; bet on yourself, winners collect from the pool of people who failed to follow through.</div>
+            </div>
+            <a class="cf-link" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">View on GitHub &rarr;</a>
+          </div>
+
+          <div class="cf-card accent-blue-card" data-index="3">
+            <div>
+              <div class="cf-kicker">Career automation</div>
+              <div class="cf-title">ML Job Autopilot</div>
+              <div class="cf-desc">Automated ML job application pipeline: scrape, score, generate tailored PDFs, and track applications using OpenRouter LLM.</div>
+            </div>
+            <a class="cf-link" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">View on GitHub &rarr;</a>
+          </div>
+
+          <div class="cf-card accent-purple-card" data-index="4">
+            <div>
+              <div class="cf-kicker">Developer tooling</div>
+              <div class="cf-title">Spec to Repo</div>
+              <div class="cf-desc">LLM-powered tool that converts product specs into complete GitHub repo scaffolds with structure, README, and pre-populated issues.</div>
+            </div>
+            <a class="cf-link" href="https://github.com/davidlifschitz/spec-to-repo" target="_blank" rel="noreferrer">View project &rarr;</a>
+          </div>
+
+          <div class="cf-card accent-teal-card" data-index="5">
+            <div>
+              <div class="cf-kicker">Finance visualization</div>
+              <div class="cf-title">Finance Sankey</div>
+              <div class="cf-desc">Import transaction data from Chase, Capital One, and Amex to visualize cash flow with interactive Sankey diagrams.</div>
+            </div>
+            <a class="cf-link" href="https://github.com/davidlifschitz/finance-sankey" target="_blank" rel="noreferrer">View project &rarr;</a>
+          </div>
+
+          <div class="cf-card accent-pink-card" data-index="6">
+            <div>
+              <div class="cf-kicker">LLM experiment</div>
+              <div class="cf-title">NFA</div>
+              <div class="cf-desc">LLM-powered &ldquo;NOT&rdquo; Finance Advisor &mdash; making financial analysis and decision support more conversational and accessible.</div>
+            </div>
+            <a class="cf-link" href="https://github.com/davidlifschitz/NFA" target="_blank" rel="noreferrer">View project &rarr;</a>
+          </div>
+
         </div>
       </div>
 
-      <div class="projects-grid">
-        <article class="card project accent-purple span-7 reveal tilt-card">
-          <div class="project-top">
-            <div class="kicker">Swift • iOS automation</div>
-            <h3>ShortcutForge</h3>
-            <p>Natural language to Siri Shortcut generator — an iOS app aimed at making powerful automation feel effortless.</p>
-          </div>
-          <div class="project-links">
-            <a class="text-link" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">View on GitHub →</a>
-          </div>
-        </article>
-
-        <article class="card project accent-teal span-5 reveal tilt-card">
-          <div class="project-top">
-            <div class="kicker">Self-hosted AI</div>
-            <h3>ScheduleOS</h3>
-            <p>A personal AI agent stack powered by Ollama, Telegram, Tailscale, and calendar integrations for practical day-to-day orchestration.</p>
-          </div>
-          <div class="project-links">
-            <a class="text-link" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">View on GitHub →</a>
-          </div>
-        </article>
-
-        <article class="card project accent-pink span-4 reveal tilt-card">
-          <div class="project-top">
-            <div class="kicker">Behavioral product</div>
-            <h3>Bttr</h3>
-            <p>A habit prediction market app built around accountability, incentives, and self-improvement with a playful edge.</p>
-          </div>
-          <div class="project-links">
-            <a class="text-link" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">View on GitHub →</a>
-          </div>
-        </article>
-
-        <article class="card project accent-blue span-4 reveal tilt-card">
-          <div class="project-top">
-            <div class="kicker">Career automation</div>
-            <h3>ML Job Autopilot</h3>
-            <p>An automated ML job application pipeline that scrapes roles, scores fit, generates tailored materials, and tracks applications.</p>
-          </div>
-          <div class="project-links">
-            <a class="text-link" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">View on GitHub →</a>
-          </div>
-        </article>
-
-        <article class="card project accent-purple span-4 reveal tilt-card">
-          <div class="project-top">
-            <div class="kicker">Developer tooling</div>
-            <h3>Spec to Repo</h3>
-            <p>An LLM-powered tool that converts product specs into complete repository scaffolds, starter docs, and pre-populated issues.</p>
-          </div>
-          <div class="project-links">
-            <a class="text-link" href="https://github.com/davidlifschitz/spec-to-repo" target="_blank" rel="noreferrer">View project →</a>
-          </div>
-        </article>
-
-        <article class="card project accent-teal span-6 reveal tilt-card">
-          <div class="project-top">
-            <div class="kicker">Finance visualization</div>
-            <h3>Finance Sankey</h3>
-            <p>Imports transaction data from major banks and turns cash flow into clear Sankey diagrams for better financial understanding.</p>
-          </div>
-          <div class="project-links">
-            <a class="text-link" href="https://github.com/davidlifschitz/finance-sankey" target="_blank" rel="noreferrer">View project →</a>
-          </div>
-        </article>
-
-        <article class="card project accent-pink span-6 reveal tilt-card">
-          <div class="project-top">
-            <div class="kicker">LLM experiment</div>
-            <h3>NFA</h3>
-            <p>A personal “not finance advisor” that explores how LLMs can make financial analysis and decision support more conversational.</p>
-          </div>
-          <div class="project-links">
-            <a class="text-link" href="https://github.com/davidlifschitz/NFA" target="_blank" rel="noreferrer">View project →</a>
-          </div>
-        </article>
+      <div class="carousel-dots" id="dots"></div>
+      <div class="carousel-arrows">
+        <button class="arrow-btn" id="prev" aria-label="Previous">&#8592;</button>
+        <button class="arrow-btn" id="next" aria-label="Next">&#8594;</button>
       </div>
     </section>
 
+    <!-- ── Social links ── -->
     <section id="links">
       <div class="section-head reveal">
-        <div>
-          <h2 class="section-title">Around the web</h2>
-          <p class="section-intro">Find me where I post, build, and connect.</p>
-        </div>
+        <h2 class="section-title">Around the web</h2>
+        <p class="section-intro">Find me where I post, build, and connect.</p>
       </div>
-
       <div class="social-grid">
-        <article class="card social-card accent-blue reveal tilt-card">
+        <article class="social-card accent-blue-card reveal">
           <div>
             <div class="kicker">Social</div>
             <h3>X</h3>
-            <p>Short thoughts, experiments, and things I’m thinking about in AI and software.</p>
+            <p>Short thoughts, experiments, and things I&rsquo;m thinking about in AI and software.</p>
           </div>
-          <div class="social-link-row">
-            <a class="text-link" href="https://x.com/david_firstname" target="_blank" rel="noreferrer">Open profile →</a>
-          </div>
+          <a class="text-link" href="https://x.com/david_firstname" target="_blank" rel="noreferrer">Open profile &rarr;</a>
         </article>
-
-        <article class="card social-card accent-purple reveal tilt-card">
+        <article class="social-card accent-purple-card reveal">
           <div>
             <div class="kicker">Professional</div>
             <h3>LinkedIn</h3>
             <p>Background, experience, and a more formal view of the work I do.</p>
           </div>
-          <div class="social-link-row">
-            <a class="text-link" href="https://www.linkedin.com/in/david-lifschitz" target="_blank" rel="noreferrer">Open profile →</a>
-          </div>
+          <a class="text-link" href="https://www.linkedin.com/in/david-lifschitz" target="_blank" rel="noreferrer">Open profile &rarr;</a>
         </article>
-
-        <article class="card social-card accent-teal reveal tilt-card">
+        <article class="social-card accent-teal-card reveal">
           <div>
             <div class="kicker">Code</div>
             <h3>GitHub</h3>
-            <p>Repositories, experiments, and the projects I’m actively shipping.</p>
+            <p>Repositories, experiments, and the projects I&rsquo;m actively shipping.</p>
           </div>
-          <div class="social-link-row">
-            <a class="text-link" href="https://www.github.com/davidlifschitz" target="_blank" rel="noreferrer">Open profile →</a>
-          </div>
+          <a class="text-link" href="https://www.github.com/davidlifschitz" target="_blank" rel="noreferrer">Open profile &rarr;</a>
         </article>
       </div>
     </section>
+
   </main>
 
   <footer class="wrap">
-    Designed with an Apple-inspired visual language — soft glass, strong typography, and a focus on clarity.
+    Designed with an Apple-inspired visual language &mdash; soft glass, strong typography, and a focus on clarity.
   </footer>
 
   <script>
-    const progress = document.querySelector('.scroll-progress');
-    const orbLayer = document.querySelector('.blur-orb');
+    /* ── Scroll progress ── */
+    const progressBar = document.querySelector('.scroll-progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.transform = `scaleX(${h > 0 ? window.scrollY / h : 0})`;
+    }, { passive: true });
+
+    /* ── Reveal on scroll ── */
     const reveals = document.querySelectorAll('.reveal');
-    const tiltCards = document.querySelectorAll('.tilt-card');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.16 });
-
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.13 });
     reveals.forEach((el, i) => {
-      el.style.transitionDelay = `${Math.min(i * 60, 320)}ms`;
-      observer.observe(el);
+      el.style.transitionDelay = `${Math.min(i * 55, 280)}ms`;
+      revealObs.observe(el);
     });
 
-    const updateScrollFx = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progressValue = docHeight > 0 ? scrollTop / docHeight : 0;
-      progress.style.transform = `scaleX(${progressValue})`;
+    /* ════════════════════════════
+       COVERFLOW CAROUSEL
+    ════════════════════════════ */
+    const track   = document.getElementById('track');
+    const cards   = Array.from(document.querySelectorAll('.cf-card'));
+    const dotsEl  = document.getElementById('dots');
+    const N       = cards.length;
+    let   active  = 0;
 
-      const y1 = scrollTop * 0.12;
-      const y2 = scrollTop * -0.08;
-      orbLayer.style.transform = `translate3d(0, ${scrollTop * 0.02}px, 0)`;
-      orbLayer.style.setProperty('--orb1', `${y1}px`);
-      orbLayer.style.setProperty('--orb2', `${y2}px`);
-    };
+    const GAP    = 230;   // horizontal spacing between card centres
+    const ROT_Y  = 42;    // degrees each side card is rotated
+    const Z_BACK = -180;  // z-offset for side cards
 
-    updateScrollFx();
-    window.addEventListener('scroll', updateScrollFx, { passive: true });
-
-    tiltCards.forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const rx = ((y / rect.height) - 0.5) * -10;
-        const ry = ((x / rect.width) - 0.5) * 12;
-        card.style.setProperty('--mx', `${(x / rect.width) * 100}%`);
-        card.style.setProperty('--my', `${(y / rect.height) * 100}%`);
-        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
-        card.style.boxShadow = '0 30px 90px rgba(31, 38, 135, 0.18)';
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-        card.style.boxShadow = '';
-      });
+    /* Build dots */
+    cards.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', `Go to project ${i + 1}`);
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
     });
+    const dots = Array.from(dotsEl.children);
+
+    function goTo(idx) {
+      active = (idx + N) % N;
+      render();
+    }
+
+    function render() {
+      dots.forEach((d, i) => d.classList.toggle('active', i === active));
+
+      cards.forEach((card, i) => {
+        const offset = i - active;
+        /* wrap around for circular feel */
+        let wrapped = offset;
+        if (wrapped >  N / 2) wrapped -= N;
+        if (wrapped < -N / 2) wrapped += N;
+
+        const tx      = wrapped * GAP;
+        const ry      = wrapped === 0 ? 0 : (wrapped > 0 ? -ROT_Y : ROT_Y);
+        const tz      = wrapped === 0 ? 0 : Z_BACK - Math.abs(wrapped) * 60;
+        const scale   = wrapped === 0 ? 1 : Math.max(0.78 - Math.abs(wrapped) * 0.05, 0.62);
+        const zIndex  = N - Math.abs(wrapped);
+        const visible = Math.abs(wrapped) <= 2;
+
+        card.style.transform   = `translateX(${tx}px) translateZ(${tz}px) rotateY(${ry}deg) scale(${scale})`;
+        card.style.zIndex      = zIndex;
+        card.style.opacity     = visible ? 1 : 0;
+        card.style.pointerEvents = wrapped === 0 ? 'auto' : 'none';
+        card.classList.toggle('is-active', wrapped === 0);
+        card.classList.toggle('is-side',   Math.abs(wrapped) === 1);
+        card.classList.toggle('is-far',    Math.abs(wrapped) >= 2);
+      });
+    }
+
+    /* click side cards to navigate */
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => { if (i !== active) goTo(i); });
+    });
+
+    document.getElementById('prev').addEventListener('click', () => goTo(active - 1));
+    document.getElementById('next').addEventListener('click', () => goTo(active + 1));
+
+    /* keyboard */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft')  goTo(active - 1);
+      if (e.key === 'ArrowRight') goTo(active + 1);
+    });
+
+    /* touch/swipe */
+    let touchStartX = null;
+    track.addEventListener('touchstart',  (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',    (e) => {
+      if (touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) goTo(active + (dx < 0 ? 1 : -1));
+      touchStartX = null;
+    });
+
+    render();
   </script>
 </body>
 </html>
