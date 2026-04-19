@@ -1,2 +1,3 @@
-# davidlifschitz.github.io
-Personal landing page
+# David Lifschitz
+
+Personal landing page for GitHub Pages.
