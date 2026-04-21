@@ -3,427 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>David Lifschitz — Ecosystem Change Dashboard</title>
-  <meta name="description" content="Daily lines-of-code change dashboard for the ecosystem." />
-  <style>
-    :root {
-      --bg: #f6f7fb;
-      --surface: #ffffff;
-      --text: #172033;
-      --muted: #5d6985;
-      --border: #dbe2f0;
-      --accent: #3856ff;
-      --accent-soft: #eef2ff;
-      --success: #0f9d58;
-      --danger: #c73b3b;
-      --max: 1180px;
-      --radius: 18px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
-    .site-header {
-      position: sticky;
-      top: 0;
-      background: rgba(246, 247, 251, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      z-index: 10;
-    }
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 0;
-    }
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      font-size: 0.95rem;
-    }
-    .brand { font-weight: 700; color: var(--text); }
-    .hero { padding: 56px 0 24px; }
-    .eyebrow {
-      display: inline-block;
-      background: var(--accent-soft);
-      color: var(--accent);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-    h1, h2, h3 { line-height: 1.1; margin: 0; }
-    h1 { font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 14px; }
-    h2 { font-size: clamp(1.35rem, 3vw, 2.2rem); margin-bottom: 12px; }
-    p.lead {
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 760px;
-      margin: 0;
-    }
-    section { padding: 18px 0; }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-    }
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 20px;
-    }
-    .stat {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-    .stat-value {
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-    .control-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-    select, button {
-      border: 1px solid var(--border);
-      background: white;
-      border-radius: 12px;
-      padding: 10px 12px;
-      font: inherit;
-      color: var(--text);
-    }
-    button {
-      cursor: pointer;
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-      font-weight: 600;
-    }
-    .chart-wrap {
-      overflow-x: auto;
-      padding-bottom: 8px;
-    }
-    .chart {
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
-      min-height: 320px;
-      padding: 18px 8px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .bar-group {
-      min-width: 56px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-    .bar-stack {
-      height: 260px;
-      width: 34px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      gap: 2px;
-    }
-    .bar-add, .bar-del {
-      width: 100%;
-      border-radius: 8px 8px 0 0;
-    }
-    .bar-add { background: var(--success); }
-    .bar-del { background: var(--danger); }
-    .bar-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-align: center;
-      white-space: nowrap;
-    }
-    .bar-total {
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.95rem;
-    }
-    th, td {
-      text-align: left;
-      padding: 12px 10px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
-    th { color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    .mono { font-variant-numeric: tabular-nums; }
-    .muted { color: var(--muted); }
-    .pill {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.82rem;
-      font-weight: 600;
-    }
-    .repo-note {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    footer {
-      padding: 30px 0 56px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    @media (max-width: 900px) {
-      .meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 640px) {
-      .meta-grid { grid-template-columns: 1fr; }
-      .nav { align-items: flex-start; flex-direction: column; }
-    }
-  </style>
+  <title>Ecosystem Dashboard</title>
+  <link rel="stylesheet" href="styles/dashboard.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="index.html">David Lifschitz</a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="ecosystem.html">Ecosystem</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub / Repos</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <div class="eyebrow">Ecosystem telemetry v1</div>
-      <h1>Daily lines-of-code change dashboard</h1>
-      <p class="lead">This first dashboard tracks additions, deletions, total changed lines, and commit count per repo per day. Public repos update immediately. Private repos appear once the workflow has a cross-repo token.</p>
-      <div class="meta-grid" id="summaryCards"></div>
-    </section>
-
-    <section>
-      <div class="card">
-        <div class="controls">
-          <div class="control-row">
-            <label for="repoSelect" class="muted">Repo</label>
-            <select id="repoSelect"></select>
-            <label for="windowSelect" class="muted">Window</label>
-            <select id="windowSelect">
-              <option value="7">Last 7 days</option>
-              <option value="14">Last 14 days</option>
-              <option value="21" selected>Last 21 days</option>
-              <option value="30">Last 30 days</option>
-            </select>
-          </div>
-          <div class="control-row">
-            <button id="reloadButton" type="button">Reload data</button>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="brand-lockup">
+          <div class="brand-mark">DL</div>
+          <div class="brand-text">
+            <strong>Ecosystem</strong>
+            <span>Telemetry</span>
           </div>
         </div>
-        <div class="chart-wrap">
-          <div class="chart" id="chart"></div>
+
+        <nav class="sidebar-nav">
+          <a class="nav-item active"><span class="nav-dot"></span>Dashboard</a>
+          <a class="nav-item"><span class="nav-dot"></span>Repositories</a>
+          <a class="nav-item"><span class="nav-dot"></span>Tokens</a>
+          <a class="nav-item"><span class="nav-dot"></span>Settings</a>
+          <a class="nav-item"><span class="nav-dot"></span>Docs</a>
+        </nav>
+
+        <div class="sidebar-card">
+          <div class="eyebrow">Token</div>
+          <h3>ECOSYSTEM_GH_TOKEN</h3>
+          <p>Private repos require a GitHub token with repo read access.</p>
         </div>
-        <p class="repo-note" id="repoNote"></p>
       </div>
-    </section>
+    </aside>
 
-    <section>
-      <div class="card">
-        <h2>Repo summary</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Repo</th>
-              <th>Visibility</th>
-              <th>Tracked branch</th>
-              <th>Additions</th>
-              <th>Deletions</th>
-              <th>Total changes</th>
-              <th>Commits</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="repoTableBody"></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <footer class="wrap">
-    Source: GitHub commit stats gathered by a scheduled workflow in this repo. “Total changes” = additions + deletions.
-  </footer>
-
-  <script>
-    const dataUrl = 'data/loc-history.json';
-    const chartEl = document.getElementById('chart');
-    const repoSelect = document.getElementById('repoSelect');
-    const windowSelect = document.getElementById('windowSelect');
-    const repoTableBody = document.getElementById('repoTableBody');
-    const summaryCards = document.getElementById('summaryCards');
-    const repoNote = document.getElementById('repoNote');
-    const reloadButton = document.getElementById('reloadButton');
-
-    let dashboardData = null;
-
-    function formatNumber(value) {
-      return new Intl.NumberFormat().format(value || 0);
-    }
-
-    function aggregateRepo(days, repoName) {
-      return days.reduce((acc, day) => {
-        const metric = day.metrics?.[repoName] || {};
-        acc.additions += metric.additions || 0;
-        acc.deletions += metric.deletions || 0;
-        acc.changes += metric.changes || 0;
-        acc.commits += metric.commits || 0;
-        if (metric.status === 'private-token-required') acc.status = 'private-token-required';
-        if (metric.status === 'error' && acc.status !== 'private-token-required') acc.status = 'error';
-        return acc;
-      }, { additions: 0, deletions: 0, changes: 0, commits: 0, status: 'ok' });
-    }
-
-    function buildSummary(days) {
-      const totals = days.reduce((acc, day) => {
-        for (const metric of Object.values(day.metrics || {})) {
-          acc.additions += metric.additions || 0;
-          acc.deletions += metric.deletions || 0;
-          acc.changes += metric.changes || 0;
-          acc.commits += metric.commits || 0;
-        }
-        return acc;
-      }, { additions: 0, deletions: 0, changes: 0, commits: 0 });
-
-      const cards = [
-        ['Tracked repos', dashboardData.repos.length],
-        ['Additions', totals.additions],
-        ['Deletions', totals.deletions],
-        ['Commits', totals.commits]
-      ];
-
-      summaryCards.innerHTML = cards.map(([label, value]) => `
-        <div class="stat">
-          <div class="stat-label">${label}</div>
-          <div class="stat-value mono">${formatNumber(value)}</div>
-        </div>
-      `).join('');
-    }
-
-    function renderTable(days) {
-      repoTableBody.innerHTML = dashboardData.repos.map(repo => {
-        const totals = aggregateRepo(days, repo.name);
-        const status = totals.status === 'private-token-required'
-          ? 'Needs cross-repo token'
-          : totals.status === 'error'
-            ? 'Fetch error'
-            : 'OK';
-        return `
-          <tr>
-            <td><a href="https://github.com/${repo.name}" target="_blank" rel="noreferrer">${repo.name}</a></td>
-            <td><span class="pill">${repo.visibility}</span></td>
-            <td class="mono">${repo.branch}</td>
-            <td class="mono">${formatNumber(totals.additions)}</td>
-            <td class="mono">${formatNumber(totals.deletions)}</td>
-            <td class="mono">${formatNumber(totals.changes)}</td>
-            <td class="mono">${formatNumber(totals.commits)}</td>
-            <td>${status}</td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    function renderChart(days, repoName) {
-      const repo = dashboardData.repos.find(item => item.name === repoName);
-      const maxValue = Math.max(1, ...days.map(day => (day.metrics?.[repoName]?.changes || 0)));
-      chartEl.innerHTML = days.map(day => {
-        const metric = day.metrics?.[repoName] || {};
-        const additions = metric.additions || 0;
-        const deletions = metric.deletions || 0;
-        const changes = metric.changes || 0;
-        const addHeight = changes ? Math.max(4, Math.round((additions / maxValue) * 260)) : 0;
-        const delHeight = changes ? Math.max(4, Math.round((deletions / maxValue) * 260)) : 0;
-        return `
-          <div class="bar-group" title="${day.date}: +${additions} / -${deletions} / ${changes} total">
-            <div class="bar-total mono">${formatNumber(changes)}</div>
-            <div class="bar-stack">
-              <div class="bar-del" style="height:${delHeight}px"></div>
-              <div class="bar-add" style="height:${addHeight}px"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="topbar">
+          <div class="topbar-left">
+            <div class="utility-chip">Live telemetry</div>
+            <div id="cacheBadge" class="utility-chip">Live data</div>
+          </div>
+          <div class="topbar-right header-profile">
+            <div class="profile-avatar">DL</div>
+            <div>
+              <strong>Dashboard</strong>
+              <span id="lastUpdated"></span>
             </div>
-            <div class="bar-label">${day.date.slice(5)}</div>
           </div>
-        `;
-      }).join('');
+        </div>
 
-      repoNote.textContent = repo.visibility === 'private'
-        ? 'This repo is private. If the dashboard shows zeroes or “Needs cross-repo token,” add an ECOSYSTEM_GH_TOKEN secret with repo read access to this site repo.'
-        : 'Public repo data should update from the scheduled workflow without extra setup.';
-    }
+        <div class="page-heading">
+          <div>
+            <h1 class="page-title">Ecosystem analytics</h1>
+            <p class="page-subtitle">Track additions, deletions, commits, and repository activity over time.</p>
+          </div>
 
-    function getWindowedDays() {
-      const count = Number(windowSelect.value || 21);
-      return dashboardData.days.slice(-count);
-    }
+          <div class="control-strip">
+            <div class="control-group">
+              <label>Repo</label>
+              <select id="repoSelect" class="select"></select>
+            </div>
 
-    function render() {
-      const days = getWindowedDays();
-      buildSummary(days);
-      renderTable(days);
-      renderChart(days, repoSelect.value);
-    }
+            <div class="control-group">
+              <label>Compare</label>
+              <select id="compareSelect" class="select"></select>
+            </div>
 
-    async function loadDashboard() {
-      const response = await fetch(`${dataUrl}?t=${Date.now()}`);
-      dashboardData = await response.json();
+            <div class="control-group">
+              <label>Window</label>
+              <select id="windowSelect" class="select">
+                <option value="7">7d</option>
+                <option value="14">14d</option>
+                <option value="21" selected>21d</option>
+                <option value="30">30d</option>
+              </select>
+            </div>
 
-      repoSelect.innerHTML = dashboardData.repos.map(repo => `<option value="${repo.name}">${repo.name}</option>`).join('');
-      if (!repoSelect.value && dashboardData.repos[0]) {
-        repoSelect.value = dashboardData.repos[0].name;
-      }
-      render();
-    }
+            <div class="control-group">
+              <label>Mode</label>
+              <select id="modeSelect" class="select">
+                <option value="daily">Daily</option>
+                <option value="cumulative">Cumulative</option>
+              </select>
+            </div>
 
-    repoSelect.addEventListener('change', render);
-    windowSelect.addEventListener('change', render);
-    reloadButton.addEventListener('click', loadDashboard);
+            <button id="reloadButton" class="button button-primary">Refresh</button>
+          </div>
+        </div>
 
-    loadDashboard().catch(error => {
-      summaryCards.innerHTML = `<div class="card">Unable to load dashboard data. ${error.message}</div>`;
-    });
-  </script>
+        <div class="status-banner">
+          <div>
+            <strong id="statusBannerTitle">Status</strong>
+            <p id="statusBannerCopy"></p>
+          </div>
+        </div>
+
+        <div id="summaryCards" class="kpi-grid"></div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-header-row">
+              <h2 class="panel-title">Activity chart</h2>
+            </div>
+          </div>
+
+          <div class="chart-shell">
+            <div class="chart-frame">
+              <svg id="chartSvg"></svg>
+              <div id="chartEmpty" class="empty-state">No data</div>
+              <div id="chartTooltip" class="chart-tooltip" hidden></div>
+            </div>
+          </div>
+
+          <p id="chartMeta" class="chart-meta"></p>
+          <p id="repoNote"></p>
+        </div>
+
+        <div class="panel table-card">
+          <div class="table-card-header">
+            <h2 class="table-title">Repository summary</h2>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Repository</th>
+                  <th>Visibility</th>
+                  <th>Branch</th>
+                  <th>Additions</th>
+                  <th>Deletions</th>
+                  <th>Total</th>
+                  <th>Commits</th>
+                  <th>Status</th>
+                  <th>Blame</th>
+                  <th>Trend</th>
+                </tr>
+              </thead>
+              <tbody id="repoTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/dashboard.js"></script>
 </body>
 </html>
