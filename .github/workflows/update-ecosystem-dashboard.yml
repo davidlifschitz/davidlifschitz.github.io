@@ -1,0 +1,39 @@
+name: Update ecosystem dashboard
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 2 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Refresh LOC history
+        env:
+          ECOSYSTEM_GH_TOKEN: ${{ secrets.ECOSYSTEM_GH_TOKEN }}
+          DAYS_BACK: 21
+        run: node scripts/update-loc-history.mjs
+
+      - name: Commit updated dashboard data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/loc-history.json
+          if git diff --cached --quiet; then
+            echo "No dashboard data changes to commit"
+            exit 0
+          fi
+          git commit -m "Update ecosystem dashboard data"
+          git push
