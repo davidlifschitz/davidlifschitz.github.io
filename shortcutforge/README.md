@@ -22,7 +22,8 @@ From the repository root:
 
 ```bash
 cd web
-python3 -m http.server 4173
+npm run validate
+npm run serve
 ```
 
 Then open:
@@ -31,7 +32,25 @@ Then open:
 http://localhost:4173
 ```
 
-For phone testing, serve the same directory over an HTTPS-capable host such as GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
+## Public deployment
+
+The source of truth remains this directory:
+
+```text
+ShortcutForge/web/
+```
+
+The public copy is synced into:
+
+```text
+davidlifschitz.github.io/shortcutforge/
+```
+
+Expected public URL after the sync workflow succeeds:
+
+```text
+https://davidlifschitz.github.io/shortcutforge/
+```
 
 ## Configuration
 
