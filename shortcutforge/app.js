@@ -33,6 +33,8 @@ const elements = {
   modelInput: document.querySelector("#modelInput"),
   apiKeyInput: document.querySelector("#apiKeyInput"),
   passphraseInput: document.querySelector("#passphraseInput"),
+  forgetKeyAfterGeneration: document.querySelector("#forgetKeyAfterGeneration"),
+  useKeyOnce: document.querySelector("#useKeyOnce"),
   saveApiKey: document.querySelector("#saveApiKey"),
   clearApiKey: document.querySelector("#clearApiKey"),
   keyStatus: document.querySelector("#keyStatus"),
@@ -54,6 +56,10 @@ function bytesToBase64(bytes) {
 
 function base64ToBytes(base64) {
   return Uint8Array.from(atob(base64), (char) => char.charCodeAt(0));
+}
+
+function clearSensitiveInputs() {
+  elements.apiKeyInput.value = "";
 }
 
 async function deriveKey(passphrase, salt) {
@@ -180,8 +186,8 @@ function updateKeyStatus(message) {
   }
   const saved = localStorage.getItem(STORAGE_KEY);
   elements.keyStatus.textContent = saved
-    ? "Encrypted API key is saved in this browser. Enter the passphrase when generating."
-    : "No encrypted API key saved yet.";
+    ? "Encrypted API key is saved in this browser. Enter the passphrase when generating with saved/direct key."
+    : "No encrypted API key saved. Session-only use is available with a pasted key.";
 }
 
 function inferShortcutId(prompt) {
@@ -353,15 +359,19 @@ function renderPayload(payload) {
   elements.payloadPreview.textContent = JSON.stringify(payload, null, 2);
 }
 
-async function getApiKeyForGeneration() {
+async function getApiKeyForGeneration({ requirePastedKey = false } = {}) {
   const directKey = elements.apiKeyInput.value.trim();
   if (directKey) {
-    return directKey;
+    return { apiKey: directKey, source: "pasted" };
+  }
+
+  if (requirePastedKey) {
+    throw new Error("Paste an API key to use session-only generation.");
   }
 
   const saved = localStorage.getItem(STORAGE_KEY);
   if (!saved) {
-    throw new Error("No API key provided. Paste a key or save an encrypted key first.");
+    throw new Error("No API key provided. Paste a key for this session or save an encrypted key first.");
   }
 
   const passphrase = elements.passphraseInput.value;
@@ -369,7 +379,37 @@ async function getApiKeyForGeneration() {
     throw new Error("Enter the encryption passphrase to decrypt the saved key.");
   }
 
-  return decryptApiKey(JSON.parse(saved), passphrase);
+  return { apiKey: await decryptApiKey(JSON.parse(saved), passphrase), source: "saved" };
+}
+
+async function generatePayloadWithKeyMode({ requirePastedKey = false } = {}) {
+  const prompt = elements.promptInput.value.trim();
+  if (!prompt) {
+    announce("Add a prompt before generating.");
+    return;
+  }
+
+  let apiKeyRecord = null;
+  try {
+    elements.generateWithLlm.disabled = true;
+    elements.useKeyOnce.disabled = true;
+    elements.generateWithLlm.textContent = "Generating…";
+    announce("Generating runner payload with LLM…");
+    apiKeyRecord = await getApiKeyForGeneration({ requirePastedKey });
+    const payload = await callLlm(prompt, apiKeyRecord.apiKey);
+    renderPayload(payload);
+    announce(apiKeyRecord.source === "pasted" ? "LLM payload generated with session-only key." : "LLM payload generated with saved key.");
+  } catch (error) {
+    announce(`Generation failed: ${error.message}`);
+  } finally {
+    if (apiKeyRecord?.source === "pasted" && elements.forgetKeyAfterGeneration.checked) {
+      clearSensitiveInputs();
+    }
+    apiKeyRecord = null;
+    elements.generateWithLlm.disabled = false;
+    elements.useKeyOnce.disabled = false;
+    elements.generateWithLlm.textContent = "Generate with saved/direct key";
+  }
 }
 
 function wireEvents() {
@@ -385,8 +425,8 @@ function wireEvents() {
     try {
       const encrypted = await encryptApiKey(apiKey, passphrase);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(encrypted));
-      elements.apiKeyInput.value = "";
-      updateKeyStatus("Encrypted API key saved locally in this browser.");
+      clearSensitiveInputs();
+      updateKeyStatus("Encrypted API key saved locally in this browser. Use a dedicated low-limit provider key.");
     } catch (error) {
       updateKeyStatus(`Could not save key: ${error.message}`);
     }
@@ -394,7 +434,9 @@ function wireEvents() {
 
   elements.clearApiKey.addEventListener("click", () => {
     localStorage.removeItem(STORAGE_KEY);
-    updateKeyStatus("Saved API key cleared from this browser.");
+    clearSensitiveInputs();
+    elements.passphraseInput.value = "";
+    updateKeyStatus("Saved key and local key fields cleared from this browser.");
   });
 
   elements.copyRunnerLink.addEventListener("click", async () => {
@@ -410,26 +452,12 @@ function wireEvents() {
     await copyText(prompt, "Prompt copied.");
   });
 
+  elements.useKeyOnce.addEventListener("click", async () => {
+    await generatePayloadWithKeyMode({ requirePastedKey: true });
+  });
+
   elements.generateWithLlm.addEventListener("click", async () => {
-    const prompt = elements.promptInput.value.trim();
-    if (!prompt) {
-      announce("Add a prompt before generating.");
-      return;
-    }
-    try {
-      elements.generateWithLlm.disabled = true;
-      elements.generateWithLlm.textContent = "Generating…";
-      announce("Generating runner payload with LLM…");
-      const apiKey = await getApiKeyForGeneration();
-      const payload = await callLlm(prompt, apiKey);
-      renderPayload(payload);
-      announce("LLM runner payload generated.");
-    } catch (error) {
-      announce(`Generation failed: ${error.message}`);
-    } finally {
-      elements.generateWithLlm.disabled = false;
-      elements.generateWithLlm.textContent = "Generate with LLM";
-    }
+    await generatePayloadWithKeyMode({ requirePastedKey: false });
   });
 
   elements.buildPayload.addEventListener("click", () => {

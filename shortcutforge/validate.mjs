@@ -50,10 +50,28 @@ if (!manifest.name || !manifest.start_url || manifest.display !== "standalone") 
   throw new Error("manifest.webmanifest is missing required PWA fields");
 }
 
+const indexHtml = await readFile("index.html", "utf8");
+for (const requiredSnippet of [
+  "Content-Security-Policy",
+  "connect-src 'self' https://openrouter.ai https://integrate.api.nvidia.com",
+  "Use pasted key once",
+  "Forget pasted API key after generation"
+]) {
+  if (!indexHtml.includes(requiredSnippet)) {
+    throw new Error(`index.html is missing expected hardened BYOK snippet: ${requiredSnippet}`);
+  }
+}
+
 const appJs = await readFile("app.js", "utf8");
-for (const requiredSnippet of ["crypto.subtle", "Generate with LLM", "Authorization: `Bearer ${apiKey}`"]) {
+for (const requiredSnippet of [
+  "crypto.subtle",
+  "clearSensitiveInputs",
+  "requirePastedKey",
+  "Authorization: `Bearer ${apiKey}`",
+  "forgetKeyAfterGeneration.checked"
+]) {
   if (!appJs.includes(requiredSnippet)) {
-    throw new Error(`app.js is missing expected BYOK LLM snippet: ${requiredSnippet}`);
+    throw new Error(`app.js is missing expected hardened BYOK snippet: ${requiredSnippet}`);
   }
 }
 

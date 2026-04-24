@@ -25,7 +25,16 @@ Supported provider presets:
 - OpenRouter
 - NVIDIA NIM
 
-The API key flow is:
+The safest flow is session-only:
+
+```text
+user pastes API key
+→ user clicks Use pasted key once
+→ browser calls the selected provider
+→ pasted key field is cleared after generation by default
+```
+
+Optional saved-key flow:
 
 ```text
 user enters API key + passphrase
@@ -37,7 +46,7 @@ user enters API key + passphrase
 → LLM returns a ShortcutForge runner payload
 ```
 
-Security note: this is encrypted at rest in this browser. The key must still be decrypted in browser memory to call the provider. Do not treat this as equivalent to a server-side secret vault.
+Security note: this is encrypted at rest in this browser. The key must still be decrypted in browser memory to call the provider. Do not treat this as equivalent to a server-side secret vault. Use a dedicated low-limit provider key.
 
 ## Local preview
 
@@ -103,4 +112,5 @@ Edit `config.json`:
 - The runner shortcut must be created and shared through Apple Shortcuts/iCloud.
 - Dynamic behavior is limited to branches that the installed runner shortcut already supports.
 - LLM provider calls may fail if the provider blocks direct browser requests with CORS rules.
+- Browser key storage is encrypted at rest, but decrypted in browser memory during generation.
 - ScheduleOS submission is represented as a payload preview until the live endpoint is available.

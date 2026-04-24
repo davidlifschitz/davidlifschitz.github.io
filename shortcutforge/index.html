@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'self' https://openrouter.ai https://integrate.api.nvidia.com; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#111827" />
     <meta name="description" content="ShortcutForge mobile web runner install and prompt launcher." />
@@ -31,7 +35,7 @@
           <li>Open this page on your iPhone.</li>
           <li>Tap <strong>Open iCloud Runner Shortcut</strong>.</li>
           <li>Add the shortcut in Apple Shortcuts.</li>
-          <li>Add an LLM API key below if you want natural-language generation.</li>
+          <li>Use a session-only API key for the safest BYOK flow, or save an encrypted key on this device.</li>
           <li>Generate a runner payload and copy it into the installed shortcut flow.</li>
         </ol>
       </section>
@@ -39,8 +43,8 @@
       <section class="card llm-settings" aria-labelledby="llm-title">
         <h2 id="llm-title">LLM settings</h2>
         <p>
-          Bring your own API key. The key is encrypted locally with a passphrase before being stored in this browser.
-          It is decrypted in browser memory only when you generate a payload.
+          Bring your own API key. Session-only usage is safest. Saving is optional and stores only an encrypted blob in this browser.
+          The key is still decrypted in browser memory while a provider request is running.
         </p>
         <div class="field-grid">
           <label>
@@ -58,11 +62,16 @@
         </label>
         <label>
           Encryption passphrase
-          <input id="passphraseInput" type="password" autocomplete="current-password" placeholder="Used only on this device" />
+          <input id="passphraseInput" type="password" autocomplete="current-password" placeholder="Required only for saved keys" />
+        </label>
+        <label class="checkbox-row">
+          <input id="forgetKeyAfterGeneration" type="checkbox" checked />
+          Forget pasted API key after generation
         </label>
         <div class="actions">
-          <button id="saveApiKey" class="button primary" type="button">Encrypt and save key</button>
-          <button id="clearApiKey" class="button secondary" type="button">Clear saved key</button>
+          <button id="useKeyOnce" class="button primary" type="button">Use pasted key once</button>
+          <button id="saveApiKey" class="button secondary" type="button">Save encrypted key on this device</button>
+          <button id="clearApiKey" class="button secondary" type="button">Clear all local key data</button>
         </div>
         <p class="fine-print" id="keyStatus">No saved key loaded yet.</p>
       </section>
@@ -72,7 +81,7 @@
         <label for="promptInput">What do you want the runner to do?</label>
         <textarea id="promptInput" rows="6" placeholder="Ask me what text to send, let me choose a contact, and prepare the message."></textarea>
         <div class="actions">
-          <button id="generateWithLlm" class="button primary" type="button">Generate with LLM</button>
+          <button id="generateWithLlm" class="button primary" type="button">Generate with saved/direct key</button>
           <button id="buildPayload" class="button secondary" type="button">Build fallback JSON</button>
           <button id="copyPrompt" class="button secondary" type="button">Copy prompt</button>
         </div>
