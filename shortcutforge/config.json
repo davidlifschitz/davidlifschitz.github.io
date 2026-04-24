@@ -1,0 +1,12 @@
+{
+  "appName": "ShortcutForge Web Runner",
+  "runnerShortcutName": "ShortcutForge Runner",
+  "runnerInstallUrl": "https://www.icloud.com/shortcuts/290365e70329446caec7e93f702a7919",
+  "scheduleOsEndpoint": "",
+  "examplePrompts": [
+    "Ask me what text to send, let me choose a contact, and prepare the message.",
+    "Create a task from this note and send it to ScheduleOS.",
+    "Capture this idea to my ecosystem inbox.",
+    "Tell me what I should work on next."
+  ]
+}

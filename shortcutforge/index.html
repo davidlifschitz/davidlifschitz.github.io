@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#111827" />
+    <meta name="description" content="ShortcutForge mobile web runner install and prompt launcher." />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>ShortcutForge Web Runner</title>
+  </head>
+  <body>
+    <main class="shell" aria-labelledby="page-title">
+      <section class="hero card">
+        <p class="eyebrow">ShortcutForge V1</p>
+        <h1 id="page-title">Install one trusted runner shortcut, then launch mobile workflows from the web.</h1>
+        <p class="lede">
+          This web app avoids unsigned shortcut-file imports by sending users through the iCloud Shortcut install flow.
+          After the runner is installed, prompts can be copied or handed to the runner workflow.
+        </p>
+        <div class="actions">
+          <a id="installRunner" class="button primary" href="#" target="_blank" rel="noopener noreferrer">Open iCloud Runner Shortcut</a>
+          <button id="copyRunnerLink" class="button secondary" type="button">Copy runner link</button>
+        </div>
+        <p class="fine-print" id="runnerStatus">Loading runner configuration…</p>
+      </section>
+
+      <section class="card steps" aria-labelledby="setup-title">
+        <h2 id="setup-title">Phone setup</h2>
+        <ol>
+          <li>Open this page on your iPhone.</li>
+          <li>Tap <strong>Open iCloud Runner Shortcut</strong>.</li>
+          <li>Add the shortcut in Apple Shortcuts.</li>
+          <li>Come back here and use a prompt below as the mobile request payload.</li>
+        </ol>
+      </section>
+
+      <section class="card composer" aria-labelledby="composer-title">
+        <h2 id="composer-title">Draft a runner request</h2>
+        <label for="promptInput">What do you want the runner to do?</label>
+        <textarea id="promptInput" rows="6" placeholder="Ask me what text to send, let me choose a contact, and prepare the message."></textarea>
+        <div class="actions">
+          <button id="copyPrompt" class="button primary" type="button">Copy prompt</button>
+          <button id="buildPayload" class="button secondary" type="button">Build JSON payload</button>
+        </div>
+        <div class="examples" id="examples" aria-label="Example prompts"></div>
+      </section>
+
+      <section class="card payload" aria-labelledby="payload-title">
+        <h2 id="payload-title">Runner payload preview</h2>
+        <p>
+          V1 keeps the web surface simple: generate a structured payload that a ShortcutForge Runner can send to ScheduleOS or use for a supported local branch.
+        </p>
+        <pre id="payloadPreview" tabindex="0">No payload yet.</pre>
+        <button id="copyPayload" class="button secondary" type="button">Copy payload JSON</button>
+      </section>
+    </main>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

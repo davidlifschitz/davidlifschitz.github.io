@@ -1,0 +1,10 @@
+{
+  "name": "ShortcutForge Web Runner",
+  "short_name": "ShortcutForge",
+  "description": "Mobile web launcher for the ShortcutForge trusted iCloud runner shortcut.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f3f4f6",
+  "theme_color": "#111827",
+  "icons": []
+}
