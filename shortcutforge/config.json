@@ -3,6 +3,19 @@
   "runnerShortcutName": "ShortcutForge Runner",
   "runnerInstallUrl": "https://www.icloud.com/shortcuts/290365e70329446caec7e93f702a7919",
   "scheduleOsEndpoint": "",
+  "llmProviders": {
+    "openrouter": {
+      "label": "OpenRouter",
+      "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+      "defaultModel": "openai/gpt-4o-mini"
+    },
+    "nvidia": {
+      "label": "NVIDIA NIM",
+      "endpoint": "https://integrate.api.nvidia.com/v1/chat/completions",
+      "defaultModel": "meta/llama-3.1-70b-instruct"
+    }
+  },
+  "defaultProvider": "openrouter",
   "examplePrompts": [
     "Ask me what text to send, let me choose a contact, and prepare the message.",
     "Create a task from this note and send it to ScheduleOS.",

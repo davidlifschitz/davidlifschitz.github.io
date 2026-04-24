@@ -112,7 +112,9 @@ h2 {
 
 .button:focus-visible,
 textarea:focus-visible,
-pre:focus-visible {
+pre:focus-visible,
+input:focus-visible,
+select:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--focus), transparent 60%);
   outline-offset: 3px;
 }
@@ -131,21 +133,34 @@ pre:focus-visible {
   margin-top: 0.5rem;
 }
 
-.composer label {
+.composer label,
+.llm-settings label {
   display: block;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+input,
+select,
 textarea {
   width: 100%;
-  resize: vertical;
   border: 1px solid var(--line);
   border-radius: 1rem;
   padding: 1rem;
   font: inherit;
   background: var(--soft);
   color: var(--ink);
+  margin-top: 0.4rem;
+}
+
+textarea {
+  resize: vertical;
   margin-bottom: 0.75rem;
 }
 
@@ -180,5 +195,9 @@ pre {
 @media (min-width: 700px) {
   .card {
     padding: 1.75rem;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }

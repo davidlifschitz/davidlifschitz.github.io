@@ -13,10 +13,10 @@
     <main class="shell" aria-labelledby="page-title">
       <section class="hero card">
         <p class="eyebrow">ShortcutForge V1</p>
-        <h1 id="page-title">Install one trusted runner shortcut, then launch mobile workflows from the web.</h1>
+        <h1 id="page-title">Install one trusted runner shortcut, then generate mobile workflow payloads.</h1>
         <p class="lede">
           This web app avoids unsigned shortcut-file imports by sending users through the iCloud Shortcut install flow.
-          After the runner is installed, prompts can be copied or handed to the runner workflow.
+          Then it can use your own LLM API key to turn plain English into a structured runner payload.
         </p>
         <div class="actions">
           <a id="installRunner" class="button primary" href="#" target="_blank" rel="noopener noreferrer">Open iCloud Runner Shortcut</a>
@@ -31,8 +31,40 @@
           <li>Open this page on your iPhone.</li>
           <li>Tap <strong>Open iCloud Runner Shortcut</strong>.</li>
           <li>Add the shortcut in Apple Shortcuts.</li>
-          <li>Come back here and use a prompt below as the mobile request payload.</li>
+          <li>Add an LLM API key below if you want natural-language generation.</li>
+          <li>Generate a runner payload and copy it into the installed shortcut flow.</li>
         </ol>
+      </section>
+
+      <section class="card llm-settings" aria-labelledby="llm-title">
+        <h2 id="llm-title">LLM settings</h2>
+        <p>
+          Bring your own API key. The key is encrypted locally with a passphrase before being stored in this browser.
+          It is decrypted in browser memory only when you generate a payload.
+        </p>
+        <div class="field-grid">
+          <label>
+            Provider
+            <select id="providerSelect"></select>
+          </label>
+          <label>
+            Model
+            <input id="modelInput" type="text" autocomplete="off" />
+          </label>
+        </div>
+        <label>
+          API key
+          <input id="apiKeyInput" type="password" autocomplete="off" placeholder="Paste provider API key" />
+        </label>
+        <label>
+          Encryption passphrase
+          <input id="passphraseInput" type="password" autocomplete="current-password" placeholder="Used only on this device" />
+        </label>
+        <div class="actions">
+          <button id="saveApiKey" class="button primary" type="button">Encrypt and save key</button>
+          <button id="clearApiKey" class="button secondary" type="button">Clear saved key</button>
+        </div>
+        <p class="fine-print" id="keyStatus">No saved key loaded yet.</p>
       </section>
 
       <section class="card composer" aria-labelledby="composer-title">
@@ -40,8 +72,9 @@
         <label for="promptInput">What do you want the runner to do?</label>
         <textarea id="promptInput" rows="6" placeholder="Ask me what text to send, let me choose a contact, and prepare the message."></textarea>
         <div class="actions">
-          <button id="copyPrompt" class="button primary" type="button">Copy prompt</button>
-          <button id="buildPayload" class="button secondary" type="button">Build JSON payload</button>
+          <button id="generateWithLlm" class="button primary" type="button">Generate with LLM</button>
+          <button id="buildPayload" class="button secondary" type="button">Build fallback JSON</button>
+          <button id="copyPrompt" class="button secondary" type="button">Copy prompt</button>
         </div>
         <div class="examples" id="examples" aria-label="Example prompts"></div>
       </section>
@@ -49,7 +82,7 @@
       <section class="card payload" aria-labelledby="payload-title">
         <h2 id="payload-title">Runner payload preview</h2>
         <p>
-          V1 keeps the web surface simple: generate a structured payload that a ShortcutForge Runner can send to ScheduleOS or use for a supported local branch.
+          The installed ShortcutForge Runner can consume this structured payload or use it to choose a supported local branch.
         </p>
         <pre id="payloadPreview" tabindex="0">No payload yet.</pre>
         <button id="copyPayload" class="button secondary" type="button">Copy payload JSON</button>
