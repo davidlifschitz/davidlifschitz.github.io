@@ -1,4 +1,6 @@
 const STORAGE_KEY = "shortcutforge.encryptedApiKey.v1";
+const MODEL_CACHE_KEY = "shortcutforge.modelCache.v1";
+const CUSTOM_MODEL_VALUE = "__custom__";
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
@@ -11,15 +13,20 @@ const DEFAULT_CONFIG = {
     openrouter: {
       label: "OpenRouter",
       endpoint: "https://openrouter.ai/api/v1/chat/completions",
-      defaultModel: "openai/gpt-4o-mini"
+      modelsEndpoint: "https://openrouter.ai/api/v1/models",
+      defaultModel: "openai/gpt-4o-mini",
+      modelFallbacks: ["openai/gpt-4o-mini"]
     },
     nvidia: {
       label: "NVIDIA NIM",
       endpoint: "https://integrate.api.nvidia.com/v1/chat/completions",
-      defaultModel: "meta/llama-3.1-70b-instruct"
+      modelsEndpoint: "https://integrate.api.nvidia.com/v1/models",
+      defaultModel: "meta/llama-3.1-70b-instruct",
+      modelFallbacks: ["meta/llama-3.1-70b-instruct"]
     }
   },
   defaultProvider: "openrouter",
+  customModelValue: CUSTOM_MODEL_VALUE,
   examplePrompts: [
     "Ask me what text to send, let me choose a contact, and prepare the message."
   ]
@@ -30,7 +37,11 @@ const elements = {
   copyRunnerLink: document.querySelector("#copyRunnerLink"),
   runnerStatus: document.querySelector("#runnerStatus"),
   providerSelect: document.querySelector("#providerSelect"),
-  modelInput: document.querySelector("#modelInput"),
+  modelSelect: document.querySelector("#modelSelect"),
+  refreshModels: document.querySelector("#refreshModels"),
+  customModelField: document.querySelector("#customModelField"),
+  customModelInput: document.querySelector("#customModelInput"),
+  modelStatus: document.querySelector("#modelStatus"),
   apiKeyInput: document.querySelector("#apiKeyInput"),
   passphraseInput: document.querySelector("#passphraseInput"),
   forgetKeyAfterGeneration: document.querySelector("#forgetKeyAfterGeneration"),
@@ -134,6 +145,10 @@ async function loadConfig() {
   }
 }
 
+function getCustomModelValue() {
+  return activeConfig.customModelValue || CUSTOM_MODEL_VALUE;
+}
+
 function getSelectedProvider() {
   const providerKey = elements.providerSelect.value || activeConfig.defaultProvider;
   const provider = activeConfig.llmProviders[providerKey];
@@ -141,6 +156,160 @@ function getSelectedProvider() {
     throw new Error(`Unknown provider: ${providerKey}`);
   }
   return { providerKey, provider };
+}
+
+function getCachedModels(providerKey) {
+  try {
+    const cache = JSON.parse(localStorage.getItem(MODEL_CACHE_KEY) || "{}");
+    return cache[providerKey] || null;
+  } catch {
+    return null;
+  }
+}
+
+function setCachedModels(providerKey, models) {
+  try {
+    const cache = JSON.parse(localStorage.getItem(MODEL_CACHE_KEY) || "{}");
+    cache[providerKey] = {
+      savedAt: new Date().toISOString(),
+      models
+    };
+    localStorage.setItem(MODEL_CACHE_KEY, JSON.stringify(cache));
+  } catch (error) {
+    console.warn("Unable to cache model list", error);
+  }
+}
+
+function fallbackModelOptions(provider) {
+  const fallbackIds = [provider.defaultModel, ...(provider.modelFallbacks || [])]
+    .filter(Boolean)
+    .filter((modelId, index, all) => all.indexOf(modelId) === index);
+
+  return fallbackIds.map((id) => ({ id, name: id }));
+}
+
+function modelLabel(model) {
+  if (model.name && model.name !== model.id) {
+    return `${model.name} (${model.id})`;
+  }
+  return model.id;
+}
+
+function renderModelOptions(models, { source = "fallback", savedAt = null } = {}) {
+  const { providerKey, provider } = getSelectedProvider();
+  const customValue = getCustomModelValue();
+  const existingSelection = elements.modelSelect.value;
+  const modelOptions = models?.length ? models : fallbackModelOptions(provider);
+
+  elements.modelSelect.innerHTML = "";
+  for (const model of modelOptions) {
+    const option = document.createElement("option");
+    option.value = model.id;
+    option.textContent = modelLabel(model);
+    elements.modelSelect.append(option);
+  }
+
+  const customOption = document.createElement("option");
+  customOption.value = customValue;
+  customOption.textContent = "Custom model…";
+  elements.modelSelect.append(customOption);
+
+  const preferred = modelOptions.some((model) => model.id === existingSelection)
+    ? existingSelection
+    : provider.defaultModel;
+  elements.modelSelect.value = modelOptions.some((model) => model.id === preferred)
+    ? preferred
+    : modelOptions[0]?.id || customValue;
+
+  syncCustomModelVisibility();
+
+  if (source === "live") {
+    elements.modelStatus.textContent = `Loaded ${modelOptions.length} current ${provider.label || providerKey} models.`;
+  } else if (source === "cache") {
+    const suffix = savedAt ? ` Cached ${new Date(savedAt).toLocaleString()}.` : "";
+    elements.modelStatus.textContent = `Using cached ${provider.label || providerKey} model list.${suffix}`;
+  } else {
+    elements.modelStatus.textContent = `Using fallback ${provider.label || providerKey} model list. Tap Refresh model list for current models.`;
+  }
+}
+
+function parseProviderModels(data) {
+  const models = Array.isArray(data?.data) ? data.data : [];
+  return models
+    .map((model) => ({
+      id: model.id || model.root || model.name,
+      name: model.name || model.id || model.root
+    }))
+    .filter((model) => model.id)
+    .filter((model, index, all) => all.findIndex((candidate) => candidate.id === model.id) === index)
+    .sort((a, b) => a.id.localeCompare(b.id));
+}
+
+async function getOptionalApiKeyForModelRefresh() {
+  const directKey = elements.apiKeyInput.value.trim();
+  if (directKey) {
+    return directKey;
+  }
+
+  const saved = localStorage.getItem(STORAGE_KEY);
+  const passphrase = elements.passphraseInput.value;
+  if (!saved || !passphrase) {
+    return null;
+  }
+
+  try {
+    return await decryptApiKey(JSON.parse(saved), passphrase);
+  } catch {
+    return null;
+  }
+}
+
+async function refreshProviderModels() {
+  const { providerKey, provider } = getSelectedProvider();
+  if (!provider.modelsEndpoint) {
+    renderModelOptions(fallbackModelOptions(provider), { source: "fallback" });
+    return;
+  }
+
+  let apiKey = null;
+  try {
+    elements.refreshModels.disabled = true;
+    elements.refreshModels.textContent = "Refreshing…";
+    elements.modelStatus.textContent = `Loading current ${provider.label || providerKey} models…`;
+    apiKey = await getOptionalApiKeyForModelRefresh();
+
+    const headers = { Accept: "application/json" };
+    if (apiKey) {
+      headers.Authorization = `Bearer ${apiKey}`;
+    }
+
+    const response = await fetch(provider.modelsEndpoint, { headers });
+    if (!response.ok) {
+      throw new Error(`Model list request failed with ${response.status}`);
+    }
+
+    const data = await response.json();
+    const models = parseProviderModels(data);
+    if (!models.length) {
+      throw new Error("Provider response did not include model IDs.");
+    }
+
+    setCachedModels(providerKey, models);
+    renderModelOptions(models, { source: "live" });
+  } catch (error) {
+    const cached = getCachedModels(providerKey);
+    if (cached?.models?.length) {
+      renderModelOptions(cached.models, { source: "cache", savedAt: cached.savedAt });
+      elements.modelStatus.textContent += ` Refresh failed: ${error.message}`;
+    } else {
+      renderModelOptions(fallbackModelOptions(provider), { source: "fallback" });
+      elements.modelStatus.textContent += ` Refresh failed: ${error.message}`;
+    }
+  } finally {
+    apiKey = null;
+    elements.refreshModels.disabled = false;
+    elements.refreshModels.textContent = "Refresh model list";
+  }
 }
 
 function renderConfig() {
@@ -156,7 +325,7 @@ function renderConfig() {
     elements.providerSelect.append(option);
   }
   elements.providerSelect.value = activeConfig.defaultProvider || Object.keys(activeConfig.llmProviders)[0];
-  syncModelInputWithProvider();
+  syncModelSelectWithProvider();
 
   elements.examples.innerHTML = "";
   for (const prompt of activeConfig.examplePrompts || []) {
@@ -174,9 +343,33 @@ function renderConfig() {
   updateKeyStatus();
 }
 
-function syncModelInputWithProvider() {
-  const { provider } = getSelectedProvider();
-  elements.modelInput.value = provider.defaultModel || "";
+function syncModelSelectWithProvider() {
+  const { providerKey, provider } = getSelectedProvider();
+  const cached = getCachedModels(providerKey);
+  if (cached?.models?.length) {
+    renderModelOptions(cached.models, { source: "cache", savedAt: cached.savedAt });
+  } else {
+    renderModelOptions(fallbackModelOptions(provider), { source: "fallback" });
+  }
+}
+
+function syncCustomModelVisibility() {
+  const isCustom = elements.modelSelect.value === getCustomModelValue();
+  elements.customModelField.classList.toggle("hidden", !isCustom);
+  if (isCustom) {
+    elements.customModelInput.focus();
+  }
+}
+
+function getSelectedModelId() {
+  if (elements.modelSelect.value === getCustomModelValue()) {
+    const customModel = elements.customModelInput.value.trim();
+    if (!customModel) {
+      throw new Error("Paste a custom model ID or choose a model from the dropdown.");
+    }
+    return customModel;
+  }
+  return elements.modelSelect.value;
 }
 
 function updateKeyStatus(message) {
@@ -306,7 +499,7 @@ function normalizeLlmPayload(payload, prompt) {
 
 async function callLlm(prompt, apiKey) {
   const { providerKey, provider } = getSelectedProvider();
-  const model = elements.modelInput.value.trim() || provider.defaultModel;
+  const model = getSelectedModelId();
 
   const headers = {
     "Content-Type": "application/json",
@@ -413,7 +606,9 @@ async function generatePayloadWithKeyMode({ requirePastedKey = false } = {}) {
 }
 
 function wireEvents() {
-  elements.providerSelect.addEventListener("change", syncModelInputWithProvider);
+  elements.providerSelect.addEventListener("change", syncModelSelectWithProvider);
+  elements.modelSelect.addEventListener("change", syncCustomModelVisibility);
+  elements.refreshModels.addEventListener("click", refreshProviderModels);
 
   elements.saveApiKey.addEventListener("click", async () => {
     const apiKey = elements.apiKeyInput.value.trim();

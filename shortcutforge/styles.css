@@ -88,6 +88,14 @@ h2 {
   align-items: center;
 }
 
+.model-actions {
+  margin: -0.2rem 0 0.75rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .button {
   appearance: none;
   border: 1px solid var(--primary);

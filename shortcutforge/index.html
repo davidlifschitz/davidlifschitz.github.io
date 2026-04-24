@@ -36,6 +36,7 @@
           <li>Tap <strong>Open iCloud Runner Shortcut</strong>.</li>
           <li>Add the shortcut in Apple Shortcuts.</li>
           <li>Use a session-only API key for the safest BYOK flow, or save an encrypted key on this device.</li>
+          <li>Pick a provider model from the current model list, or choose custom.</li>
           <li>Generate a runner payload and copy it into the installed shortcut flow.</li>
         </ol>
       </section>
@@ -53,9 +54,17 @@
           </label>
           <label>
             Model
-            <input id="modelInput" type="text" autocomplete="off" />
+            <select id="modelSelect"></select>
           </label>
         </div>
+        <div class="actions model-actions">
+          <button id="refreshModels" class="button secondary" type="button">Refresh model list</button>
+        </div>
+        <label id="customModelField" class="hidden">
+          Custom model ID
+          <input id="customModelInput" type="text" autocomplete="off" placeholder="Paste custom model ID" />
+        </label>
+        <p class="fine-print" id="modelStatus">Model list not loaded yet.</p>
         <label>
           API key
           <input id="apiKeyInput" type="password" autocomplete="off" placeholder="Paste provider API key" />

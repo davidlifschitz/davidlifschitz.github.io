@@ -48,6 +48,25 @@ user enters API key + passphrase
 
 Security note: this is encrypted at rest in this browser. The key must still be decrypted in browser memory to call the provider. Do not treat this as equivalent to a server-side secret vault. Use a dedicated low-limit provider key.
 
+## Model selection
+
+The model field is a provider-aware dropdown.
+
+For each provider:
+
+1. The page starts with configured fallback models.
+2. The user can tap **Refresh model list** to fetch the provider's current model catalog from `modelsEndpoint`.
+3. The fetched list is cached locally.
+4. The dropdown always includes **Custom model…**.
+5. The custom model text box is hidden unless **Custom model…** is selected.
+
+Configured model catalog endpoints:
+
+```text
+OpenRouter: https://openrouter.ai/api/v1/models
+NVIDIA NIM: https://integrate.api.nvidia.com/v1/models
+```
+
 ## Local preview
 
 From the repository root:
@@ -93,10 +112,12 @@ Edit `config.json`:
   "runnerInstallUrl": "https://www.icloud.com/shortcuts/290365e70329446caec7e93f702a7919",
   "llmProviders": {
     "openrouter": {
-      "endpoint": "https://openrouter.ai/api/v1/chat/completions"
+      "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+      "modelsEndpoint": "https://openrouter.ai/api/v1/models"
     },
     "nvidia": {
-      "endpoint": "https://integrate.api.nvidia.com/v1/chat/completions"
+      "endpoint": "https://integrate.api.nvidia.com/v1/chat/completions",
+      "modelsEndpoint": "https://integrate.api.nvidia.com/v1/models"
     }
   }
 }
@@ -112,5 +133,6 @@ Edit `config.json`:
 - The runner shortcut must be created and shared through Apple Shortcuts/iCloud.
 - Dynamic behavior is limited to branches that the installed runner shortcut already supports.
 - LLM provider calls may fail if the provider blocks direct browser requests with CORS rules.
+- Model-list refresh may fall back to cached or configured fallback models if the provider blocks browser-origin requests or requires authentication.
 - Browser key storage is encrypted at rest, but decrypted in browser memory during generation.
 - ScheduleOS submission is represented as a payload preview until the live endpoint is available.
