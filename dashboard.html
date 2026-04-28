@@ -5,8 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ecosystem Dashboard</title>
   <link rel="stylesheet" href="styles/dashboard.css" />
+  <style>
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(246,247,251,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #dbe2f0; }
+    .site-nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 24px; }
+    .site-nav .brand { font-weight: 700; color: #172033; text-decoration: none; font-family: Inter, -apple-system, sans-serif; font-size: 0.95rem; }
+    .site-nav .nav-links { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.9rem; font-family: Inter, -apple-system, sans-serif; }
+    .site-nav .nav-links a { color: #5d6985; text-decoration: none; }
+    .site-nav .nav-links a:hover { color: #3856ff; }
+    @media (max-width: 700px) { .site-nav { flex-direction: column; align-items: flex-start; } }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="site-nav">
+      <a class="brand" href="index.html">David Lifschitz</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="ecosystem.html">Ecosystem</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#research">Research</a>
+        <a href="index.html#mobile">Mobile</a>
+        <a href="blog/index.html">Writing</a>
+        <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub / Repos</a>
+      </nav>
+    </div>
+  </header>
+
   <div class="app-shell">
     <aside class="sidebar">
       <div class="sidebar-inner">
@@ -17,7 +42,6 @@
             <span>Telemetry</span>
           </div>
         </div>
-
         <nav class="sidebar-nav">
           <a class="nav-item active"><span class="nav-dot"></span>Dashboard</a>
           <a class="nav-item"><span class="nav-dot"></span>Repositories</a>
@@ -25,7 +49,6 @@
           <a class="nav-item"><span class="nav-dot"></span>Settings</a>
           <a class="nav-item"><span class="nav-dot"></span>Docs</a>
         </nav>
-
         <div class="sidebar-card">
           <div class="eyebrow">Token</div>
           <h3>ECOSYSTEM_GH_TOKEN</h3>
@@ -55,18 +78,9 @@
             <h1 class="page-title">Ecosystem analytics</h1>
             <p class="page-subtitle">Track additions, deletions, commits, and repository activity over time.</p>
           </div>
-
           <div class="control-strip">
-            <div class="control-group">
-              <label>Repo</label>
-              <select id="repoSelect" class="select"></select>
-            </div>
-
-            <div class="control-group">
-              <label>Compare</label>
-              <select id="compareSelect" class="select"></select>
-            </div>
-
+            <div class="control-group"><label>Repo</label><select id="repoSelect" class="select"></select></div>
+            <div class="control-group"><label>Compare</label><select id="compareSelect" class="select"></select></div>
             <div class="control-group">
               <label>Window</label>
               <select id="windowSelect" class="select">
@@ -76,7 +90,6 @@
                 <option value="30">30d</option>
               </select>
             </div>
-
             <div class="control-group">
               <label>Mode</label>
               <select id="modeSelect" class="select">
@@ -84,7 +97,6 @@
                 <option value="cumulative">Cumulative</option>
               </select>
             </div>
-
             <button id="reloadButton" class="button button-primary">Refresh</button>
           </div>
         </div>
@@ -104,7 +116,6 @@
               <h2 class="panel-title">Activity chart</h2>
             </div>
           </div>
-
           <div class="chart-shell">
             <div class="chart-frame">
               <svg id="chartSvg"></svg>
@@ -112,7 +123,6 @@
               <div id="chartTooltip" class="chart-tooltip" hidden></div>
             </div>
           </div>
-
           <p id="chartMeta" class="chart-meta"></p>
           <p id="repoNote"></p>
         </div>
@@ -125,16 +135,9 @@
             <table class="data-table">
               <thead>
                 <tr>
-                  <th>Repository</th>
-                  <th>Visibility</th>
-                  <th>Branch</th>
-                  <th>Additions</th>
-                  <th>Deletions</th>
-                  <th>Total</th>
-                  <th>Commits</th>
-                  <th>Status</th>
-                  <th>Blame</th>
-                  <th>Trend</th>
+                  <th>Repository</th><th>Visibility</th><th>Branch</th>
+                  <th>Additions</th><th>Deletions</th><th>Total</th>
+                  <th>Commits</th><th>Status</th><th>Blame</th><th>Trend</th>
                 </tr>
               </thead>
               <tbody id="repoTableBody"></tbody>
