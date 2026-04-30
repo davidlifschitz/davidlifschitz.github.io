@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-29T05:34:51.668Z",
+  "generated_at": "2026-04-30T05:40:21.837Z",
   "days_back": 21,
   "repos": [
     {
@@ -39,60 +39,6 @@
     }
   ],
   "days": [
-    {
-      "date": "2026-04-09",
-      "metrics": {
-        "davidlifschitz/agentic-os": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/spec-to-repo": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/children-of-israel-agent-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/graphify": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/ScheduleOS": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ShortcutForge": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
-        }
-      }
-    },
     {
       "date": "2026-04-10",
       "metrics": {
@@ -1057,10 +1003,10 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 77,
-          "deletions": 77,
-          "changes": 154,
-          "commits": 1,
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
           "status": "error"
         }
       }
@@ -1111,10 +1057,10 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 497,
-          "deletions": 93,
-          "changes": 590,
-          "commits": 3,
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
           "status": "error"
         }
       }
@@ -1165,10 +1111,64 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
+          "additions": 524,
+          "deletions": 168,
+          "changes": 692,
+          "commits": 4,
+          "status": "error"
+        }
+      }
+    },
+    {
+      "date": "2026-04-30",
+      "metrics": {
+        "davidlifschitz/agentic-os": {
           "additions": 0,
           "deletions": 0,
           "changes": 0,
           "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/spec-to-repo": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/children-of-israel-agent-swarm": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/graphify": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/ScheduleOS": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ShortcutForge": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/davidlifschitz.github.io": {
+          "additions": 378,
+          "deletions": 0,
+          "changes": 378,
+          "commits": 3,
           "status": "error"
         }
       }
