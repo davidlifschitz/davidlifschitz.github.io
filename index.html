@@ -134,6 +134,7 @@
       .nav { align-items: flex-start; flex-direction: column; }
     }
   </style>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@hyperframes/player"></script>
 </head>
 <body>
   <header class="site-header">
@@ -143,6 +144,7 @@
         <a href="index.html">Home</a>
         <a href="ecosystem.html">Ecosystem</a>
         <a href="dashboard.html">Dashboard</a>
+        <a href="#projects">Projects</a>
         <a href="#products">Products</a>
         <a href="#research">Research</a>
         <a href="#mobile">Mobile</a>
@@ -162,6 +164,22 @@
         <a class="button primary" href="ecosystem.html">Explore the ecosystem</a>
         <a class="button secondary" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">Browse GitHub</a>
       </div>
+    </section>
+
+    <section id="projects">
+      <h2>Selected projects</h2>
+      <p class="section-intro">A 36-second auto-rotating reel of what I'm currently shipping. Authored as a <a href="https://hyperframes.heygen.com" target="_blank" rel="noreferrer">Hyperframes</a> composition (HTML &amp; GSAP), so the same source plays live here and renders deterministically to MP4.</p>
+      <hyperframes-player
+        src="hyperframes/projects-reel/index.html"
+        width="1920"
+        height="1080"
+        controls
+        autoplay
+        loop
+        muted
+        style="display:block;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:#0b1224;border:1px solid var(--border);">
+      </hyperframes-player>
+      <p class="section-intro" style="margin-top:14px;">Source: <a href="https://github.com/davidlifschitz/davidlifschitz.github.io/tree/main/hyperframes/projects-reel" target="_blank" rel="noreferrer">hyperframes/projects-reel</a> &middot; All repos: <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">github.com/davidlifschitz</a></p>
     </section>
 
     <section>
