@@ -51,7 +51,7 @@ a:hover { text-decoration: underline; }
 }
 .btn--primary { background: var(--text); color: var(--bg); }
 .btn--secondary { background: var(--bg); color: var(--text); border-left: none; }
-.btn-row { display: flex; }
+.btn-row { display: flex; gap: 0; }
 
 /* ── Footer ──────────────────────────────────────── */
 .site-footer {
@@ -114,7 +114,7 @@ a:hover { text-decoration: underline; }
 /* ── Responsive ──────────────────────────────────── */
 @media (max-width: 600px) {
   .nav-inner { flex-direction: column; align-items: flex-start; }
-  h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
+  .hero h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
   .btn--secondary { border-left: 1px solid var(--border); border-top: none; }
   .btn-row { flex-direction: column; }
 }

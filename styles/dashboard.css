@@ -128,7 +128,7 @@ button, select { font: inherit; }
 .nav-dot {
   width: 10px;
   height: 10px;
-  border-radius: 999px;
+  border-radius: 0;
   background: currentColor;
   opacity: 0.9;
 }
@@ -136,10 +136,9 @@ button, select { font: inherit; }
 .sidebar-card {
   margin-top: auto;
   padding: 18px;
-  border-radius: 20px;
-  background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+  border-radius: 0;
+  background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
 }
 
 .sidebar-card .eyebrow,
@@ -158,7 +157,7 @@ button, select { font: inherit; }
   gap: 8px;
   color: var(--accent-strong);
   background: var(--accent-soft);
-  border-radius: 999px;
+  border-radius: 0;
   padding: 6px 10px;
   font-size: 0.72rem;
   font-weight: 700;
@@ -246,7 +245,7 @@ button, select { font: inherit; }
   padding: 8px 12px;
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 0.74rem;
   font-weight: 700;
   color: var(--accent-strong);
@@ -258,7 +257,7 @@ button, select { font: inherit; }
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #5fe3a1, #11a36d);
+  background: var(--success);
 }
 
 .header-profile {
@@ -266,14 +265,14 @@ button, select { font: inherit; }
   padding: 8px 12px 8px 8px;
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 .profile-avatar {
   width: 34px;
   height: 34px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #d7deff, #f0f3ff);
+  border-radius: 0;
+  background: var(--accent-soft);
   color: var(--accent-strong);
   display: inline-flex;
   align-items: center;
@@ -342,7 +341,7 @@ button, select { font: inherit; }
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.92);
   color: var(--text);
-  border-radius: 14px;
+  border-radius: 0;
   padding: 11px 14px;
   min-height: 46px;
   box-shadow: var(--shadow-sm);
@@ -364,7 +363,7 @@ button, select { font: inherit; }
 }
 
 .button-primary {
-  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-strong) 100%);
+  background: var(--accent);
   border-color: transparent;
   color: #fff;
 }
@@ -417,7 +416,7 @@ button, select { font: inherit; }
 }
 
 .kpi-card {
-  border-radius: 22px;
+  border-radius: 0;
   padding: 20px 20px 18px;
 }
 
@@ -536,7 +535,7 @@ button, select { font: inherit; }
   text-align: center;
   padding: 24px;
   border: 1px dashed var(--border-strong);
-  border-radius: 20px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.6);
 }
 
@@ -551,9 +550,9 @@ button, select { font: inherit; }
   display: grid;
   gap: 10px;
   padding: 18px;
-  border-radius: 20px;
+  border-radius: 0;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  background: var(--surface);
 }
 
 .helper-card code {
@@ -630,7 +629,7 @@ button, select { font: inherit; }
   align-items: center;
   gap: 8px;
   padding: 6px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 0.78rem;
   font-weight: 700;
   white-space: nowrap;
@@ -759,7 +758,7 @@ button, select { font: inherit; }
   .panel,
   .kpi-card,
   .status-banner {
-    border-radius: 18px;
+    border-radius: 0;
   }
 }
 
