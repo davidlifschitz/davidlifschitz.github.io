@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Consulting Call — David Lifschitz</title>
+  <meta name="description" content="Book a 1-on-1 AI consulting session with David Lifschitz. Choose a session type and pick a time that works for you." />
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, [L, ar[1], ar[2]])} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", {origin:"https://cal.com"});
+  </script>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #5d6985;
+      --border: #dbe2f0;
+      --accent: #3856ff;
+      --accent-soft: #eef2ff;
+      --accent-hover: #2440e8;
+      --max: 1100px;
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      background: rgba(246, 247, 251, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+    }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.95rem; }
+    .brand { font-weight: 700; color: var(--text); }
+    .hero { padding: 64px 0 36px; }
+    .eyebrow {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    h1, h2, h3 { line-height: 1.1; margin: 0; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 14px; }
+    h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 12px; }
+    p.lead {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 0 20px;
+    }
+    section { padding: 24px 0; }
+    .section-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .session-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .session-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      cursor: pointer;
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+      position: relative;
+    }
+    .session-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px rgba(56, 86, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    .session-card.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      box-shadow: 0 4px 20px rgba(56, 86, 255, 0.12);
+    }
+    .session-card .type-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .session-card h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--text); }
+    .session-card p { font-size: 0.9rem; color: var(--muted); margin: 0 0 14px; }
+    .session-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .session-meta span { display: flex; align-items: center; gap: 4px; }
+    .check-badge {
+      display: none;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+    }
+    .session-card.active .check-badge { display: flex; }
+    .book-btn-row { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.15s;
+      text-decoration: none;
+    }
+    .button.primary { background: var(--accent); color: white; border: none; }
+    .button.primary:hover { background: var(--accent-hover); transform: translateY(-1px); text-decoration: none; }
+    .button.secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
+    .hint-text { font-size: 0.88rem; color: var(--muted); }
+    #cal-embed-container {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 8px;
+      min-height: 600px;
+    }
+    #cal-embed-container.visible { display: block; }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+    }
+    .info-card h3 { font-size: 1rem; margin-bottom: 6px; }
+    .info-card p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+    footer { padding: 36px 0 60px; color: var(--muted); font-size: 0.95rem; }
+    @media (max-width: 860px) {
+      .session-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .nav { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">David Lifschitz</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="ecosystem.html">Ecosystem</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="index.html#products">Products</a>
+      <a href="index.html#research">Research</a>
+      <a href="blog/index.html">Writing</a>
+      <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="booking.html" style="color:var(--accent);font-weight:600;">Book a Call</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">AI Consulting</div>
+    <h1>Book a session with David</h1>
+    <p class="lead">Applied AI/ML engineering, agentic system design, and LLM integration. Pick the session type that fits your goal and grab a time that works.</p>
+  </section>
+
+  <section>
+    <span class="section-label">Choose a session type</span>
+    <div class="session-grid">
+
+      <div class="session-card" data-cal-link="david-lifschitz-agentic-solutions/15min" onclick="selectSession(this)">
+        <div class="check-badge">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="type-tag">Quick Advice</span>
+        <h3>15-Minute Intro Call</h3>
+        <p>A fast intro for fit-checking, triage, and deciding the right next step for your AI or agentic project.</p>
+        <div class="session-meta">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            15 min
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Video call
+          </span>
+        </div>
+      </div>
+
+      <div class="session-card" data-cal-link="david-lifschitz-agentic-solutions/30min" onclick="selectSession(this)">
+        <div class="check-badge">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="type-tag">Consulting Core</span>
+        <h3>30-Minute Consulting Call</h3>
+        <p>A focused consulting session for architecture review, model selection, system design, or implementation tradeoffs.</p>
+        <div class="session-meta">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            30 min
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Video call
+          </span>
+        </div>
+      </div>
+
+      <div class="session-card" data-cal-link="david-lifschitz-agentic-solutions/60min" onclick="selectSession(this)">
+        <div class="check-badge">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="type-tag">Extended Session</span>
+        <h3>60-Minute Deep Dive</h3>
+        <p>A deeper working session for architecture walkthroughs, debugging, roadmap planning, or detailed implementation review.</p>
+        <div class="session-meta">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            60 min
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Video + screenshare
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="book-btn-row">
+      <button class="button primary" onclick="openCalEmbed()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book this session
+      </button>
+      <span class="hint-text" id="hint-text">← Select a session type first</span>
+    </div>
+
+    <div id="cal-embed-container"></div>
+  </section>
+
+  <section>
+    <span class="section-label">What to expect</span>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Before the call</h3>
+        <p>You'll get a confirmation email with a calendar invite and a short intake form so I can prepare for your specific situation.</p>
+      </div>
+      <div class="info-card">
+        <h3>During the call</h3>
+        <p>Video-first via Google Meet or Zoom. Screen sharing available. I take notes and share a written summary with next steps after.</p>
+      </div>
+      <div class="info-card">
+        <h3>Topics I cover</h3>
+        <p>LLM selection &amp; fine-tuning, agentic architecture, RAG pipelines, multi-agent orchestration, API integration, and production deployment.</p>
+      </div>
+      <div class="info-card">
+        <h3>Follow-up</h3>
+        <p>Every paid session includes a written summary, resource links, and one async follow-up question via email within 7 days.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Questions before booking? Reach out via <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub</a> or open an issue on any of the ecosystem repos.
+</footer>
+
+<script>
+  let selectedCard = null;
+
+  function selectSession(card) {
+    document.querySelectorAll('.session-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    selectedCard = card;
+    document.getElementById('hint-text').textContent = '← Click to pick a time';
+    document.getElementById('hint-text').style.color = '#3856ff';
+  }
+
+  function openCalEmbed() {
+    if (!selectedCard) {
+      document.getElementById('hint-text').textContent = '← Please select a session type first';
+      document.getElementById('hint-text').style.color = '#e05';
+      return;
+    }
+    const calLink = selectedCard.getAttribute('data-cal-link');
+    const container = document.getElementById('cal-embed-container');
+    container.innerHTML = '';
+    container.classList.add('visible');
+    setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    Cal("inline", {
+      elementOrSelector: "#cal-embed-container",
+      calLink: calLink,
+      layout: "month_view",
+      config: { theme: "light", hideEventTypeDetails: "0", layout: "month_view" }
+    });
+  }
+</script>
+
+</body>
+</html>

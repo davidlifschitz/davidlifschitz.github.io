@@ -1,0 +1,3 @@
+[submodule "ad-studio"]
+	path = ad-studio
+	url = https://github.com/davidlifschitz/jewish-link-ad-studio.git

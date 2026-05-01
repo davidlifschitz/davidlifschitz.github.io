@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unwrapping the Stack — David Lifschitz</title>
+  <meta name="description" content="A layer-by-layer examination of files, apps, browsers, operating systems, hardware, and identity — and what happens to each when intelligence becomes a system property." />
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #5d6985;
+      --border: #dbe2f0;
+      --accent: #3856ff;
+      --accent-soft: #eef2ff;
+      --max: 860px;
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; background: rgba(246,247,251,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 10; }
+    .nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 0; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.95rem; }
+    .brand { font-weight: 700; color: var(--text); }
+    main { padding: 64px 0 80px; }
+    .eyebrow { display: inline-block; background: var(--accent-soft); color: var(--accent); padding: 6px 12px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; margin: 0 0 16px; }
+    h2 { font-size: 1.3rem; line-height: 1.2; margin: 0 0 8px; }
+    p.lead { font-size: 1.05rem; color: var(--muted); max-width: 68ch; margin: 0 0 40px; }
+    .section-label { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--muted); margin-bottom: 16px; }
+    .parts-list { display: grid; gap: 14px; list-style: none; padding: 0; margin: 0; }
+    .part-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .part-card-body h2 a { color: var(--text); }
+    .part-card-body h2 a:hover { color: var(--accent); text-decoration: none; }
+    .part-card-body p { color: var(--muted); margin: 6px 0 0; font-size: 0.95rem; }
+    .part-meta { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+    .part-badge { display: inline-block; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-bottom: 8px; }
+    .coming-soon { opacity: 0.45; pointer-events: none; }
+    .coming-soon .part-badge { background: var(--bg); color: var(--muted); }
+    footer { padding: 36px 0 60px; color: var(--muted); font-size: 0.9rem; }
+    @media (max-width: 600px) { .part-card { flex-direction: column; align-items: flex-start; } .nav { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">David Lifschitz</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../ecosystem.html">Ecosystem</a>
+        <a href="../dashboard.html">Dashboard</a>
+        <a href="../index.html#products">Products</a>
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#mobile">Mobile</a>
+        <a href="index.html">Writing</a>
+        <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub / Repos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="eyebrow">Series · 6 parts</div>
+    <h1>Unwrapping the Stack</h1>
+    <p class="lead">What happens to computing's foundational abstractions — files, apps, browsers, operating systems, hardware, and identity — when the system starts to think. A layer-by-layer examination of the cognitive scaffolding we built before intelligence was a system property.</p>
+
+    <p class="section-label">Parts</p>
+    <ul class="parts-list">
+      <li class="part-card">
+        <div class="part-card-body">
+          <span class="part-badge">Part 1</span>
+          <h2><a href="part1-files-folders.html">Files &amp; Folders</a></h2>
+          <p>The first abstraction that starts to break. What happens to cognitive scaffolding when the system starts to think.</p>
+        </div>
+        <span class="part-meta">Read →</span>
+      </li>
+      <li class="part-card">
+        <div class="part-card-body">
+          <span class="part-badge">Part 2</span>
+          <h2><a href="part2-apps.html">Apps</a></h2>
+          <p>The container that outlived its contents. What happens to software packaging when intent is the interface.</p>
+        </div>
+        <span class="part-meta">Read →</span>
+      </li>
+      <li class="part-card coming-soon">
+        <div class="part-card-body">
+          <span class="part-badge">Part 3</span>
+          <h2>Browsers</h2>
+          <p>Coming soon.</p>
+        </div>
+        <span class="part-meta">Coming soon</span>
+      </li>
+      <li class="part-card coming-soon">
+        <div class="part-card-body">
+          <span class="part-badge">Part 4</span>
+          <h2>Operating Systems</h2>
+          <p>Coming soon.</p>
+        </div>
+        <span class="part-meta">Coming soon</span>
+      </li>
+      <li class="part-card coming-soon">
+        <div class="part-card-body">
+          <span class="part-badge">Part 5</span>
+          <h2>Hardware</h2>
+          <p>Coming soon.</p>
+        </div>
+        <span class="part-meta">Coming soon</span>
+      </li>
+      <li class="part-card coming-soon">
+        <div class="part-card-body">
+          <span class="part-badge">Part 6</span>
+          <h2>Identity</h2>
+          <p>Coming soon.</p>
+        </div>
+        <span class="part-meta">Coming soon</span>
+      </li>
+    </ul>
+  </main>
+
+  <footer class="wrap">
+    Part of the <a href="../index.html">David Lifschitz ecosystem</a>. Parts 1 &amp; 2 available now.
+  </footer>
+</body>
+</html>

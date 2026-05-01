@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apps — Unwrapping the Stack</title>
+  <meta name="description" content="The container that outlived its contents. What happens to software packaging when intent is the interface." />
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #5d6985;
+      --border: #dbe2f0;
+      --accent: #3856ff;
+      --accent-soft: #eef2ff;
+      --max-prose: 680px;
+      --max-shell: 1100px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { width: min(calc(100% - 32px), var(--max-shell)); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; background: rgba(246,247,251,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 10; }
+    .nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 0; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.95rem; }
+    .brand { font-weight: 700; color: var(--text); }
+    .post-shell { max-width: var(--max-prose); margin: 0 auto; padding: 64px 16px 100px; }
+    .post-meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 28px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .series-link { background: var(--accent-soft); color: var(--accent); padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 0.8rem; }
+    h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; margin: 0 0 12px; }
+    .subtitle { font-size: 1.05rem; color: var(--muted); margin: 0 0 40px; }
+    h2 { font-size: 1.25rem; font-weight: 700; margin: 44px 0 10px; color: var(--text); }
+    p { margin: 0 0 20px; }
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+    .post-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 48px; border-top: 1px solid var(--border); margin-top: 48px; font-size: 0.9rem; gap: 16px; }
+    footer { padding: 36px 0 60px; color: var(--muted); font-size: 0.9rem; text-align: center; }
+    @media (max-width: 600px) { .nav { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">David Lifschitz</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../ecosystem.html">Ecosystem</a>
+        <a href="../dashboard.html">Dashboard</a>
+        <a href="../index.html#products">Products</a>
+        <a href="../index.html#research">Research</a>
+        <a href="../index.html#mobile">Mobile</a>
+        <a href="index.html">Writing</a>
+        <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub / Repos</a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="post-shell">
+    <div class="post-meta">
+      <a class="series-link" href="index.html">Unwrapping the Stack</a>
+      <span>Part 2 of 6</span>
+    </div>
+    <h1>Apps — the container that outlived its contents</h1>
+    <p class="subtitle">What happens to software packaging when intent is the interface.</p>
+
+    <p>Part 1 ended with a question: what does a system look like when it no longer assumes the user is responsible for remembering structure?</p>
+    <p>Files and folders were the first answer computing gave to that problem. The app was the second.</p>
+    <p>Where files organized <em>data</em>, apps organized <em>capability</em>. Instead of scattering functionality across the system, you bundled it — gave it a name, an icon, a launch point. The app became the unit of doing.</p>
+    <p>That model still dominates everything. Your phone is a grid of apps. Your laptop is a dock of apps. Your browser is a collection of tabs, each one a thin app. The app is so fundamental to how we think about software that it feels more like physics than design.</p>
+    <p>It isn't.</p>
+
+    <h2>What the app is actually solving</h2>
+    <p>An app is a bundle of related functionality wrapped in a consistent context.</p>
+    <p>The key word is <em>consistent</em>. Before apps, using software meant switching between tools that didn't share state, didn't know about each other, and couldn't anticipate what you'd need next. The app gave you a contained environment where tools, data, and interface could cohere around a single purpose.</p>
+    <p>That coherence was valuable because the system itself couldn't provide it. Someone had to draw the boundary. The developer drew it for you.</p>
+    <p>So apps are really a solution to a coordination problem — how do you give a user a coherent working context when the underlying system has no model of what they're trying to do?</p>
+    <p>You hand them a pre-packaged one.</p>
+
+    <h2>The assumption embedded in that design</h2>
+    <p>The app model assumes that the developer's model of your workflow is close enough to your actual workflow that the packaging holds.</p>
+    <p>That assumption has always been partially wrong. It was just tolerable.</p>
+    <p>You want to write a document, paste in a screenshot, annotate it, share a clip, track a comment thread, and log a follow-up task. Those are not separate apps. They are one intent, fragmented across five containers because each container was built by a team that only owned one slice of the workflow.</p>
+    <p>The app boundary is not a natural boundary. It is an organizational boundary that got exported to the user interface.</p>
+
+    <h2>What starts to break</h2>
+    <p>The seams show up in predictable places.</p>
+    <p><strong>1. Context collapse at the boundary.</strong> Every time you move between apps, you lose state. You copy a URL. You paste a screenshot. You re-explain the situation in a new interface that has no memory of the last one. The transition tax is so normalized we've stopped calling it friction. We call it workflow.</p>
+    <p><strong>2. The integration layer becomes its own product.</strong> Zapier, IFTTT, Make, n8n — entire companies exist to reconnect apps that never should have been separated. When the glue becomes an industry, the original seams were probably wrong.</p>
+    <p><strong>3. The modal penalty.</strong> Every app is a mode. Switching modes costs attention. The research on task-switching puts the reorientation cost at minutes, not seconds. A knowledge worker switching apps dozens of times per day is paying that tax on every transition, mostly invisibly.</p>
+    <p><strong>4. Permission as a proxy for trust.</strong> Because apps are isolated containers, sharing data between them requires explicit handshakes — OAuth, API keys, export/import. The system has no native concept of "these two contexts are related." You have to manually build that bridge every time.</p>
+
+    <h2>What an AI-native system does differently</h2>
+    <p>The shift is subtle but structural.</p>
+    <p>In the current model, capability lives inside containers. You go to the container to access the capability. The app is the address.</p>
+    <p>In an AI-native model, capability is ambient. You express an intent, and the system assembles the tools. The app, if it exists at all, is an output of that assembly — not a prerequisite for it.</p>
+    <p>This is already partially visible. When you ask a capable language model to help you draft an email, summarize a document, write code, and then explain what the code does — that is not one app. That is context-aware capability routing happening beneath any single interface. The model doesn't care what "app" the task belongs to.</p>
+    <p>As agents gain more tool access, this generalizes. The question "which app do I open for this?" starts to dissolve into "what do I need to happen here?"</p>
+
+    <h2>The three things apps were bundling</h2>
+    <p>To understand what replaces them, it helps to decompose what apps were doing:</p>
+    <p><strong>1. Context.</strong> An app maintained a working state — your open files, your cursor position, your undo history, your preferences. It was a persistent envelope for your in-progress work.</p>
+    <p><strong>2. Capability.</strong> An app gave you access to a specific set of operations — tools, commands, transformations. It was a toolbox for a particular domain.</p>
+    <p><strong>3. Interface.</strong> An app rendered a specific UI for that domain — buttons, menus, canvases. It was a language for interacting with that capability.</p>
+    <p>In a system where agents maintain context continuously, where capability is addressable without container, and where natural language becomes a primary interface — each of those three things decouples.</p>
+    <p>Context becomes a system property, not an app property. Capability becomes a graph of services, not a bundle. Interface becomes a rendering decision, not a fixed container.</p>
+
+    <h2>What fills the space</h2>
+    <p>Not a void. Something more like:</p>
+    <p><strong>Intent surfaces.</strong> Instead of launching an app, you open a surface that's already oriented around what you're doing. The system knows you've been working on a proposal, a project, a conversation — and it assembles the relevant context before you ask.</p>
+    <p><strong>Composable capability layers.</strong> Tools exist independently and get invoked together. Writing assistance, search, computation, external data — these stop being inside different apps and become addressable primitives that get composed on demand.</p>
+    <p><strong>Persistent agents as long-running contexts.</strong> Instead of reopening an app to resume work, an agent maintains the thread. You don't pick up where you left off. The system never put it down.</p>
+    <p>The app starts to look less like a product and more like a pattern — a temporary, purpose-built interface that assembles when needed and dissolves when not.</p>
+
+    <h2>The transition state we're in</h2>
+    <p>What exists today is a hybrid that satisfies no one cleanly.</p>
+    <p>AI assistants live inside apps — browser extensions, chat interfaces, sidebar panels — which means they inherit the context problem they were supposed to solve. You still have to copy and paste. You still have to re-explain. The intelligence is local to the container, which defeats much of the point.</p>
+    <p>The few systems that break this pattern — OS-level AI integrations, context-aware agents with persistent memory — are early and rough. They hint at the shape without delivering it.</p>
+    <p>We are in the part of the transition where we are teaching intelligence to work around containers rather than dissolving the containers themselves.</p>
+
+    <h2>What this implies for the next layer</h2>
+    <p>If files were cognitive scaffolding for data, apps were cognitive scaffolding for capability. Both assumed a user whose working context had to be manually maintained.</p>
+    <p>The next layer up is the interface itself — how humans and systems communicate intent in the first place. Because once context is ambient and capability is composable, what you're left with is the question of <em>how you express what you want</em>.</p>
+    <p>That's where the browser lives. And the desktop. And the command line before both of them.</p>
+    <p>Each one was an answer to: given that the system can do things, how does the human say which things?</p>
+    <p>The interesting question is what that conversation looks like when the system can finally understand the answer.</p>
+
+    <div class="post-nav">
+      <a href="part1-files-folders.html">← Part 1: Files &amp; Folders</a>
+      <a href="index.html">Series index →</a>
+    </div>
+  </article>
+
+  <footer class="wrap">
+    Part of <a href="index.html">Unwrapping the Stack</a> · <a href="../index.html">davidlifschitz.github.io</a>
+  </footer>
+</body>
+</html>

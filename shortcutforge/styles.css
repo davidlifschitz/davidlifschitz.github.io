@@ -88,6 +88,14 @@ h2 {
   align-items: center;
 }
 
+.model-actions {
+  margin: -0.2rem 0 0.75rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .button {
   appearance: none;
   border: 1px solid var(--primary);
@@ -108,6 +116,11 @@ h2 {
 .button.secondary {
   background: var(--card);
   color: var(--primary);
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 .button:focus-visible,
@@ -157,6 +170,19 @@ textarea {
   background: var(--soft);
   color: var(--ink);
   margin-top: 0.4rem;
+}
+
+.checkbox-row {
+  align-items: center;
+  display: flex !important;
+  gap: 0.7rem;
+  margin-top: 0.25rem;
+}
+
+.checkbox-row input {
+  flex: 0 0 auto;
+  margin: 0;
+  width: auto;
 }
 
 textarea {
