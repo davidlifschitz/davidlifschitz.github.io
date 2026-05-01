@@ -1,30 +1,30 @@
 :root {
-  --bg: #f3f6fb;
-  --bg-elevated: #eef3fb;
-  --surface: #ffffff;
-  --surface-soft: #f8fbff;
-  --text: #142033;
-  --muted: #65738f;
-  --muted-2: #8b97af;
-  --border: #dde5f2;
-  --border-strong: #cad5e8;
-  --accent: #5865f2;
-  --accent-strong: #4251ee;
-  --accent-soft: #eef1ff;
-  --success: #0f9f6e;
+  --bg:           #f9f9f9;
+  --bg-elevated:  #f2f2f2;
+  --surface:      #ffffff;
+  --surface-soft: #f9f9f9;
+  --text:         #000000;
+  --muted:        #666666;
+  --muted-2:      #999999;
+  --border:       #000000;
+  --border-strong:#000000;
+  --accent:       #5865f2;
+  --accent-strong:#4251ee;
+  --accent-soft:  #eef1ff;
+  --success:      #0f9f6e;
   --success-soft: #eafaf4;
-  --danger: #d84d57;
-  --danger-soft: #fff1f2;
-  --warning: #d18a14;
+  --danger:       #d84d57;
+  --danger-soft:  #fff1f2;
+  --warning:      #d18a14;
   --warning-soft: #fff7e8;
-  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04);
-  --shadow-md: 0 12px 32px rgba(27, 39, 94, 0.08);
-  --shadow-lg: 0 22px 48px rgba(35, 54, 119, 0.12);
-  --radius-lg: 24px;
-  --radius-md: 18px;
-  --radius-sm: 14px;
-  --sidebar-width: 268px;
-  --content-max: 1600px;
+  --shadow-sm:    none;
+  --shadow-md:    none;
+  --shadow-lg:    none;
+  --radius-lg:    0px;
+  --radius-md:    0px;
+  --radius-sm:    0px;
+  --sidebar-width:  268px;
+  --content-max:    1600px;
 }
 
 * { box-sizing: border-box; }
@@ -32,9 +32,7 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background:
-    radial-gradient(circle at top left, rgba(88, 101, 242, 0.08), transparent 24%),
-    linear-gradient(180deg, #f8fbff 0%, var(--bg) 24%, #f7f9fd 100%);
+  background: var(--bg);
   color: var(--text);
   min-height: 100vh;
 }
@@ -58,9 +56,8 @@ button, select { font: inherit; }
   top: 0;
   height: 100vh;
   padding: 28px 22px;
-  background: rgba(247, 250, 255, 0.88);
-  backdrop-filter: blur(18px);
-  border-right: 1px solid rgba(202, 213, 232, 0.82);
+  background: #ffffff;
+  border-right: 1px solid var(--border);
 }
 
 .sidebar-inner {
@@ -79,15 +76,14 @@ button, select { font: inherit; }
 .brand-mark {
   width: 42px;
   height: 42px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--accent), #7f8bff);
-  color: #fff;
+  border-radius: 0;
+  background: #000000;
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
   font-weight: 800;
-  box-shadow: var(--shadow-md);
 }
 
 .brand-text strong {
@@ -113,22 +109,20 @@ button, select { font: inherit; }
   align-items: center;
   gap: 12px;
   padding: 12px 14px;
-  border-radius: 14px;
+  border-radius: 0;
   color: var(--muted);
   font-weight: 600;
-  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  transition: color 160ms ease;
+  border-left: 3px solid transparent;
 }
 
 .nav-item:hover {
-  background: rgba(88, 101, 242, 0.08);
   color: var(--text);
-  transform: translateX(1px);
 }
 
 .nav-item.active {
-  background: linear-gradient(180deg, rgba(88, 101, 242, 0.12), rgba(88, 101, 242, 0.08));
-  color: var(--accent-strong);
-  box-shadow: inset 0 0 0 1px rgba(88, 101, 242, 0.14);
+  border-left: 3px solid var(--text);
+  color: var(--text);
 }
 
 .nav-dot {
