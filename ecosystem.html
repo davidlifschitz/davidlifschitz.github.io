@@ -4,142 +4,132 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ecosystem — David Lifschitz</title>
-  <meta name="description" content="Overview of the ecosystem layers, repo roles, and public versus internal surfaces." />
+  <meta name="description" content="Five layers — operator shell, mobile capture, execution backend, memory/context, and public surface — connected into one routing and review system." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/site.css" />
   <style>
-    :root {
-      --bg: #f6f7fb;
-      --surface: #ffffff;
-      --text: #172033;
-      --muted: #5d6985;
-      --border: #dbe2f0;
-      --accent: #3856ff;
-      --max: 1000px;
+    .eco-header { padding: 64px 0 0; }
+    .eco-rule { width: 100%; height: 2px; background: var(--border); margin-bottom: 20px; }
+    .eco-rule--thin { height: 1px; margin: 12px 0 28px; }
+    h1.eco-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      margin: 0;
     }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
-    header { border-bottom: 1px solid var(--border); background: rgba(246,247,251,.94); backdrop-filter: blur(10px); }
-    .nav { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 16px 0; }
-    .nav-links { display: flex; flex-wrap: wrap; gap: 14px; }
-    .brand { color: var(--text); font-weight: 700; }
-    main { padding: 56px 0; }
-    h1, h2, h3 { line-height: 1.1; }
-    h1 { font-size: clamp(2.4rem, 5vw, 4rem); margin: 0 0 16px; }
-    h2 { font-size: 1.7rem; margin: 0 0 12px; }
-    p.lead, .intro { color: var(--muted); max-width: 760px; }
-    .section { margin-top: 32px; }
-    .card, .layer {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
+    .eco-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 640px;
+      line-height: 1.65;
     }
-    .stack { display: grid; gap: 14px; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
-    .label { display: inline-block; margin-bottom: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; font-weight: 700; }
-    footer { padding: 0 0 48px; color: var(--muted); }
-    @media (max-width: 800px) { .grid, .nav { grid-template-columns: 1fr; flex-direction: column; align-items: flex-start; } }
+    .layers { padding: 48px 0; }
+    .layers-header {
+      display: grid;
+      grid-template-columns: 180px 1fr 32px;
+      gap: 24px;
+      padding: 8px 0 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 2px solid var(--border);
+    }
+    .layer-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 32px;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .layer-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .layer-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
+    .layer-desc a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+    .layer-desc a:hover { color: var(--muted); }
+    .layer-link { font-size: 0.9rem; color: var(--muted); text-align: right; }
+    .layer-link a { color: var(--text); text-decoration: none; font-weight: 600; }
+    .layer-link a:hover { text-decoration: underline; }
+    @media (max-width: 600px) {
+      .layers-header, .layer-row { grid-template-columns: 1fr; gap: 6px; }
+      .layers-header .layer-link-col, .layer-link { display: none; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
+  <header class="site-header">
+    <div class="wrap nav-inner">
       <a class="brand" href="index.html">David Lifschitz</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="ecosystem.html">Ecosystem</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="index.html#products">Products</a>
-        <a href="index.html#research">Research</a>
-        <a href="index.html#mobile">Mobile</a>
-        <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub / Repos</a>
+        <a href="shortcutforge/index.html">ShortcutForge</a>
+        <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub</a>
       </nav>
     </div>
   </header>
 
   <main class="wrap">
-    <section>
-      <span class="label">Ecosystem overview</span>
-      <h1>How the layers fit together</h1>
-      <p class="lead">This page is the v1 ecosystem skeleton. Its job is to explain the major layers, clarify repo roles, and show which surfaces are public-facing versus internal/operator-oriented.</p>
-    </section>
+    <div class="eco-header">
+      <div class="eco-rule"></div>
+      <h1 class="eco-title" id="eco-heading">Ecosystem</h1>
+      <div class="eco-rule eco-rule--thin"></div>
+      <p class="eco-subtitle">Five layers — operator shell, mobile capture, execution backend, memory/context, and public surface — connected into one routing and review system.</p>
+    </div>
 
-    <section class="section stack">
-      <div class="layer">
-        <h2>1. Public storefront</h2>
-        <p class="intro">`davidlifschitz.github.io` is the discovery and explanation layer. It routes visitors, highlights key surfaces, and explains the system without replacing GitHub as the detailed technical source.</p>
+    <section class="layers" aria-labelledby="layers-heading">
+      <div class="layers-header">
+        <h2 id="layers-heading" style="font:inherit;margin:0;">Layer</h2>
+        <span>Description</span>
+        <span class="layer-link-col"></span>
       </div>
-      <div class="layer">
-        <h2>2. Operator shell</h2>
-        <p class="intro"><a href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noreferrer">ScheduleOS</a> is the operator-facing shell. It receives work, helps structure requests, routes them using shared capability concepts, and surfaces queue and result state.</p>
+      <div class="layer-row">
+        <div class="layer-name">Operator Shell</div>
+        <div class="layer-desc"><a href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noreferrer" aria-label="ScheduleOS on GitHub (opens in new tab)">ScheduleOS</a> — receives work, routes requests, and surfaces queue and result state.</div>
+        <div class="layer-link"><a href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noreferrer" aria-label="ScheduleOS on GitHub (opens in new tab)">↗</a></div>
       </div>
-      <div class="layer">
-        <h2>3. Mobile layer</h2>
-        <p class="intro"><a href="shortcutforge/index.html">ShortcutForge</a> is the fast mobile front door. It handles capture, one-tap triggers, and simple return flows, while routing deeper interpreted workflows into ScheduleOS.</p>
+      <div class="layer-row">
+        <div class="layer-name">Mobile Layer</div>
+        <div class="layer-desc"><a href="shortcutforge/index.html">ShortcutForge</a> — fast mobile capture, one-tap triggers, and lightweight return flows.</div>
+        <div class="layer-link"><a href="shortcutforge/index.html">→</a></div>
       </div>
-      <div class="layer">
-        <h2>4. Execution backend</h2>
-        <p class="intro">Delegated execution systems perform the heavier work once a task has been routed out of the shell layer.</p>
+      <div class="layer-row">
+        <div class="layer-name">Execution Backend</div>
+        <div class="layer-desc">Delegated systems perform heavy async work after operator routing.</div>
+        <div class="layer-link">—</div>
       </div>
-      <div class="layer">
-        <h2>5. Memory and context</h2>
-        <p class="intro">Context and artifact lookup surfaces enrich routing, review, and later explanation layers.</p>
+      <div class="layer-row">
+        <div class="layer-name">Memory / Context</div>
+        <div class="layer-desc">Context and artifact lookup surfaces that enrich routing and review decisions.</div>
+        <div class="layer-link">—</div>
       </div>
-      <div class="layer">
-        <h2>6. Product and research surfaces</h2>
-        <p class="intro">Public-facing tools, experiments, and research verticals sit on top of the architecture and give visitors concrete surfaces to explore.</p>
+      <div class="layer-row">
+        <div class="layer-name">Public Surface</div>
+        <div class="layer-desc">This site — discovery, explanation, and visitor routing without exposing internal state.</div>
+        <div class="layer-link"><a href="index.html">→</a></div>
       </div>
-    </section>
-
-    <section class="section">
-      <h2>Public versus internal</h2>
-      <div class="grid">
-        <article class="card">
-          <span class="label">Public-facing</span>
-          <h3>Belongs on the storefront</h3>
-          <p>Ecosystem summaries, product highlights, repo role descriptions, mobile entry explanations, and selected public links.</p>
-        </article>
-        <article class="card">
-          <span class="label">Internal / GitHub detail</span>
-          <h3>Belongs elsewhere</h3>
-          <p>Raw issue queues, sprint execution details, backend implementation internals, and deeper technical artifacts that are better suited for GitHub.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Repo role map</h2>
-      <div class="stack">
-        <article class="card">
-          <span class="label">Storefront</span>
-          <h3><a href="index.html"><code>davidlifschitz.github.io</code></a></h3>
-          <p>Public discovery and explanation layer.</p>
-        </article>
-        <article class="card">
-          <span class="label">Operator shell</span>
-          <h3><a href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noreferrer"><code>ScheduleOS</code></a></h3>
-          <p>Operator-facing intake, routing, and monitoring surface.</p>
-        </article>
-        <article class="card">
-          <span class="label">Mobile layer</span>
-          <h3><a href="shortcutforge/index.html"><code>ShortcutForge</code></a></h3>
-          <p>Fast mobile capture and trigger surface that complements ScheduleOS.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>What is placeholder in v1</h2>
-      <div class="card">
-        <p>This page is intentionally a content and structure skeleton. The layer descriptions, role map, and public/internal boundaries are real. The copy, visuals, richer product examples, and more polished navigation will be refined in a later storefront design sprint. For live metrics, use the <a href="dashboard.html">dashboard</a>.</p>
+      <div class="layer-row">
+        <div class="layer-name">Product Surfaces</div>
+        <div class="layer-desc">Public-facing tools and experiments. Explore <a href="https://github.com/davidlifschitz/graphify" target="_blank" rel="noreferrer" aria-label="Graphify on GitHub (opens in new tab)">Graphify</a> and <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub profile (opens in new tab)">other repos</a>.</div>
+        <div class="layer-link"><a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub profile (opens in new tab)">↗</a></div>
       </div>
     </section>
   </main>
 
-  <footer class="wrap">
-    The ecosystem page is a public explanation surface, not the source of truth for implementation detail. GitHub remains the deeper technical source.
+  <footer class="site-footer wrap">
+    <span>David Lifschitz · 2026</span>
+    <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
   </footer>
 </body>
 </html>
