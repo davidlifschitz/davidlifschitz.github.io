@@ -3,271 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>David Lifschitz — Ecosystem Storefront</title>
-  <meta name="description" content="Public storefront for David Lifschitz's ecosystem of operator, mobile, product, and research surfaces." />
-  <style>
-    :root {
-      --bg: #f6f7fb;
-      --surface: #ffffff;
-      --text: #172033;
-      --muted: #5d6985;
-      --border: #dbe2f0;
-      --accent: #3856ff;
-      --accent-soft: #eef2ff;
-      --max: 1100px;
-      --radius: 20px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
-    .site-header {
-      position: sticky;
-      top: 0;
-      background: rgba(246, 247, 251, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 0;
-    }
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      font-size: 0.95rem;
-    }
-    .brand { font-weight: 700; color: var(--text); }
-    .hero { padding: 72px 0 40px; }
-    .eyebrow {
-      display: inline-block;
-      background: var(--accent-soft);
-      color: var(--accent);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
-    h1, h2, h3 { line-height: 1.1; margin: 0; }
-    h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 16px; }
-    h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); margin-bottom: 12px; }
-    p.lead {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 760px;
-      margin: 0 0 24px;
-    }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 18px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-weight: 600;
-    }
-    .button.primary { background: var(--accent); color: white; }
-    .button.secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
-    section { padding: 28px 0; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-    }
-    .card p { color: var(--muted); margin: 10px 0 0; }
-    .label {
-      display: inline-block;
-      margin-bottom: 12px;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 700;
-    }
-    .section-intro { color: var(--muted); max-width: 760px; margin: 0 0 18px; }
-    .layer-list, .catalog-list {
-      display: grid;
-      gap: 14px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .layer-list li, .catalog-list li {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 18px;
-    }
-    .split {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 18px;
-      align-items: start;
-    }
-    footer {
-      padding: 36px 0 60px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    @media (max-width: 860px) {
-      .grid, .grid.three, .split { grid-template-columns: 1fr; }
-      .nav { align-items: flex-start; flex-direction: column; }
-    }
-  </style>
+  <title>David Lifschitz</title>
+  <meta name="description" content="Operator tooling, mobile utilities, and research surfaces — connected into one ecosystem." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/site.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap nav">
+    <div class="wrap nav-inner">
       <a class="brand" href="index.html">David Lifschitz</a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
         <a href="ecosystem.html">Ecosystem</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="#products">Products</a>
-        <a href="#research">Research</a>
-        <a href="#mobile">Mobile</a>
-        <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub / Repos</a>
+        <a href="shortcutforge/index.html">ShortcutForge</a>
+        <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
     </div>
   </header>
 
   <main class="wrap">
     <section class="hero">
-      <div class="eyebrow">Public storefront</div>
-      <h1>A connected ecosystem of operator, mobile, product, and research surfaces.</h1>
-      <p class="lead">This site is the public front door for the ecosystem. It explains how the major layers fit together, highlights the most relevant surfaces, and routes different kinds of visitors to the right next step without forcing them to understand every repo first.</p>
-      <div class="cta-row">
-        <a class="button primary" href="ecosystem.html">Explore the ecosystem</a>
-        <a class="button secondary" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">Browse GitHub</a>
+      <div class="hero-rule hero-rule--thick"></div>
+      <h1>Build fast.<br>Route smart.<br>Ship everything.</h1>
+      <div class="hero-rule"></div>
+      <p class="hero-sub">Operator tooling, mobile utilities, and research surfaces.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="ecosystem.html">Explore Ecosystem</a>
+        <a class="btn btn--secondary" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub ↗</a>
       </div>
     </section>
 
-    <section>
-      <h2>Choose your path</h2>
-      <p class="section-intro">The storefront should route visitors by intent instead of dumping every repo at once.</p>
-      <div class="grid">
-        <article class="card">
-          <span class="label">Product visitor</span>
-          <h3>Start with products</h3>
-          <p>See the public-facing surfaces, understand what they do, and open the most relevant project or demo next.</p>
-        </article>
-        <article class="card">
-          <span class="label">Technical visitor</span>
-          <h3>Start with architecture</h3>
-          <p>See the ecosystem layers first, then jump into GitHub for the deeper implementation detail.</p>
-        </article>
-        <article class="card">
-          <span class="label">Mobile-first visitor</span>
-          <h3><a href="shortcutforge/index.html">Start with ShortcutForge</a></h3>
-          <p>Understand the fast mobile entry layer for capture, trigger, and simple utility flows.</p>
-        </article>
-        <article class="card">
-          <span class="label">Operator-curious visitor</span>
-          <h3><a href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noreferrer">Start with ScheduleOS</a></h3>
-          <p>Learn about the operator shell as part of the architecture, not as the default casual visitor path.</p>
-        </article>
+    <section class="surfaces">
+      <div class="surfaces-label">Surfaces</div>
+      <div class="surface-list">
+        <a class="surface-row" href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noreferrer">
+          <span>ScheduleOS — operator shell</span><span class="arrow">→</span>
+        </a>
+        <a class="surface-row" href="shortcutforge/index.html">
+          <span>ShortcutForge — mobile capture &amp; trigger flows</span><span class="arrow">→</span>
+        </a>
+        <a class="surface-row" href="ecosystem.html">
+          <span>Ecosystem overview</span><span class="arrow">→</span>
+        </a>
+        <a class="surface-row" href="dashboard.html">
+          <span>Dashboard &amp; metrics</span><span class="arrow">→</span>
+        </a>
       </div>
-    </section>
-
-    <section>
-      <div class="split">
-        <div>
-          <h2>Major ecosystem layers</h2>
-          <p class="section-intro">The public site explains the layers in plain language, while GitHub stays the place for low-level technical detail.</p>
-          <ul class="layer-list">
-            <li><strong>Public storefront:</strong> discovery, explanation, and visitor routing.</li>
-            <li><strong>Operator shell:</strong> ScheduleOS receives, structures, routes, and monitors work.</li>
-            <li><strong>Mobile layer:</strong> ShortcutForge provides quick mobile capture and trigger flows.</li>
-            <li><strong>Execution backend:</strong> delegated systems perform heavier work after routing.</li>
-            <li><strong>Memory/context layer:</strong> context and artifact lookup surfaces enrich routing and review.</li>
-          </ul>
-        </div>
-        <aside class="card">
-          <span class="label">Public vs internal</span>
-          <h3>What belongs here</h3>
-          <p>Public architecture summaries, product highlights, and clear next steps belong on the site. Raw issue queues, sprint trackers, and deep backend internals stay in GitHub and internal planning surfaces.</p>
-        </aside>
-      </div>
-    </section>
-
-    <section id="products">
-      <h2>Highlighted surfaces</h2>
-      <p class="section-intro">These cards establish the first public catalog structure for the storefront.</p>
-      <div class="grid three">
-        <article class="card">
-          <span class="label">Operator shell</span>
-          <h3><a href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noreferrer">ScheduleOS</a></h3>
-          <p>The operator-facing shell for receiving work, routing requests, and monitoring results across the ecosystem.</p>
-        </article>
-        <article class="card">
-          <span class="label">Mobile layer</span>
-          <h3><a href="shortcutforge/index.html">ShortcutForge</a></h3>
-          <p>The fast mobile companion for capturing ideas, triggering recurring flows, and routing lightweight actions into ScheduleOS or downstream surfaces.</p>
-        </article>
-        <article class="card">
-          <span class="label">Product examples</span>
-          <h3><a href="https://github.com/davidlifschitz/graphify" target="_blank" rel="noreferrer">Selected product surfaces</a></h3>
-          <p>Flagship tools and experiments sit on top of the architecture and give visitors concrete places to explore next, including Graphify and related public repos.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="research">
-      <h2>Research and vertical explorations</h2>
-      <p class="section-intro">The storefront should make room for research-oriented surfaces without turning the homepage into a repo dump.</p>
-      <div class="card">
-        <p>Research surfaces, vertical experiments, and ecosystem-adjacent projects should be grouped by theme and linked selectively. Explore <a href="https://github.com/davidlifschitz/children-of-israel-agent-swarm" target="_blank" rel="noreferrer">children-of-israel-agent-swarm</a> and <a href="https://github.com/davidlifschitz/agentic-os" target="_blank" rel="noreferrer">agentic-os</a> for deeper technical detail.</p>
-      </div>
-    </section>
-
-    <section id="mobile">
-      <h2>Mobile entry layer</h2>
-      <p class="section-intro">ShortcutForge represents the fast-entry mobile layer: capture, trigger, return, and only open deeper operator workflows when needed.</p>
-      <div class="grid">
-        <article class="card">
-          <h3>Capture and trigger</h3>
-          <p>Use mobile for quick notes, one-tap actions, and small recurring workflows.</p>
-        </article>
-        <article class="card">
-          <h3>Route deeper work</h3>
-          <p>Interpretation-heavy or queue-aware workflows should route into ScheduleOS instead of being forced into a purely mobile UX.</p>
-        </article>
-      </div>
-    </section>
-
-    <section>
-      <h2>Where to go next</h2>
-      <ul class="catalog-list">
-        <li><strong>Want the architecture story?</strong> Read the <a href="ecosystem.html">ecosystem page</a>.</li>
-        <li><strong>Want metrics over time?</strong> Open the <a href="dashboard.html">ecosystem dashboard</a>.</li>
-        <li><strong>Want the repos?</strong> Open <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub</a>.</li>
-        <li><strong>Want the mobile layer?</strong> Start with <a href="shortcutforge/index.html">ShortcutForge</a> and the mobile section above.</li>
-      </ul>
     </section>
   </main>
 
-  <footer class="wrap">
-    This homepage is the v1 public storefront skeleton. Some sections are intentionally placeholder public content that will be refined in later design and content sprints.
+  <footer class="site-footer wrap">
+    <span>David Lifschitz · 2026</span>
+    <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer">GitHub ↗</a>
   </footer>
 </body>
 </html>
