@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-02T05:20:00.172Z",
+  "generated_at": "2026-05-03T05:38:45.936Z",
   "days_back": 21,
   "repos": [
     {
@@ -39,60 +39,6 @@
     }
   ],
   "days": [
-    {
-      "date": "2026-04-12",
-      "metrics": {
-        "davidlifschitz/agentic-os": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/spec-to-repo": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/children-of-israel-agent-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/graphify": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/ScheduleOS": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ShortcutForge": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
-        }
-      }
-    },
     {
       "date": "2026-04-13",
       "metrics": {
@@ -1111,16 +1057,70 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
+          "additions": 58,
+          "deletions": 2,
+          "changes": 60,
+          "commits": 4,
           "status": "error"
         }
       }
     },
     {
       "date": "2026-05-02",
+      "metrics": {
+        "davidlifschitz/agentic-os": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/spec-to-repo": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/children-of-israel-agent-swarm": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/graphify": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/ScheduleOS": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ShortcutForge": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/davidlifschitz.github.io": {
+          "additions": 59,
+          "deletions": 59,
+          "changes": 118,
+          "commits": 1,
+          "status": "error"
+        }
+      }
+    },
+    {
+      "date": "2026-05-03",
       "metrics": {
         "davidlifschitz/agentic-os": {
           "additions": 0,
