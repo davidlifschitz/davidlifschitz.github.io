@@ -18,6 +18,8 @@ const repoConfigs = [
   { name: 'davidlifschitz/graphify', branch: 'v3', visibility: 'public' },
   { name: 'davidlifschitz/ScheduleOS', branch: 'main', visibility: 'private' },
   { name: 'davidlifschitz/ShortcutForge', branch: 'main', visibility: 'private' },
+  { name: 'davidlifschitz/article-education-website', branch: 'main', visibility: 'private' },
+  { name: 'davidlifschitz/ml-job-swarm', branch: 'main', visibility: 'private' },
   { name: 'davidlifschitz/davidlifschitz.github.io', branch: 'main', visibility: 'public' }
 ];
 
