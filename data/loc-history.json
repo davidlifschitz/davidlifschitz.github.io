@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-10T05:45:54.262Z",
+  "generated_at": "2026-05-11T06:07:56.950Z",
   "days_back": 21,
   "repos": [
     {
@@ -50,74 +50,6 @@
   ],
   "days": [
     {
-      "date": "2026-04-20",
-      "metrics": {
-        "davidlifschitz/agentic-os": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/spec-to-repo": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/children-of-israel-agent-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/graphify": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
-        },
-        "davidlifschitz/ScheduleOS": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ShortcutForge": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
-        },
-        "davidlifschitz/article-education-website": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ml-job-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        }
-      }
-    },
-    {
       "date": "2026-04-21",
       "metrics": {
         "davidlifschitz/agentic-os": {
@@ -142,11 +74,11 @@
           "status": "ok"
         },
         "davidlifschitz/graphify": {
-          "additions": 104,
+          "additions": 171,
           "deletions": 0,
-          "changes": 104,
-          "commits": 6,
-          "status": "error"
+          "changes": 171,
+          "commits": 7,
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -214,7 +146,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -282,7 +214,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -350,7 +282,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -418,7 +350,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -486,7 +418,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -554,7 +486,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -622,7 +554,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -690,7 +622,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -758,7 +690,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -826,7 +758,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -894,7 +826,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -962,7 +894,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -1030,7 +962,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -1098,7 +1030,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -1166,7 +1098,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -1234,7 +1166,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -1302,7 +1234,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -1370,7 +1302,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -1438,7 +1370,7 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "ok"
         },
         "davidlifschitz/ScheduleOS": {
           "additions": 0,
@@ -1474,6 +1406,74 @@
           "changes": 0,
           "commits": 0,
           "status": "private-token-required"
+        }
+      }
+    },
+    {
+      "date": "2026-05-11",
+      "metrics": {
+        "davidlifschitz/agentic-os": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/spec-to-repo": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/children-of-israel-agent-swarm": {
+          "additions": 2325,
+          "deletions": 69,
+          "changes": 2394,
+          "commits": 1,
+          "status": "ok"
+        },
+        "davidlifschitz/graphify": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/ScheduleOS": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ShortcutForge": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/article-education-website": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ml-job-swarm": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/davidlifschitz.github.io": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "error"
         }
       }
     }
