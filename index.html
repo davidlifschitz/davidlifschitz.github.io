@@ -22,6 +22,10 @@
         <a href="shortcutforge/index.html">ShortcutForge</a>
         <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub</a>
         <a href="booking.html" style="color:#3856ff;font-weight:600;">Book a Call</a>
+        <button class="space-toggle" type="button" data-space-mode-toggle aria-pressed="false">
+          <span class="space-toggle__track" aria-hidden="true"><span class="space-toggle__knob"></span></span>
+          <span>Space mode</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -64,5 +68,28 @@
     <span>David Lifschitz · 2026</span>
     <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
   </footer>
+
+  <div class="space-mode" data-space-mode-root aria-hidden="true">
+    <canvas id="space-mode-canvas" class="space-mode__canvas" aria-label="Interactive space map of David Lifschitz's portfolio"></canvas>
+
+    <div class="space-hud" aria-label="Space mode controls">
+      <div class="space-menu">
+        <button class="space-menu__button" type="button" data-space-menu-toggle aria-expanded="false">Menu ▾</button>
+        <div class="space-menu__list" data-space-menu-list hidden></div>
+      </div>
+      <button class="space-hud__button" type="button" data-space-mode-exit>Exit</button>
+    </div>
+
+    <section class="space-card" aria-live="polite" aria-labelledby="space-card-title">
+      <p class="space-card__eyebrow">Flight deck</p>
+      <h2 id="space-card-title" data-space-card-title>Launch sequence</h2>
+      <p data-space-card-body>Fly the astronaut to planets, moons, stations, and strange signals to explore the portfolio.</p>
+      <div class="space-card__actions" data-space-card-actions></div>
+    </section>
+
+    <p class="space-instructions">Click/Tap to fly • WASD/Arrows to steer • Drift close to destinations</p>
+  </div>
+
+  <script src="scripts/space-mode.js" defer></script>
 </body>
 </html>
