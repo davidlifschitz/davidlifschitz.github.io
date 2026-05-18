@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T05:56:26.817Z",
+  "generated_at": "2026-05-18T06:33:38.762Z",
   "days_back": 21,
   "repos": [
     {
@@ -50,74 +50,6 @@
   ],
   "days": [
     {
-      "date": "2026-04-27",
-      "metrics": {
-        "davidlifschitz/agentic-os": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/spec-to-repo": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/children-of-israel-agent-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/graphify": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/ScheduleOS": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ShortcutForge": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
-        },
-        "davidlifschitz/article-education-website": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ml-job-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        }
-      }
-    },
-    {
       "date": "2026-04-28",
       "metrics": {
         "davidlifschitz/agentic-os": {
@@ -163,10 +95,10 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 30,
-          "deletions": 27,
-          "changes": 57,
-          "commits": 1,
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
           "status": "error"
         },
         "davidlifschitz/article-education-website": {
@@ -231,10 +163,10 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 524,
-          "deletions": 168,
-          "changes": 692,
-          "commits": 4,
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
           "status": "error"
         },
         "davidlifschitz/article-education-website": {
@@ -299,10 +231,10 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 437,
-          "deletions": 59,
-          "changes": 496,
-          "commits": 4,
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
           "status": "error"
         },
         "davidlifschitz/article-education-website": {
@@ -367,10 +299,10 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 2892,
-          "deletions": 669,
-          "changes": 3561,
-          "commits": 18,
+          "additions": 6,
+          "deletions": 0,
+          "changes": 6,
+          "commits": 1,
           "status": "error"
         },
         "davidlifschitz/article-education-website": {
@@ -1431,6 +1363,74 @@
           "deletions": 0,
           "changes": 0,
           "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/graphify": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/ScheduleOS": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ShortcutForge": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/article-education-website": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ml-job-swarm": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/davidlifschitz.github.io": {
+          "additions": 77,
+          "deletions": 77,
+          "changes": 154,
+          "commits": 1,
+          "status": "error"
+        }
+      }
+    },
+    {
+      "date": "2026-05-18",
+      "metrics": {
+        "davidlifschitz/agentic-os": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/spec-to-repo": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/children-of-israel-agent-swarm": {
+          "additions": 1831,
+          "deletions": 23,
+          "changes": 1854,
+          "commits": 1,
           "status": "ok"
         },
         "davidlifschitz/graphify": {
