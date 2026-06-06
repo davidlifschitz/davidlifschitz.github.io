@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-05T06:43:10.017Z",
+  "generated_at": "2026-06-06T06:01:46.181Z",
   "days_back": 21,
   "repos": [
     {
@@ -49,74 +49,6 @@
     }
   ],
   "days": [
-    {
-      "date": "2026-05-16",
-      "metrics": {
-        "davidlifschitz/agentic-os": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/spec-to-repo": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/children-of-israel-agent-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/graphify": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/ScheduleOS": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ShortcutForge": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/article-education-website": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ml-job-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 76,
-          "deletions": 76,
-          "changes": 152,
-          "commits": 1,
-          "status": "ok"
-        }
-      }
-    },
     {
       "date": "2026-05-17",
       "metrics": {
@@ -1411,6 +1343,74 @@
     },
     {
       "date": "2026-06-05",
+      "metrics": {
+        "davidlifschitz/agentic-os": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/spec-to-repo": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/children-of-israel-agent-swarm": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/graphify": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/ScheduleOS": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ShortcutForge": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/article-education-website": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ml-job-swarm": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/davidlifschitz.github.io": {
+          "additions": 64,
+          "deletions": 64,
+          "changes": 128,
+          "commits": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "date": "2026-06-06",
       "metrics": {
         "davidlifschitz/agentic-os": {
           "additions": 0,
