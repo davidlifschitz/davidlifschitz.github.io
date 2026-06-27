@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T06:20:36.218Z",
+  "generated_at": "2026-06-27T06:01:48.278Z",
   "days_back": 21,
   "repos": [
     {
@@ -49,74 +49,6 @@
     }
   ],
   "days": [
-    {
-      "date": "2026-06-06",
-      "metrics": {
-        "davidlifschitz/agentic-os": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/spec-to-repo": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/children-of-israel-agent-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/graphify": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "ok"
-        },
-        "davidlifschitz/ScheduleOS": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ShortcutForge": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/article-education-website": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/ml-job-swarm": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "private-token-required"
-        },
-        "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
-        }
-      }
-    },
     {
       "date": "2026-06-07",
       "metrics": {
@@ -177,11 +109,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 63,
+          "deletions": 63,
+          "changes": 126,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -245,11 +177,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 56,
+          "deletions": 56,
+          "changes": 112,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -313,11 +245,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 52,
+          "deletions": 52,
+          "changes": 104,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -381,11 +313,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 52,
+          "deletions": 52,
+          "changes": 104,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -449,11 +381,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 49,
+          "deletions": 49,
+          "changes": 98,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -517,11 +449,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 49,
+          "deletions": 49,
+          "changes": 98,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -585,11 +517,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 46,
+          "deletions": 46,
+          "changes": 92,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -653,11 +585,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 49,
+          "deletions": 49,
+          "changes": 98,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -721,11 +653,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 49,
+          "deletions": 49,
+          "changes": 98,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -789,11 +721,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 102,
+          "deletions": 102,
+          "changes": 204,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -857,11 +789,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 105,
+          "deletions": 105,
+          "changes": 210,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -925,11 +857,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 55,
+          "deletions": 55,
+          "changes": 110,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -993,11 +925,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 91,
+          "deletions": 91,
+          "changes": 182,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -1061,11 +993,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 94,
+          "deletions": 94,
+          "changes": 188,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -1129,11 +1061,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 64,
+          "deletions": 64,
+          "changes": 128,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -1197,11 +1129,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 67,
+          "deletions": 67,
+          "changes": 134,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -1265,11 +1197,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 67,
+          "deletions": 67,
+          "changes": 134,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -1333,11 +1265,11 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0,
-          "commits": 0,
-          "status": "error"
+          "additions": 67,
+          "deletions": 67,
+          "changes": 134,
+          "commits": 1,
+          "status": "ok"
         }
       }
     },
@@ -1405,7 +1337,7 @@
           "deletions": 64,
           "changes": 128,
           "commits": 1,
-          "status": "error"
+          "status": "ok"
         }
       }
     },
@@ -1469,11 +1401,79 @@
           "status": "private-token-required"
         },
         "davidlifschitz/davidlifschitz.github.io": {
+          "additions": 122,
+          "deletions": 122,
+          "changes": 244,
+          "commits": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "metrics": {
+        "davidlifschitz/agentic-os": {
           "additions": 0,
           "deletions": 0,
           "changes": 0,
           "commits": 0,
-          "status": "error"
+          "status": "private-token-required"
+        },
+        "davidlifschitz/spec-to-repo": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/children-of-israel-agent-swarm": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/graphify": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
+        },
+        "davidlifschitz/ScheduleOS": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ShortcutForge": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/article-education-website": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/ml-job-swarm": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "private-token-required"
+        },
+        "davidlifschitz/davidlifschitz.github.io": {
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0,
+          "commits": 0,
+          "status": "ok"
         }
       }
     }
