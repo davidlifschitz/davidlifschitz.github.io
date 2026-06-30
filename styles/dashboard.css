@@ -696,7 +696,7 @@ button, select { font: inherit; }
     position: relative;
     height: auto;
     border-right: none;
-    border-bottom: 1px solid rgba(202, 213, 232, 0.82);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 20px;
   }
 
@@ -785,7 +785,12 @@ button, select { font: inherit; }
     font-size: 1.85rem;
   }
 
+  .chart-shell {
+    min-width: 0;
+  }
+
   #chartSvg {
-    min-width: 680px;
+    min-width: 100%;
+    width: 100%;
   }
 }
