@@ -1,12 +1,18 @@
 # Projects Reel — Hyperframes composition
 
 A 36-second auto-rotating 3D coverflow that cycles through 12 selected projects.
-Authored as a [Hyperframes](https://hyperframes.heygen.com) composition (HTML + GSAP timeline) so it can play live on the site **and** render to MP4.
+Authored as a [Hyperframes](https://hyperframes.heygen.com) composition (HTML + GSAP timeline). Preview in a browser or render to MP4 via the CLI.
 
-## Live on the site
+## Preview
 
-The composition is embedded on `index.html` via `<hyperframes-player>` (CDN, zero install).
-It autoplays muted, loops, and shows scrub controls on hover.
+The composition lives standalone at `hyperframes/projects-reel/index.html`. It is **not** embedded on the public site — the repo root `index.html` does not include it, and nothing in the site currently links to this page.
+
+To preview locally:
+
+```bash
+cd hyperframes/projects-reel
+npx hyperframes preview     # local preview server (recommended while editing)
+```
 
 ## Edit the cards
 
@@ -34,9 +40,9 @@ npx hyperframes render      # outputs MP4 alongside index.html
 
 Requires Node 22+ and FFmpeg. See https://hyperframes.heygen.com/quickstart.
 
-The rendered MP4 can be committed to `assets/projects-reel.mp4` and used as a `poster` or `<video>` fallback if you ever drop the live player.
+`npx hyperframes render` writes the MP4 next to `index.html` in this folder.
 
 ## Why Hyperframes (not React/Remotion)
 
 Plain HTML + CSS + a tiny GSAP timeline. No build step, no framework lock-in.
-Same source plays in a browser via `<hyperframes-player>` and renders deterministically to MP4 via the CLI.
+Same source can be embedded on a page later via `<hyperframes-player>` and renders deterministically to MP4 via the CLI.

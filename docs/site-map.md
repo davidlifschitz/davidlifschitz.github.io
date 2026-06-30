@@ -87,3 +87,4 @@ Should answer:
 - GitHub remains the detailed technical source
 - ScheduleOS should be described clearly, but not presented as the default path for a casual visitor
 - repo links should support the story rather than replace it
+- Space mode (interactive portfolio map) is intentionally homepage-only via `index.html`; other pages use shared `site-nav.js` without a space toggle.
