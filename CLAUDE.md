@@ -2,6 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Validation
+
+```bash
+node scripts/validate-site.mjs
+cd shortcutforge && npm run validate
+```
+
+CI runs `validate-site.yml` on push/PR to `main`.
+
 ## Local Preview
 
 No build step. Serve from the repo root:

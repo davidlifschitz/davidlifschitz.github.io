@@ -56,3 +56,5 @@ ECOSYSTEM_GH_TOKEN=<token> DAYS_BACK=21 node scripts/update-loc-history.mjs
 `shortcutforge/` is synced from the `web` branch of [davidlifschitz/ShortcutForge](https://github.com/davidlifschitz/ShortcutForge). Feature work belongs in that source repo.
 
 This deploy copy may still receive **intentional patches** that are site-specific — for example the `.site-back` header/back-nav links that route visitors back into the main storefront. Do not treat every file under `shortcutforge/` as upstream-owned.
+
+Ad Studio ([jewish-link-ad-studio](https://github.com/davidlifschitz/jewish-link-ad-studio)) is external-only and is not vendored in this repo.

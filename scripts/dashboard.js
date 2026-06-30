@@ -1,6 +1,7 @@
 const DATA_URL = 'data/loc-history.json';
 const CACHE_KEY = 'ecosystem-dashboard-cache-v2';
 const CACHE_TTL_MS = 5 * 60 * 1000;
+const MOBILE_BREAKPOINT = 720;
 
 const state = {
   data: null,
@@ -27,8 +28,10 @@ const el = {
   lastUpdated: document.getElementById('lastUpdated'),
   statusBannerTitle: document.getElementById('statusBannerTitle'),
   statusBannerCopy: document.getElementById('statusBannerCopy'),
+  privateRepoSetup: document.getElementById('privateRepoSetup'),
   cacheBadge: document.getElementById('cacheBadge'),
-  tooltip: document.getElementById('chartTooltip')
+  tooltip: document.getElementById('chartTooltip'),
+  repoCardsMobile: document.getElementById('repoCardsMobile')
 };
 
 const comparisonPalette = ['#5865f2', '#00a3ff', '#8b5cf6', '#0f9f6e', '#d84d57'];
@@ -146,13 +149,24 @@ function buildSparkline(values) {
   `;
 }
 
-function renderTable(days) {
-  el.repoTableBody.innerHTML = state.data.repos.map(repo => {
+function isMobileViewport() {
+  return window.innerWidth <= MOBILE_BREAKPOINT;
+}
+
+function buildRepoRows(days) {
+  return state.data.repos.map(repo => {
     const totals = aggregateRepo(days, repo.name);
     const visibilityClass = repo.visibility === 'private' ? 'badge-private' : 'badge-public';
     const status = statusMeta(totals.status);
 
-    return `
+    return { repo, totals, visibilityClass, status };
+  });
+}
+
+function renderTable(days) {
+  const rows = buildRepoRows(days);
+
+  el.repoTableBody.innerHTML = rows.map(({ repo, totals, visibilityClass, status }) => `
       <tr>
         <td>
           <a class="repo-link" href="https://github.com/${repo.name}" target="_blank" rel="noreferrer">${repo.name}</a>
@@ -167,8 +181,35 @@ function renderTable(days) {
         <td><a class="repo-link" href="https://github.com/${repo.name}/blame/${repo.branch}" target="_blank" rel="noreferrer">View</a></td>
         <td>${buildSparkline(totals.sparkline)}</td>
       </tr>
-    `;
-  }).join('');
+    `).join('');
+
+  if (el.repoCardsMobile) {
+    if (isMobileViewport()) {
+      el.repoCardsMobile.hidden = false;
+      el.repoCardsMobile.innerHTML = rows.map(({ repo, totals, visibilityClass, status }) => `
+          <article class="repo-mobile-card">
+            <div class="repo-mobile-card-header">
+              <a class="repo-link" href="https://github.com/${repo.name}" target="_blank" rel="noreferrer">${repo.name}</a>
+              <span class="badge ${visibilityClass}">${repo.visibility}</span>
+            </div>
+            <div class="repo-mobile-card-meta mono">${repo.branch}</div>
+            <dl class="repo-mobile-stats">
+              <div><dt>Additions</dt><dd class="mono">${formatNumber(totals.additions)}</dd></div>
+              <div><dt>Deletions</dt><dd class="mono">${formatNumber(totals.deletions)}</dd></div>
+              <div><dt>Total</dt><dd class="mono">${formatNumber(totals.changes)}</dd></div>
+              <div><dt>Commits</dt><dd class="mono">${formatNumber(totals.commits)}</dd></div>
+            </dl>
+            <div class="repo-mobile-card-footer">
+              <span class="badge ${status.className}">${status.label}</span>
+              <a class="repo-link" href="https://github.com/${repo.name}/blame/${repo.branch}" target="_blank" rel="noreferrer">Blame</a>
+            </div>
+          </article>
+        `).join('');
+    } else {
+      el.repoCardsMobile.hidden = true;
+      el.repoCardsMobile.innerHTML = '';
+    }
+  }
 }
 
 function updateRepoNote() {
@@ -186,6 +227,16 @@ function updateRepoNote() {
   el.repoNote.textContent = selected.visibility === 'private'
     ? 'This repository is private. If metrics are empty or warn for token access, set ECOSYSTEM_GH_TOKEN with repo read scope in the site repository secrets.'
     : 'Public repositories should refresh from the scheduled workflow without extra setup.';
+}
+
+function updatePrivateRepoSetup(days) {
+  if (!el.privateRepoSetup) return;
+
+  const needsToken = days.some(day =>
+    Object.values(day.metrics || {}).some(metric => metric?.status === 'private-token-required')
+  );
+
+  el.privateRepoSetup.hidden = !needsToken;
 }
 
 function updateStatusBanner(days) {
@@ -440,6 +491,7 @@ function render() {
   drawChart(days);
   updateRepoNote();
   updateStatusBanner(days);
+  updatePrivateRepoSetup(days);
   updateLastUpdated();
   updateCacheBadge();
 }
