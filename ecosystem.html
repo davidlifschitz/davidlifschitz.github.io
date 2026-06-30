@@ -8,78 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles/site.css" />
-  <style>
-    .eco-header { padding: 64px 0 0; }
-    .eco-rule { width: 100%; height: 2px; background: var(--border); margin-bottom: 20px; }
-    .eco-rule--thin { height: 1px; margin: 12px 0 28px; }
-    h1.eco-title {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.04em;
-      line-height: 1.0;
-      margin: 0;
-    }
-    .eco-subtitle {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 640px;
-      line-height: 1.65;
-    }
-    .layers { padding: 48px 0; }
-    .layers-header {
-      display: grid;
-      grid-template-columns: 180px 1fr 32px;
-      gap: 24px;
-      padding: 8px 0 10px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border-bottom: 2px solid var(--border);
-    }
-    .layer-row {
-      display: grid;
-      grid-template-columns: 180px 1fr 32px;
-      gap: 24px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-      align-items: baseline;
-    }
-    .layer-name {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .layer-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
-    .layer-desc a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
-    .layer-desc a:hover { color: var(--muted); }
-    .layer-link { font-size: 0.9rem; color: var(--muted); text-align: right; }
-    .layer-link a { color: var(--text); text-decoration: none; font-weight: 600; }
-    .layer-link a:hover { text-decoration: underline; }
-    @media (max-width: 600px) {
-      .layers-header, .layer-row { grid-template-columns: 1fr; gap: 6px; }
-      .layers-header .layer-link-col, .layer-link { display: none; }
-    }
-  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap nav-inner">
-      <a class="brand" href="index.html">David Lifschitz</a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="ecosystem.html">Ecosystem</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="shortcutforge/index.html">ShortcutForge</a>
-        <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub</a>
-        <a href="booking.html" style="color:#3856ff;font-weight:600;">Book a Call</a>
-      </nav>
-    </div>
-  </header>
+  <div data-site-nav data-active="ecosystem"></div>
 
   <main class="wrap">
     <div class="eco-header">
@@ -132,5 +65,6 @@
     <span>David Lifschitz · 2026</span>
     <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
   </footer>
+  <script src="scripts/site-nav.js" defer></script>
 </body>
 </html>
