@@ -443,6 +443,21 @@ h1.eco-title {
 .ia-card:hover { color: var(--text); text-decoration: none; }
 .ia-card:hover .arrow { color: var(--text); }
 
+/* ── Projects reel (Hyperframes embed) ───────────── */
+.projects-reel-embed { padding: 48px 0; }
+.projects-reel-embed__frame {
+  border: 1px solid var(--border);
+  background: #02040b;
+  aspect-ratio: 16 / 9;
+  max-height: min(72vh, 720px);
+  overflow: hidden;
+}
+.projects-reel-embed__frame hyperframes-player {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 /* ── Responsive ──────────────────────────────────── */
 @media (max-width: 860px) {
   .session-grid { grid-template-columns: 1fr; }

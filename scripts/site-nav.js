@@ -8,13 +8,23 @@
     { id: 'ecosystem', label: 'Ecosystem', href: 'ecosystem.html' },
     { id: 'dashboard', label: 'Dashboard', href: 'dashboard.html' },
     { id: 'shortcutforge', label: 'ShortcutForge', href: 'shortcutforge/index.html' },
+    { id: 'products', label: 'Products', href: 'index.html#products' },
+    { id: 'research', label: 'Research', href: 'index.html#research' },
+    { id: 'mobile', label: 'Mobile', href: 'index.html#mobile' },
     { id: 'writing', label: 'Writing', href: 'blog/index.html' },
     { id: 'github', label: 'GitHub', href: GITHUB_URL, external: true },
     { id: 'booking', label: 'Book a Call', href: 'booking.html', cta: true },
   ];
 
   function buildLink(item, base, active) {
-    var href = item.external ? item.href : base + item.href;
+    var href;
+    if (item.external) {
+      href = item.href;
+    } else if (active === 'home' && item.href.indexOf('index.html#') === 0) {
+      href = item.href.slice('index.html'.length);
+    } else {
+      href = base + item.href;
+    }
     var attrs = ['href="' + href + '"'];
 
     if (item.external) {

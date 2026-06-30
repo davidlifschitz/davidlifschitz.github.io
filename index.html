@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/site.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@hyperframes/player"></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 </head>
 <body>
@@ -23,6 +24,20 @@
       <div class="btn-row">
         <a class="btn btn--primary" href="ecosystem.html">Explore Ecosystem</a>
         <a class="btn btn--secondary" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
+      </div>
+    </section>
+
+    <section class="ia-section projects-reel-embed" id="projects-reel" aria-labelledby="projects-reel-heading">
+      <h2 id="projects-reel-heading" class="ia-section-label">Projects</h2>
+      <div class="projects-reel-embed__frame">
+        <hyperframes-player
+          src="hyperframes/projects-reel/index.html"
+          width="1920"
+          height="1080"
+          autoplay
+          loop
+          muted
+        ></hyperframes-player>
       </div>
     </section>
 

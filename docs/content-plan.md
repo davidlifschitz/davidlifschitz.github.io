@@ -19,7 +19,7 @@ What they should see first:
 - plain-language descriptions
 
 Primary next step:
-- visit Products
+- scroll to Home `#products`
 - then open a selected project or repo
 
 ### 2. Technical visitor
@@ -36,7 +36,7 @@ What they should see first:
 
 Primary next step:
 - visit Ecosystem
-- then visit GitHub / Repos
+- then GitHub (nav or hero CTA)
 
 ### 3. Mobile-first visitor
 
@@ -50,8 +50,7 @@ What they should see first:
 - examples of mobile capture and trigger flows
 
 Primary next step:
-- visit Mobile
-- then ShortcutForge
+- Home `#mobile` or nav → ShortcutForge
 
 ### 4. Operator-curious visitor
 
@@ -97,12 +96,13 @@ Should remain out of the main storefront pages:
 
 ## Home page content plan
 
-Recommended section order:
-1. hero: what the ecosystem is in one paragraph
-2. visitor entry cards: products, ecosystem, mobile, GitHub
-3. highlighted surfaces: ScheduleOS, ShortcutForge, flagship product examples
-4. public vs internal note
-5. next-step CTA strip
+Recommended section order (live):
+1. hero with ecosystem summary and CTAs
+2. `#projects-reel` — featured projects embed
+3. surfaces strip — ScheduleOS, ShortcutForge, ecosystem, dashboard, booking
+4. `#products` — product cards
+5. `#research` — research/writeup links
+6. `#mobile` — ShortcutForge entry
 
 ## Ecosystem page content plan
 
@@ -117,9 +117,9 @@ Recommended section order:
 
 | Visitor type | First CTA | Secondary CTA |
 | --- | --- | --- |
-| Product visitor | Explore products | View GitHub repo |
-| Technical visitor | See ecosystem architecture | Browse repos |
-| Mobile-first visitor | Explore mobile layer | View ShortcutForge |
+| Product visitor | Home `#products` | View GitHub repo |
+| Technical visitor | See ecosystem architecture | GitHub (nav) |
+| Mobile-first visitor | Home `#mobile` or ShortcutForge (nav) | View ShortcutForge |
 | Operator-curious visitor | Understand the operator shell | Read about ScheduleOS |
 
 ## Placeholder versus live content guidance
