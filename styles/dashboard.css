@@ -74,9 +74,7 @@ button, select { font: inherit; }
 .chart-meta,
 .empty-state,
 .status-banner-copy,
-.helper-copy,
 .updated-at,
-.table-scroll-hint,
 .header-profile span,
 .control-group label,
 .control-note {
@@ -107,7 +105,6 @@ button, select { font: inherit; }
 .page-heading,
 .panel-header-row,
 .panel-actions,
-.chart-legend,
 .status-legend,
 .table-card-header,
 .header-profile {
@@ -348,18 +345,24 @@ button, select { font: inherit; }
 }
 
 .panel-subtitle,
-.helper-copy,
 .chart-meta,
-.table-scroll-hint,
 .control-note {
   font-size: 0.92rem;
 }
 
 .panel-actions,
-.chart-legend,
 .status-legend {
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 8px;
 }
 
 .legend-item {
@@ -371,18 +374,27 @@ button, select { font: inherit; }
   font-weight: 600;
 }
 
-.legend-swatch,
+.legend-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+}
+
+.legend-swatch--add {
+  background: var(--success);
+}
+
+.legend-swatch--del {
+  background: var(--danger);
+}
+
+.legend-swatch--net {
+  background: var(--accent);
+}
+
 .legend-line {
   flex: 0 0 auto;
-}
-
-.legend-swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 4px;
-}
-
-.legend-line {
   width: 18px;
   height: 0;
   border-top: 3px solid currentColor;
@@ -430,27 +442,6 @@ button, select { font: inherit; }
   margin-bottom: 8px;
 }
 
-.helper-card {
-  display: grid;
-  gap: 10px;
-  padding: 18px;
-  border-radius: 0;
-  border: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.helper-card code {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  padding: 4px 8px;
-  border-radius: 10px;
-  background: #edf2ff;
-  color: var(--accent-strong);
-  font-size: 0.84rem;
-  font-weight: 700;
-}
-
 .table-card {
   overflow: hidden;
 }
@@ -458,10 +449,6 @@ button, select { font: inherit; }
 .table-scroll {
   overflow-x: auto;
   margin-top: 14px;
-}
-
-.table-scroll-hint {
-  margin-top: 10px;
 }
 
 .data-table {

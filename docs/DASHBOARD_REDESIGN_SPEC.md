@@ -1,5 +1,11 @@
 # Dashboard Redesign Spec
 
+> **Note:** Historical / partially superseded — live site uses shared top nav (`site-nav.js`), no dashboard sidebar, homepage includes projects reel and IA sections.
+>
+> **Still accurate:** data pipeline (`data/loc-history.json`), extracted `styles/dashboard.css` + `scripts/dashboard.js`, KPI/chart/table behavior.
+>
+> **Superseded:** left sidebar app shell, sidebar nav (Dashboard/Repositories/Tokens/Settings/Docs), sidebar helper card, separate dashboard-only header chrome.
+
 ## Objective
 
 Redesign the ecosystem dashboard into a polished, production-quality SaaS-style analytics dashboard while preserving the existing underlying data behavior and GitHub Pages compatibility.

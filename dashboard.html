@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Live ecosystem telemetry — track repository activity, lines changed, and commits across the David Lifschitz project stack." />
   <title>Ecosystem Dashboard — David Lifschitz</title>
   <link rel="stylesheet" href="styles/dashboard.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,7 +16,7 @@
   <div data-site-nav data-active="dashboard"></div>
 
   <div class="app-shell">
-    <main class="main">
+    <main class="main" id="main-content">
       <div class="main-inner">
         <div class="topbar">
           <div class="topbar-left">
@@ -72,6 +73,11 @@
           <div class="panel-header">
             <div class="panel-header-row">
               <h2 class="panel-title">Activity chart</h2>
+            </div>
+            <div class="chart-legend" aria-hidden="false">
+              <span class="legend-item"><span class="legend-swatch legend-swatch--add"></span>Additions</span>
+              <span class="legend-item"><span class="legend-swatch legend-swatch--del"></span>Deletions</span>
+              <span class="legend-item"><span class="legend-swatch legend-swatch--net"></span>Net change</span>
             </div>
           </div>
           <div class="chart-shell">

@@ -5,17 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>David Lifschitz</title>
   <meta name="description" content="Operator tooling, mobile utilities, and research surfaces — connected into one ecosystem." />
+  <meta property="og:title" content="David Lifschitz" />
+  <meta property="og:description" content="Operator tooling, mobile utilities, and research surfaces — connected into one ecosystem." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://davidlifschitz.github.io/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/site.css" />
+  <style>
+    .projects-reel-embed__fallback {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      margin: 0;
+      padding: 24px;
+      color: var(--muted);
+      text-align: center;
+    }
+    noscript .projects-reel-embed__fallback { display: flex; }
+    @media (prefers-reduced-motion: reduce) {
+      .projects-reel-embed__frame hyperframes-player { display: none !important; }
+      .projects-reel-embed__frame > .projects-reel-embed__fallback { display: flex; }
+    }
+  </style>
   <script type="module" src="https://cdn.jsdelivr.net/npm/@hyperframes/player"></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 </head>
 <body>
   <div data-site-nav data-active="home" data-space-toggle></div>
 
-  <main class="wrap">
+  <main class="wrap" id="main-content">
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-rule hero-rule--thick"></div>
       <h1 id="hero-heading">Build fast.<br>Route smart.<br>Ship everything.</h1>
@@ -30,6 +51,7 @@
     <section class="ia-section projects-reel-embed" id="projects-reel" aria-labelledby="projects-reel-heading">
       <h2 id="projects-reel-heading" class="ia-section-label">Projects</h2>
       <div class="projects-reel-embed__frame">
+        <p class="projects-reel-embed__fallback">Projects reel requires JavaScript</p>
         <hyperframes-player
           src="hyperframes/projects-reel/index.html"
           width="1920"
@@ -38,6 +60,9 @@
           loop
           muted
         ></hyperframes-player>
+        <noscript>
+          <p class="projects-reel-embed__fallback">Projects reel requires JavaScript</p>
+        </noscript>
       </div>
     </section>
 
@@ -73,6 +98,15 @@
         </a>
         <a class="ia-card" href="shortcutforge/index.html">
           <span>ShortcutForge — mobile capture &amp; trigger flows</span><span class="arrow">→</span>
+        </a>
+        <a class="ia-card" href="https://github.com/davidlifschitz/workout-planner" target="_blank" rel="noreferrer" aria-label="workout-planner (opens in new tab)">
+          <span>workout-planner — wellness product surface</span><span class="arrow">→</span>
+        </a>
+        <a class="ia-card" href="https://github.com/davidlifschitz/Bttr" target="_blank" rel="noreferrer" aria-label="Bttr (opens in new tab)">
+          <span>Bttr — accountability product surface</span><span class="arrow">→</span>
+        </a>
+        <a class="ia-card" href="https://github.com/davidlifschitz/fastest-growing-finance-repos" target="_blank" rel="noreferrer" aria-label="fastest-growing-finance-repos (opens in new tab)">
+          <span>fastest-growing-finance-repos — public finance intelligence product</span><span class="arrow">→</span>
         </a>
       </div>
     </section>

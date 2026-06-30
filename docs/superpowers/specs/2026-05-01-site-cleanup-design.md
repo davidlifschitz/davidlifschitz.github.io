@@ -1,5 +1,11 @@
 # Site Cleanup Design
 
+> **Note:** Historical / partially superseded — live site uses shared top nav (`site-nav.js`), no dashboard sidebar, homepage includes projects reel and IA sections.
+>
+> **Implemented:** `styles/site.css` token system, A24/Vercel aesthetic on homepage and ecosystem, dashboard token refresh (flat bg, hard edges).
+>
+> **Evolved beyond spec:** inline per-page headers → `scripts/site-nav.js`; homepage adds Projects reel + Products/Research/Mobile IA sections; dashboard dropped sidebar for shared top nav.
+
 **Date:** 2026-05-01  
 **Scope:** Homepage, Ecosystem page, Dashboard  
 **Direction:** A24 × Vercel — stark black/white, uppercase headlines, hard edges, editorial density

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browsers — Unwrapping the Stack</title>
+  <meta name="description" content="The universal runtime hiding in plain sight. What happens when the address bar and document model give way to agentic sessions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/site.css" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <div data-site-nav data-active="writing" data-base="../"></div>
+
+  <main class="wrap" id="main-content">
+    <article class="post-shell">
+      <div class="post-meta">
+        <a class="series-link" href="index.html">Unwrapping the Stack</a>
+        <span>Part 3 of 6</span>
+      </div>
+      <h1>Browsers — the universal runtime hiding in plain sight</h1>
+      <p class="subtitle">What happens when the address bar and document model give way to agentic sessions.</p>
+
+      <p>Part 2 ended with a question about the interface layer — how humans and systems communicate intent once context is ambient and capability is composable.</p>
+      <p>The browser is the most important answer we never quite acknowledged.</p>
+      <p>It started as a document viewer. It became a delivery mechanism for apps. Today it is something closer to an operating system — a universal runtime that runs on every device and hosts most of the software people actually use.</p>
+      <p>We still talk about it like a window into the web. That framing is decades out of date.</p>
+
+      <h2>What the browser is actually solving</h2>
+      <p>A browser is a portable execution environment with a built-in navigation model.</p>
+      <p>The key word is <em>portable</em>. Before the web, running software meant installing it, updating it, and hoping it worked on your machine. The browser offered a deal: write once, run anywhere, update centrally, sandbox by default. Developers traded performance for reach. Users traded local control for frictionless access.</p>
+      <p>That trade rewired the industry. The browser didn't just deliver documents. It became the default container for capability — the same problem apps were solving, but at a layer above the operating system.</p>
+      <p>So browsers are really a solution to a distribution problem — how do you deliver coherent software across incompatible machines without asking users to manage the plumbing?</p>
+      <p>You give them a tab.</p>
+
+      <h2>The assumption embedded in that design</h2>
+      <p>The browser model assumes that the fundamental unit of computing is a <em>document at an address</em>.</p>
+      <p>That assumption made sense when the web was mostly pages — articles, forms, catalogs. You navigated to a location, consumed content, and left. The address bar was a map.</p>
+      <p>It makes less sense now.</p>
+      <p>Your email client, your design tool, your spreadsheet, your code editor — these are not documents. They are long-running applications that happen to render inside something that still looks like a document browser. The URL is a legacy entry point. The tab is doing the real work.</p>
+
+      <h2>The tab as operating system</h2>
+      <p>Look at what a modern browser actually manages.</p>
+      <p>Process isolation. Memory allocation. Permission prompts. Background workers. Storage APIs. Device hooks. Extension ecosystems. Profiles. Sync.</p>
+      <p>That is not a document viewer. That is an OS kernel wearing a bookmark bar.</p>
+      <p>Each tab is a lightweight process — an app instance with its own memory and crash domain. The tab strip is a task switcher. Bookmarks are launch points. History is an activity log. The whole thing runs atop the real operating system the way a hypervisor runs atop hardware.</p>
+      <p>We call it a browser because naming is conservative. But functionally, for most users, it <em>is</em> the computer.</p>
+
+      <h2>What starts to break</h2>
+      <p>The seams show up in familiar places — many inherited from the app layer, amplified by the browser's scale.</p>
+      <p><strong>1. Navigation as a stand-in for intent.</strong> The address bar encodes location, not purpose. You don't want "docs.google.com/document/d/abc123." You want the proposal you were editing for tomorrow's client call. URLs are precise and human-hostile.</p>
+      <p><strong>2. Tab hoarding as memory management.</strong> Because the browser has no model of what you're working on, users become the garbage collector. Dozens of tabs stay open as external memory — each one a frozen context you might need again.</p>
+      <p><strong>3. The same-origin prison.</strong> Tabs can't talk to each other safely, so related work fragments across silos. Copy-paste becomes the inter-process communication protocol. Extensions exist partly to patch over a security model that treats every site as a stranger.</p>
+      <p><strong>4. Sessions that reset on refresh.</strong> The document model assumes statelessness. Real work is stateful. The browser gives you a runtime but no continuous thread of <em>you</em>.</p>
+
+      <h2>What an AI-native system does differently</h2>
+      <p>The shift is subtle but structural.</p>
+      <p>In the current model, you navigate to capability. You find the right tab, the right URL. The browser is a directory of destinations.</p>
+      <p>In an AI-native model, you open a session oriented around intent. The system knows the task, assembles the tools, and renders whatever interface the moment requires.</p>
+      <p>Browser-embedded assistants can summarize pages, fill forms, and execute actions across sites — without you orchestrating each step. The agent treats the browser as a capability surface, not a collection of addresses.</p>
+      <p>As agents gain persistent memory and deeper tool access, the question "which tab do I need?" dissolves into "what needs to happen next?"</p>
+
+      <h2>The three things browsers were bundling</h2>
+      <p>To understand what replaces them, decompose what browsers were doing:</p>
+      <p><strong>1. Runtime.</strong> A universal execution environment — HTML, CSS, JavaScript, WebAssembly — with sandboxing and automatic updates.</p>
+      <p><strong>2. Navigation.</strong> A spatial model for finding things — URLs, links, back buttons, search. A map of the internet rendered as locations.</p>
+      <p><strong>3. Session.</strong> Ephemeral working state — open tabs, cookies, logged-in identities. A scratch pad for in-progress activity.</p>
+      <p>In a system where agents maintain context continuously and capability is invoked by intent rather than location, each of those decouples. Runtime becomes ambient. Navigation becomes recall. Session becomes a persistent thread that survives tab closes and device switches.</p>
+
+      <h2>What fills the space</h2>
+      <p>Not the death of the browser. Something more like its inversion.</p>
+      <p><strong>Agentic sessions.</strong> Instead of opening a tab, you enter a session that already holds your context. The browser stops being a place you go and becomes a layer that follows you.</p>
+      <p><strong>Intent-first surfaces.</strong> The primary interface is no longer a grid of tabs but a single surface that composes whatever views the task requires — a web page, a generated panel, or just an answer.</p>
+      <p><strong>The address bar as legacy input.</strong> URLs won't disappear overnight. But for most interactions, natural language and system recall replace manual navigation.</p>
+      <p>The browser starts to look less like a navigator and more like a substrate — always present, rarely noticed, executing whatever the session demands.</p>
+
+      <h2>The transition state we're in</h2>
+      <p>What exists today is the tab OS with AI bolted onto the side.</p>
+      <p>Assistants live in browser chrome — sidebars, overlays, extensions — which means they can see your tabs but can't replace the navigation model. You still manage the tab strip. You still re-establish context when the assistant forgets.</p>
+      <p>Some products are pushing further — browsers rebuilt around agents, workspaces that persist across sites. They share a direction: the document-at-an-address model is being stretched past its design limit.</p>
+      <p>We are in the part of the transition where intelligence works <em>inside</em> the tab OS rather than replacing it.</p>
+
+      <h2>What this implies for the next layer</h2>
+      <p>If files were scaffolding for data and apps were scaffolding for capability, the browser was scaffolding for <em>distribution</em> — a way to deliver software without asking users to install anything.</p>
+      <p>But distribution was never the deepest problem. The deepest problem was coordination — who manages the processes, the permissions, the memory, the devices, the identity? The browser answered that partially, by sandboxing web apps inside tabs. The operating system answered it fully, by owning the machine.</p>
+      <p>As agentic sessions absorb navigation and context, the browser's role thins. What's left is runtime — and runtime is a question the OS was always supposed to own.</p>
+      <p>That's where we go next. The interesting question is what an OS looks like when the primary residents aren't apps or tabs, but persistent agents with tools, memory, and permission to act.</p>
+
+      <div class="post-nav">
+        <a href="part2-apps.html">← Part 2: Apps</a>
+        <a href="part4-operating-systems.html">Part 4: Operating Systems →</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer wrap">
+    <span>David Lifschitz · 2026</span>
+    <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
+  </footer>
+  <script src="../scripts/site-nav.js" defer></script>
+</body>
+</html>

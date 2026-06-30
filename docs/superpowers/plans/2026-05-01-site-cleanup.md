@@ -1,5 +1,9 @@
 # Site Cleanup Implementation Plan
 
+> **Note:** Historical / partially superseded — live site uses shared top nav (`site-nav.js`), no dashboard sidebar, homepage includes projects reel and IA sections.
+>
+> Checkboxes below reflect implementation status as of 2026-06; commit/push steps left unchecked.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Redesign homepage, ecosystem page, and dashboard to a stark black/white A24 × Vercel aesthetic with a shared token system.
@@ -16,7 +20,7 @@
 - Create: `.gitignore`
 - Create: `styles/site.css`
 
-- [ ] **Step 1: Create `.gitignore`**
+- [x] **Step 1: Create `.gitignore`**
 
 ```
 .DS_Store
@@ -25,7 +29,7 @@
 
 Save to `.gitignore` at the repo root.
 
-- [ ] **Step 2: Create `styles/site.css`**
+- [x] **Step 2: Create `styles/site.css`**
 
 ```css
 /* ── Tokens ────────────────────────────────────── */
@@ -150,7 +154,7 @@ h1 {
 }
 ```
 
-- [ ] **Step 3: Verify file exists**
+- [x] **Step 3: Verify file exists**
 
 Run: `ls -la styles/site.css`  
 Expected: file present, non-zero size.
@@ -169,7 +173,7 @@ git commit -m "Add shared site token system and base CSS"
 **Files:**
 - Modify: `index.html` (full rewrite — strip 200-line inline style block, replace 7-section layout with 3-section)
 
-- [ ] **Step 1: Replace `index.html` entirely**
+- [x] **Step 1: Replace `index.html` entirely**
 
 ```html
 <!DOCTYPE html>
@@ -236,7 +240,7 @@ git commit -m "Add shared site token system and base CSS"
 </html>
 ```
 
-- [ ] **Step 2: Open in browser and verify**
+- [x] **Step 2: Open in browser and verify**
 
 Open `index.html` directly in a browser. Check:
 - Black nav bar border, no blue, no background color
@@ -261,7 +265,7 @@ git commit -m "Rebuild homepage with A24/Vercel aesthetic and 3-section layout"
 **Files:**
 - Modify: `ecosystem.html` (full rewrite — strip inline styles, replace card-grid layout with ruled-table layout)
 
-- [ ] **Step 1: Replace `ecosystem.html` entirely**
+- [x] **Step 1: Replace `ecosystem.html` entirely**
 
 ```html
 <!DOCTYPE html>
@@ -401,7 +405,7 @@ git commit -m "Rebuild homepage with A24/Vercel aesthetic and 3-section layout"
 </html>
 ```
 
-- [ ] **Step 2: Open in browser and verify**
+- [x] **Step 2: Open in browser and verify**
 
 Open `ecosystem.html` directly. Check:
 - Nav identical to homepage
@@ -427,7 +431,7 @@ git commit -m "Rebuild ecosystem page with editorial ruled-table layout"
 
 The dashboard is a functional app — keep the sidebar layout and all JS/charting logic untouched. Change: tokens at the top of the file (replace the existing `:root` block), and targeted overrides for sidebar, brand-mark, nav-item, KPI cards, and body background.
 
-- [ ] **Step 1: Replace the `:root` block at the top of `styles/dashboard.css`**
+- [x] **Step 1: Replace the `:root` block at the top of `styles/dashboard.css`**
 
 Find and replace the entire existing `:root { ... }` block (lines 1–22) with:
 
@@ -462,7 +466,7 @@ Find and replace the entire existing `:root { ... }` block (lines 1–22) with:
 }
 ```
 
-- [ ] **Step 2: Replace the `body` rule**
+- [x] **Step 2: Replace the `body` rule**
 
 Find:
 ```css
@@ -488,7 +492,7 @@ body {
 }
 ```
 
-- [ ] **Step 3: Replace the `.sidebar` rule**
+- [ ] **Step 3: Replace the `.sidebar` rule** *(superseded — live dashboard has no sidebar; uses `site-nav.js` top nav)*
 
 Find:
 ```css
@@ -515,7 +519,7 @@ Replace with:
 }
 ```
 
-- [ ] **Step 4: Replace the `.brand-mark` rule**
+- [ ] **Step 4: Replace the `.brand-mark` rule** *(superseded — sidebar removed)*
 
 Find:
 ```css
@@ -550,7 +554,7 @@ Replace with:
 }
 ```
 
-- [ ] **Step 5: Replace `.nav-item`, `.nav-item:hover`, `.nav-item.active` rules**
+- [ ] **Step 5: Replace `.nav-item`, `.nav-item:hover`, `.nav-item.active` rules** *(superseded — sidebar removed)*
 
 Find:
 ```css
@@ -602,7 +606,7 @@ Replace with:
 }
 ```
 
-- [ ] **Step 6: Open `dashboard.html` in browser and verify**
+- [x] **Step 6: Open `dashboard.html` in browser and verify**
 
 Check:
 - Sidebar is white with a solid black right border — no glass/blur
@@ -623,7 +627,7 @@ git commit -m "Apply shared token system to dashboard: flat bg, hard edges, no s
 
 ### Task 5: Final verification pass
 
-- [ ] **Step 1: Open all three pages in browser tabs**
+- [x] **Step 1: Open all three pages in browser tabs**
 
 `index.html`, `ecosystem.html`, `dashboard.html` — open all three.
 
@@ -633,7 +637,7 @@ Check cross-page consistency:
 - No blue accent appears in nav, buttons, or layout chrome on any page
 - Dashboard sidebar matches the stark direction (black borders, no glass)
 
-- [ ] **Step 2: Check mobile (resize browser to ~375px)**
+- [x] **Step 2: Check mobile (resize browser to ~375px)**
 
 - Homepage: h1 wraps gracefully, buttons stack vertically
 - Ecosystem: layer table collapses to single-column (link column hides)

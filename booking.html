@@ -19,7 +19,7 @@
 
 <div data-site-nav data-active="booking"></div>
 
-<main class="wrap">
+<main class="wrap" id="main-content">
 
   <section class="page-hero">
     <div class="eyebrow">AI Consulting</div>
@@ -31,7 +31,7 @@
     <span class="section-label">Choose a session type</span>
     <div class="session-grid">
 
-      <div class="session-card" data-cal-link="david-lifschitz-agentic-solutions/15min" onclick="selectSession(this)">
+      <div class="session-card" role="button" tabindex="0" aria-pressed="false" data-cal-link="david-lifschitz-agentic-solutions/15min" onclick="selectSession(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectSession(this);}">
         <div class="check-badge">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div class="session-card" data-cal-link="david-lifschitz-agentic-solutions/30min" onclick="selectSession(this)">
+      <div class="session-card" role="button" tabindex="0" aria-pressed="false" data-cal-link="david-lifschitz-agentic-solutions/30min" onclick="selectSession(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectSession(this);}">
         <div class="check-badge">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <div class="session-card" data-cal-link="david-lifschitz-agentic-solutions/60min" onclick="selectSession(this)">
+      <div class="session-card" role="button" tabindex="0" aria-pressed="false" data-cal-link="david-lifschitz-agentic-solutions/60min" onclick="selectSession(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectSession(this);}">
         <div class="check-badge">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
@@ -134,17 +134,22 @@
   let selectedCard = null;
 
   function selectSession(card) {
-    document.querySelectorAll('.session-card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.session-card').forEach(c => {
+      c.classList.remove('active');
+      c.setAttribute('aria-pressed', 'false');
+    });
     card.classList.add('active');
+    card.setAttribute('aria-pressed', 'true');
     selectedCard = card;
-    document.getElementById('hint-text').textContent = '← Click to pick a time';
-    document.getElementById('hint-text').style.color = '#000000';
+    const hint = document.getElementById('hint-text');
+    hint.textContent = '← Click to pick a time';
+    hint.style.color = '';
   }
 
   function openCalEmbed() {
     if (!selectedCard) {
       document.getElementById('hint-text').textContent = '← Please select a session type first';
-      document.getElementById('hint-text').style.color = '#e05';
+      document.getElementById('hint-text').style.color = '#8b0000';
       return;
     }
     const calLink = selectedCard.getAttribute('data-cal-link');

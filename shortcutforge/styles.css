@@ -23,6 +23,43 @@ body {
   color: var(--ink);
 }
 
+.site-back {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 1rem;
+  padding-top: calc(0.5rem + env(safe-area-inset-top));
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: #111827;
+  color: #e5e7eb;
+  border-bottom: 1px solid #374151;
+}
+
+.site-back a {
+  color: #f3f4f6;
+  text-decoration: none;
+}
+
+.site-back a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.site-back a:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-back {
+    background: #0f172a;
+    border-bottom-color: #1f2937;
+  }
+}
+
 .shell {
   width: min(100%, 52rem);
   margin: 0 auto;
