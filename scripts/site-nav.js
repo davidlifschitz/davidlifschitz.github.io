@@ -3,17 +3,20 @@
 
   var GITHUB_URL = 'https://github.com/davidlifschitz';
 
-  var NAV_ITEMS = [
+  var PRIMARY_NAV_ITEMS = [
     { id: 'home', label: 'Home', href: 'index.html' },
     { id: 'ecosystem', label: 'Ecosystem', href: 'ecosystem.html' },
     { id: 'dashboard', label: 'Dashboard', href: 'dashboard.html' },
     { id: 'shortcutforge', label: 'ShortcutForge', href: 'shortcutforge/index.html' },
-    { id: 'products', label: 'Products', href: 'index.html#products' },
-    { id: 'research', label: 'Research', href: 'index.html#research' },
-    { id: 'mobile', label: 'Mobile', href: 'index.html#mobile' },
     { id: 'writing', label: 'Writing', href: 'blog/index.html' },
     { id: 'github', label: 'GitHub', href: GITHUB_URL, external: true },
     { id: 'booking', label: 'Book a Call', href: 'booking.html', cta: true },
+  ];
+
+  var SECTION_NAV_ITEMS = [
+    { id: 'products', label: 'Products', href: 'index.html#products' },
+    { id: 'research', label: 'Research', href: 'index.html#research' },
+    { id: 'mobile', label: 'Mobile', href: 'index.html#mobile' },
   ];
 
   function buildLink(item, base, active) {
@@ -59,9 +62,18 @@
     var active = placeholder.getAttribute('data-active') || '';
     var base = placeholder.getAttribute('data-base') || '';
     var includeSpaceToggle = placeholder.hasAttribute('data-space-toggle');
-    var links = NAV_ITEMS.map(function (item) {
+    var primaryLinks = PRIMARY_NAV_ITEMS.map(function (item) {
       return buildLink(item, base, active);
     }).join('\n        ');
+    var sectionLinks = SECTION_NAV_ITEMS.map(function (item) {
+      return buildLink(item, base, active);
+    }).join('\n          ');
+    var sectionsMarkup =
+      '<div class="nav-links__sections">\n' +
+      '          <span class="nav-links__sections-label">Home sections</span>\n' +
+      '          ' + sectionLinks + '\n' +
+      '        </div>';
+    var links = primaryLinks + '\n        ' + sectionsMarkup;
     if (includeSpaceToggle) {
       links += '\n        ' + spaceToggleMarkup();
     }

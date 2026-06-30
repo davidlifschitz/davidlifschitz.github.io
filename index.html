@@ -13,24 +13,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/site.css" />
-  <style>
-    .projects-reel-embed__fallback {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      min-height: 200px;
-      margin: 0;
-      padding: 24px;
-      color: var(--muted);
-      text-align: center;
-    }
-    noscript .projects-reel-embed__fallback { display: flex; }
-    @media (prefers-reduced-motion: reduce) {
-      .projects-reel-embed__frame hyperframes-player { display: none !important; }
-      .projects-reel-embed__frame > .projects-reel-embed__fallback { display: flex; }
-    }
-  </style>
   <script type="module" src="https://cdn.jsdelivr.net/npm/@hyperframes/player"></script>
+  <script src="scripts/hyperframes-fallback.js" defer></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 </head>
 <body>
@@ -114,8 +98,8 @@
     <section class="ia-section" id="research" aria-labelledby="research-heading">
       <h2 id="research-heading" class="ia-section-label">Research</h2>
       <div class="ia-grid">
-        <a class="ia-card" href="blog/index.html">
-          <span>Unwrapping the Stack — research series</span><span class="arrow">→</span>
+        <a class="ia-card" href="blog/part1-files-folders.html">
+          <span>Unwrapping the Stack — start with Files &amp; Folders</span><span class="arrow">→</span>
         </a>
       </div>
     </section>

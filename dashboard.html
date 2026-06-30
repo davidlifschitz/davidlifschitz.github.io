@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Live ecosystem telemetry — track repository activity, lines changed, and commits across the David Lifschitz project stack." />
+  <meta property="og:title" content="Ecosystem Dashboard — David Lifschitz" />
+  <meta property="og:description" content="Live ecosystem telemetry — track repository activity, lines changed, and commits across the David Lifschitz project stack." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://davidlifschitz.github.io/dashboard.html" />
+  <link rel="canonical" href="https://davidlifschitz.github.io/dashboard.html" />
   <title>Ecosystem Dashboard — David Lifschitz</title>
   <link rel="stylesheet" href="styles/dashboard.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -67,6 +72,23 @@
           </div>
         </div>
 
+        <details id="privateRepoSetup" class="setup-panel" hidden>
+          <summary class="setup-panel-summary">Private repo setup</summary>
+          <div class="setup-panel-body">
+            <p>
+              Private repository metrics require a GitHub personal access token stored as
+              <code>ECOSYSTEM_GH_TOKEN</code> in this repository&apos;s
+              <a href="https://github.com/davidlifschitz/davidlifschitz.github.io/settings/secrets/actions" target="_blank" rel="noreferrer">Actions secrets</a>.
+              Use a token with <strong>repo</strong> read scope so the nightly workflow can fetch private repo stats.
+            </p>
+            <p>
+              After adding or updating the secret, trigger a manual data refresh from the
+              <a href="https://github.com/davidlifschitz/davidlifschitz.github.io/actions/workflows/update-ecosystem-dashboard.yml" target="_blank" rel="noreferrer">Update ecosystem dashboard</a>
+              workflow (Run workflow).
+            </p>
+          </div>
+        </details>
+
         <div id="summaryCards" class="kpi-grid"></div>
 
         <div class="panel">
@@ -107,6 +129,7 @@
               <tbody id="repoTableBody"></tbody>
             </table>
           </div>
+          <div id="repoCardsMobile" class="repo-cards-mobile" hidden></div>
         </div>
       </div>
     </main>

@@ -78,10 +78,38 @@
       radius: 78,
       colors: ["#ff775c", "#6b1d2b"],
       title: "Projects belt",
-      body: "ScheduleOS, ShortcutForge, the ecosystem dashboard, and experiment surfaces live in this cluster.",
+      body: "The projects reel, ScheduleOS, ShortcutForge, the ecosystem dashboard, and experiment surfaces live in this cluster.",
       links: [
         { label: "ShortcutForge", href: "shortcutforge/index.html" },
         { label: "ScheduleOS", href: "https://github.com/davidlifschitz/ScheduleOS", external: true }
+      ]
+    },
+    {
+      id: "graphify",
+      label: "Graphify Station",
+      type: "station",
+      x: 1360,
+      y: 340,
+      radius: 68,
+      colors: ["#b8d4ff", "#4a6bff"],
+      title: "Graphify station",
+      body: "Context and architecture mapping for routing decisions, artifact lookup, and review surfaces.",
+      links: [
+        { label: "Open Graphify", href: "https://github.com/davidlifschitz/graphify", external: true }
+      ]
+    },
+    {
+      id: "products",
+      label: "Products Moon",
+      type: "moon",
+      x: 1480,
+      y: 1160,
+      radius: 56,
+      colors: ["#e8f4ff", "#6a8fb8"],
+      title: "Products orbit",
+      body: "Graphify, mobile utilities, and public experiment surfaces linked from the homepage product cards.",
+      links: [
+        { label: "View products", href: "index.html#products" }
       ]
     },
     {

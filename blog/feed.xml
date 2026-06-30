@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Unwrapping the Stack</title>
+  <subtitle>A layer-by-layer examination of files, apps, browsers, operating systems, hardware, and identity — and what happens to each when intelligence becomes a system property.</subtitle>
+  <link href="https://davidlifschitz.github.io/blog/" />
+  <link rel="self" href="https://davidlifschitz.github.io/blog/feed.xml" type="application/atom+xml" />
+  <id>https://davidlifschitz.github.io/blog/</id>
+  <updated>2026-06-06T00:00:00Z</updated>
+  <author>
+    <name>David Lifschitz</name>
+  </author>
+  <entry>
+    <title>Files &amp; Folders — the first abstraction that starts to break</title>
+    <link href="https://davidlifschitz.github.io/blog/part1-files-folders.html" />
+    <id>https://davidlifschitz.github.io/blog/part1-files-folders.html</id>
+    <published>2026-06-01T00:00:00Z</published>
+    <updated>2026-06-01T00:00:00Z</updated>
+    <summary>The first abstraction that starts to break. What happens to cognitive scaffolding when the system starts to think.</summary>
+  </entry>
+  <entry>
+    <title>Apps — the container that outlived its contents</title>
+    <link href="https://davidlifschitz.github.io/blog/part2-apps.html" />
+    <id>https://davidlifschitz.github.io/blog/part2-apps.html</id>
+    <published>2026-06-02T00:00:00Z</published>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <summary>The container that outlived its contents. What happens to software packaging when intent is the interface.</summary>
+  </entry>
+  <entry>
+    <title>Browsers — the universal runtime hiding in plain sight</title>
+    <link href="https://davidlifschitz.github.io/blog/part3-browsers.html" />
+    <id>https://davidlifschitz.github.io/blog/part3-browsers.html</id>
+    <published>2026-06-03T00:00:00Z</published>
+    <updated>2026-06-03T00:00:00Z</updated>
+    <summary>The universal runtime hiding in plain sight. What happens when the address bar and document model give way to agentic sessions.</summary>
+  </entry>
+  <entry>
+    <title>Operating Systems — the gatekeeper beneath every interface</title>
+    <link href="https://davidlifschitz.github.io/blog/part4-operating-systems.html" />
+    <id>https://davidlifschitz.github.io/blog/part4-operating-systems.html</id>
+    <published>2026-06-04T00:00:00Z</published>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <summary>The gatekeeper beneath every interface. What happens when the operating system mediates intent instead of syscalls.</summary>
+  </entry>
+  <entry>
+    <title>Hardware — the substrate where intelligence lands</title>
+    <link href="https://davidlifschitz.github.io/blog/part5-hardware.html" />
+    <id>https://davidlifschitz.github.io/blog/part5-hardware.html</id>
+    <published>2026-06-05T00:00:00Z</published>
+    <updated>2026-06-05T00:00:00Z</updated>
+    <summary>Silicon, accelerators, edge and cloud. What happens when intelligence stops being a service you call and becomes a property of the machine itself.</summary>
+  </entry>
+  <entry>
+    <title>Identity — who is the user when the system acts?</title>
+    <link href="https://davidlifschitz.github.io/blog/part6-identity.html" />
+    <id>https://davidlifschitz.github.io/blog/part6-identity.html</id>
+    <published>2026-06-06T00:00:00Z</published>
+    <updated>2026-06-06T00:00:00Z</updated>
+    <summary>Accounts, keys, personas, and delegation. Who is the user when agents act on their behalf — and what the whole stack looks like when intelligence is ambient.</summary>
+  </entry>
+</feed>
