@@ -50,19 +50,20 @@ Examples:
 
 ## Files to add next
 
-- `docs/site-map.md`
-- `docs/content-plan.md`
-- homepage sections for Products, Research, Infrastructure, and Mobile
-- a dedicated ecosystem overview page
+- [x] `docs/site-map.md`
+- [x] `docs/content-plan.md`
+- [x] homepage sections: `#products`, `#research`, `#mobile`, `#projects-reel`
+- [x] dedicated ecosystem overview page (`ecosystem.html`)
 
-## Example site structure
+## Example site structure (live nav)
 
-- Home
-- Ecosystem
-- Products
-- Research
-- Mobile
-- GitHub / Repos
+- Home (sections: `#projects-reel`, `#products`, `#research`, `#mobile`)
+- Ecosystem (layer links include children-of-israel-agent-swarm, graphify)
+- Dashboard (no sidebar)
+- ShortcutForge
+- Writing
+- GitHub (external)
+- Book a Call
 
 ## Acceptance criteria
 

@@ -124,6 +124,20 @@
       ]
     },
     {
+      id: "writing",
+      label: "Writing Station",
+      type: "station",
+      x: 520,
+      y: 1120,
+      radius: 64,
+      colors: ["#f0f0f0", "#333333"],
+      title: "Writing station",
+      body: "Unwrapping the Stack — a research series on files, apps, browsers, OS, hardware, and identity.",
+      links: [
+        { label: "Read the series", href: "blog/index.html" }
+      ]
+    },
+    {
       id: "monolith",
       label: "Quiet Monolith",
       type: "monolith",

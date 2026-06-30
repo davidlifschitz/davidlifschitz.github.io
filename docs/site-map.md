@@ -10,39 +10,39 @@ The site should explain the ecosystem quickly, separate public-facing surfaces f
 
 | Page | Purpose | Minimum content |
 | --- | --- | --- |
-| Home | Plain-language storefront and ecosystem overview | positioning statement, visitor entry points, flagship surfaces, highlighted layers |
-| Ecosystem | Architecture and layer map | major ecosystem layers, how repos fit together, public vs internal distinctions |
-| Products | Public or user-facing tools and experiments | product cards, short descriptions, links to demos or repos |
-| Research | Vertical explorations and research-oriented surfaces | research themes, repo highlights, selected writeups or experiment summaries |
-| Mobile | Mobile entry layer explanation | ShortcutForge role, mobile workflows, fast-entry examples |
-| GitHub / Repos | Technical visitor jump point | repo categories, canonical repo links, notes on where deeper detail lives |
+| Home | Plain-language storefront and ecosystem overview | hero, `#projects-reel`, surfaces strip, `#products`, `#research`, `#mobile` sections |
+| Ecosystem | Architecture and layer map | major ecosystem layers (including children-of-israel-agent-swarm, graphify), public vs internal distinctions |
+| Dashboard | Ecosystem activity metrics | KPI cards, charts, repo activity table (no sidebar) |
+| ShortcutForge | Mobile action layer | mobile capture, triggers, return flows |
+| Writing | Research and writeups | blog index and selected posts |
+| GitHub | Technical visitor jump point | external link to profile and repos |
+| Book a Call | Consulting intake | booking form / scheduling CTA |
+
+Products, Research, and Mobile are **homepage sections** (`#products`, `#research`, `#mobile`), not separate top-level routes.
 
 ## Navigation model
 
-Primary navigation should expose:
+Primary navigation (via `scripts/site-nav.js`):
 - Home
 - Ecosystem
-- Products
-- Research
-- Mobile
-- GitHub / Repos
+- Dashboard
+- ShortcutForge
+- Writing
+- GitHub (external)
+- Book a Call (CTA)
 
-Secondary routing elements on Home should expose the main visitor paths:
-- explore the ecosystem
-- browse products
-- understand the mobile layer
-- go deeper in GitHub
+Secondary routing on Home: hero CTAs, surfaces strip, and in-page sections (`#projects-reel`, `#products`, `#research`, `#mobile`).
 
 ## Visitor routing paths
 
 ### Product visitor
-Home → Products → selected product or repo
+Home → `#products` → selected product or repo
 
 ### Technical visitor
-Home → Ecosystem → GitHub / Repos
+Home → Ecosystem → GitHub
 
 ### Mobile-first visitor
-Home → Mobile → ShortcutForge
+Home → `#mobile` or nav → ShortcutForge
 
 ### Operator-curious visitor
 Home → Ecosystem → ScheduleOS explanation
@@ -55,31 +55,25 @@ Should answer:
 - what are its major surfaces?
 - where should I go next?
 
+Home sections: `#projects-reel`, `#products`, `#research`, `#mobile`.
+
 ### Ecosystem
 Should answer:
 - what are the main layers?
 - how do the repos relate conceptually?
 - which surfaces are public-facing versus internal/operator-facing?
 
-### Products
-Should answer:
-- what usable tools or experiments are available?
-- which projects are public-facing?
+Layer links include [children-of-israel-agent-swarm](https://github.com/davidlifschitz/children-of-israel-agent-swarm) and [graphify](https://github.com/davidlifschitz/graphify).
 
-### Research
+### Dashboard
 Should answer:
-- which repos or themes are exploratory, vertical, or research-oriented?
+- what is the ecosystem activity level?
+- which repos are moving?
 
-### Mobile
-Should answer:
-- what is ShortcutForge?
-- why does the ecosystem have a mobile layer?
-- what should happen on mobile versus in ScheduleOS?
+Single-column layout; no sidebar.
 
-### GitHub / Repos
-Should answer:
-- where can I inspect the repos?
-- which repos are architectural versus product-oriented?
+### ShortcutForge / Writing / GitHub / Book a Call
+ShortcutForge and Writing are dedicated pages; GitHub is external; Book a Call is the consulting intake route.
 
 ## Implementation notes
 
