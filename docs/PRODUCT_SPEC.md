@@ -39,13 +39,14 @@ In v1, the site should make it easy to:
 ## V1 scope
 
 ### 1. Ecosystem overview
-- explain the major layers:
-  - control plane
-  - operator shell
-  - execution backend
-  - memory/context layer
-  - mobile layer
-  - product surfaces
+- seven-layer model on `ecosystem.html` (control plane through product surfaces):
+  - control plane — `agentic-os`
+  - operator shell — ScheduleOS
+  - mobile layer — ShortcutForge
+  - execution backend — children-of-israel-agent-swarm
+  - memory/context — graphify
+  - public surface — this site
+  - product surfaces — public tools and experiments
 
 ### 2. Visitor routing
 Main visitor paths:
@@ -65,6 +66,15 @@ Main visitor paths:
 - infrastructure layer explanation
 - links to GitHub repos where appropriate
 
+### 5. Navigation and discovery
+- shared primary nav (`scripts/site-nav.js`): Home, Ecosystem, Dashboard, ShortcutForge, Products / Research / Mobile (homepage anchors), Writing, GitHub, Book a Call
+- mobile hamburger collapses nav on small viewports
+- `sitemap.xml` and `robots.txt` at site root
+- Space mode toggle on homepage only; no auto-restore on reload
+
+### 6. Writing
+- complete 6-part blog series, *Unwrapping the Stack* (files → identity), indexed at `blog/index.html`
+
 ## Out of scope for v1
 
 - full operator functionality
@@ -75,14 +85,17 @@ Main visitor paths:
 
 ## Site structure
 
+Primary nav (all pages except ShortcutForge): Home · Ecosystem · Dashboard · ShortcutForge · Products · Research · Mobile · Writing · GitHub · Book a Call. Products, Research, and Mobile link to homepage sections (`#products`, `#research`, `#mobile`).
+
 ### Home
 Purpose:
 - explain the ecosystem in plain language
 - highlight core surfaces and projects
+- optional Space mode (interactive portfolio map; homepage-only toggle)
 
 ### Ecosystem
 Purpose:
-- explain the architecture and layers
+- present the seven-layer architecture (including control plane)
 - show how the repos fit together
 
 ### Products
@@ -96,6 +109,14 @@ Purpose:
 ### Mobile
 Purpose:
 - explain ShortcutForge and mobile entry flows
+
+### Writing
+Purpose:
+- host the complete 6-part *Unwrapping the Stack* series
+
+### ShortcutForge
+Purpose:
+- dedicated mobile runner surface with back-nav to Home and Ecosystem (not shared site nav)
 
 ### GitHub / Repos
 Purpose:
@@ -124,7 +145,7 @@ Primary outputs:
 
 ## Connected repos
 
-- `agentic-os` — source of ecosystem structure and meaning
+- `agentic-os` — control plane; source of ecosystem structure (featured on Ecosystem page)
 - `ScheduleOS` — explained as the operator shell
 - `children-of-israel-agent-swarm` — explained as execution backend
 - `graphify` — explained as context/memory layer
@@ -137,7 +158,7 @@ The public site should describe ScheduleOS as the operator-facing shell, but not
 
 ## Relationship to ShortcutForge
 
-The public site should present ShortcutForge as the mobile-friendly entry point for fast recurring actions.
+The public site should present ShortcutForge as the mobile-friendly entry point for fast recurring actions. The ShortcutForge page uses a lightweight back-nav header (Home, Ecosystem) instead of the shared site nav.
 
 ## Success criteria for v1
 

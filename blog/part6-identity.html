@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identity — Unwrapping the Stack</title>
+  <meta name="description" content="Accounts, keys, personas, and delegation. Who is the user when agents act on their behalf — and what the whole stack looks like when intelligence is ambient." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/site.css" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <div data-site-nav data-active="writing" data-base="../"></div>
+
+  <main class="wrap" id="main-content">
+    <article class="post-shell">
+      <div class="post-meta">
+        <a class="series-link" href="index.html">Unwrapping the Stack</a>
+        <span>Part 6 of 6</span>
+      </div>
+      <h1>Identity — who is the user when the system acts?</h1>
+      <p class="subtitle">Accounts, keys, personas, delegation — and the question every other layer eventually has to answer.</p>
+
+      <p>Part 5 ended with hardware — the physical substrate where computation actually happens. Chips, sensors, devices at the edge. The layer that reminds you that all of this abstraction eventually lands somewhere real.</p>
+      <p>But hardware raises a question the stack has been deferring since Part 1: <em>whose</em> computation is this?</p>
+      <p>Every layer below identity — files, apps, browsers, operating systems, hardware — assumes an answer. Identity is where the stack stops being about what the system can do and becomes about who the system is doing it for.</p>
+      <p>That question was manageable when humans did all the doing. It is not manageable anymore.</p>
+
+      <h2>What identity was actually solving</h2>
+      <p>Identity in computing is not really about who you are. It is about <em>continuity</em> and <em>permission</em> — this session is the same entity as the last one, and that entity is allowed to act on this resource.</p>
+      <p>The earliest solution was a username and a password. That scaled until the internet made "account" synonymous with "identity" — hundreds of separate kingdoms, each with its own gate. OAuth was the patch, trading passwords for consolidation into a handful of platforms that now sit between you and everything else.</p>
+      <p>Accounts were never a good model of identity. They were a good model of <em>tenancy</em> — a way for service providers to partition users into isolated silos. The silo was the product. Your identity was just the key to your cell.</p>
+
+      <h2>Keys: identity without a landlord</h2>
+      <p>Cryptography offered a different shape. A key pair does not require a central authority to vouch for you. Proof of identity becomes proof of possession — mathematical, not institutional.</p>
+      <p>That is elegant for minimizing trust in intermediaries. It is awkward for humans who lose keys and forget passphrases. But the conceptual shift matters: a key is not an account. It is a <em>capability</em>. Holding the key means holding the right to sign.</p>
+      <p>As agents act on your behalf — signing transactions, sending messages, modifying files — the key model becomes more natural than the account model. An agent does not need a username. It needs scoped authority, granted through something key-like.</p>
+
+      <h2>Personas: one human, many selves</h2>
+      <p>Real identity was never singular. You are a different person in a work Slack, a family group chat, a public forum, a medical portal. Different contexts, different boundaries, different things you are willing to reveal.</p>
+      <p>Computing mostly pretends this doesn't exist — one account per service, maybe a work and personal split if you are disciplined. The system wants a single canonical you because single-you is easier to target and audit.</p>
+      <p>Agents make the pretense harder to maintain. If one handles your email, another your calendar, a third a marketplace negotiation, each operates in a different context with different trust requirements. Personas stop being a privacy preference and become an architectural requirement — because a system that routes capability by intent needs to route identity by context too.</p>
+
+      <h2>Delegation: the agent as proxy</h2>
+      <p>Delegation is where identity gets genuinely new. For most of computing history, it was crude — shared passwords, unlocked laptops, assistants with your credit card. The proxy was fully you or not you at all.</p>
+      <p>Modern delegation is finer-grained: OAuth scopes, expiring tokens, role-based access. Attempts to say "this entity may do <em>these things</em>, in <em>this context</em>, until <em>this time</em>." Still bolted onto account models that were not designed for them.</p>
+      <p>An agent is a delegate that never sleeps. It reads your files (Part 1), assembles capabilities without apps (Part 2), navigates the web (Part 3), runs with OS permissions (Part 4), executes on your hardware or in the cloud (Part 5). At every layer, it acts <em>as you</em> — or as some slice of you.</p>
+      <p>So the question is not "is the agent authorized?" That is table stakes. The question is: "when the agent sends the email, who sent the email?" Legally, ethically, socially — the answer matters. We have terms of service that say you are responsible for everything your account does, which made sense when you typed it. It makes less sense when an agent typed it from intent you expressed three steps upstream.</p>
+
+      <h2>Who is the user?</h2>
+      <p>Strip away the abstractions and the question becomes sharper.</p>
+      <p><strong>The human</strong> is the origin of intent — the one who wanted something to happen.</p>
+      <p><strong>The agent</strong> is the executor — the one who assembled context, invoked tools, and performed actions.</p>
+      <p><strong>The account</strong> is the liability surface — the legal and institutional entity that owns the consequences.</p>
+      <p><strong>The key</strong> is the proof — the cryptographic evidence that authority was exercised.</p>
+      <p><strong>The persona</strong> is the context boundary — the slice of self that is relevant here and not there.</p>
+      <p>In the current stack, these collapse into one login button. You click "Send" and all five roles are assumed to be the same entity.</p>
+      <p>In an AI-native stack, they cannot be. The human provides intent. The agent provides action. The system needs to track all five — separately, traceably, revocably.</p>
+      <p>That tracking is not a feature. It is the foundation everything else depends on. Without it, ambient context becomes ambient surveillance. Composable capability becomes composable liability. Persistent agents become persistent impersonators.</p>
+
+      <h2>Unwrapping the stack</h2>
+      <p>Step back and the series arc becomes visible.</p>
+      <p><strong>Files and folders</strong> were cognitive scaffolding for data — external memory for a mind that could not hold everything. When the system remembers context natively, the scaffolding fades.</p>
+      <p><strong>Apps</strong> were cognitive scaffolding for capability — pre-packaged contexts for a user who could not assemble tools on the fly. When capability is composable and intent-driven, the containers dissolve.</p>
+      <p><strong>Browsers</strong> were the negotiation layer — how humans expressed what they wanted to a system that could only respond to explicit requests. When the system understands intent, the browser becomes a rendering choice, not a primary interface.</p>
+      <p><strong>Operating systems</strong> were the resource arbiter — scheduling processes, managing permissions, mediating between hardware and software. When agents orchestrate continuously, the OS becomes an agent runtime, not a launcher.</p>
+      <p><strong>Hardware</strong> was the constraint — the physical limit on where and how fast computation happens. When intelligence distributes across edge and cloud, hardware becomes a placement decision, not a boundary.</p>
+      <p>And <strong>identity</strong> is the thread that runs through all of it. Who owns the data when files become ambient context? Who invoked the capability when apps dissolve? Who expressed the intent when the browser is optional? Who authorized the process when the OS is an agent runtime? Who executed the instruction when hardware is distributed?</p>
+      <p>Same question, at every layer: who is the user when the system acts?</p>
+
+      <h2>What comes after the stack</h2>
+      <p>Unwrapping the stack is not the same as removing it. Files, apps, browsers, operating systems, hardware — all of it persists, re-roled rather than retired.</p>
+      <p>What changes is the assumption underneath: that the human is the sole agent responsible for maintaining structure, assembling capability, expressing intent, managing resources, and proving identity at every step.</p>
+      <p>Agents are a difference in degree that becomes a difference in kind — continuous, contextual, composable, persistent. The stack was built for a user who did everything manually and proved it with a login. The next stack is built for a user who expresses intent and delegates execution — and needs a system that knows the difference.</p>
+      <p>Identity is not the last layer because it sits on top. It is the last layer because it is the only one that follows you everywhere else goes. Get identity wrong, and every layer below becomes a liability. Get it right, and the whole stack can finally stop asking the human to be the glue.</p>
+      <p>That is the unwrapping. Not fewer layers. Fewer lies about who is doing the work.</p>
+
+      <div class="post-nav">
+        <a href="part5-hardware.html">← Part 5: Hardware</a>
+        <a href="index.html">Series index →</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer wrap">
+    <span>David Lifschitz · 2026</span>
+    <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
+  </footer>
+  <script src="../scripts/site-nav.js" defer></script>
+</body>
+</html>

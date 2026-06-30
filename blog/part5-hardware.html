@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hardware — Unwrapping the Stack</title>
+  <meta name="description" content="Silicon, accelerators, edge and cloud. What happens when intelligence stops being a service you call and becomes a property of the machine itself." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/site.css" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <div data-site-nav data-active="writing" data-base="../"></div>
+
+  <main class="wrap" id="main-content">
+    <article class="post-shell">
+      <div class="post-meta">
+        <a class="series-link" href="index.html">Unwrapping the Stack</a>
+        <span>Part 5 of 6</span>
+      </div>
+      <h1>Hardware — the substrate where intelligence lands</h1>
+      <p class="subtitle">Silicon, accelerators, edge and cloud — and what changes when the model moves closer to the metal.</p>
+
+      <p>Part 4 ended at the bottom of the software stack. Below the operating system, abstraction runs out. You are left with transistors, voltage, heat, and the hard limits of physics.</p>
+      <p>If files organized data, apps organized capability, browsers organized expression, and the OS organized trust — hardware organizes <em>constraint</em>. It is the layer that says: this much compute, this much memory, this much power, no more.</p>
+      <p>For most of computing history, that constraint was invisible. Hardware was a spec on a box, not something you thought about while working. The interesting decisions happened in software.</p>
+      <p>That is changing. Intelligence is moving down the stack, and hardware is part of the conversation again.</p>
+
+      <h2>What hardware is actually solving</h2>
+      <p>A computer turns electricity into structured information. Hardware's job is to do that as efficiently and reliably as physics allows.</p>
+      <p>The general-purpose CPU solved this by being flexible — one architecture, many programs. For decades, software could assume a processor fast enough that sequential execution felt instant.</p>
+      <p>But flexibility has a cost. A CPU built for branching logic is a poor fit for the dense parallel math that machine learning demands. When the dominant workload shifts, the substrate shifts with it.</p>
+      <p>Hardware is where the economics of computation get decided — what is cheap, what is fast, what is possible at all.</p>
+
+      <h2>GPU, NPU, and the specialization wave</h2>
+      <p>The GPU was the first crack in the general-purpose assumption. Graphics required parallel operations at scale — the same shape as matrix multiplication. GPUs turned out to be good at neural networks because linear algebra doesn't care whether you're shading a pixel or scoring a token.</p>
+      <p>Now the specialization is explicit. NPUs — neural processing units — are on-die blocks built for inference: low-precision math, fixed pipelines, power budgets in milliwatts. Apple puts them in every phone. Laptop vendors advertise "AI PCs" with dedicated accelerator tiles.</p>
+      <p>The pattern is familiar. Workloads start on general hardware, prove themselves at scale, then harden into silicon — floating-point coprocessors, graphics cards, encryption engines. Intelligence is following the same arc: first a library, then a service, then a chip feature in the spec sheet.</p>
+      <p>When inference lives on the NPU, "run the model" stops being a network request and becomes a local operation — closer to playing video than querying a database.</p>
+
+      <h2>Edge vs cloud: where the mind runs</h2>
+      <p>The edge/cloud split is really a question about where intelligence should <em>live</em>.</p>
+      <p>Cloud inference concentrates capability. The largest models, the freshest weights — pooled in datacenters where power is cheap and GPUs stack by the rack. You trade latency and privacy for scale.</p>
+      <p>Edge inference distributes capability. Smaller models, quantized weights, on-device memory — enough for interactions that need to be instant, private, or offline. You trade model size for locality.</p>
+      <p>Neither side wins outright. Cloud gives depth; edge gives presence. The interesting systems route between them — preprocessing on device, heavy reasoning in the cloud, distillation pulling capability downward over time.</p>
+      <p>But routing is not neutral. Where you run the model determines who sees your data, who pays for compute, and who controls the upgrade cycle. Hardware is not just substrate. It is territory.</p>
+
+      <h2>What breaks when intelligence moves down the stack</h2>
+      <p>Pushing models toward the metal surfaces constraints cloud-first AI could ignore.</p>
+      <p><strong>1. Memory becomes the bottleneck.</strong> A model's capability is bounded by what fits in RAM. On device, that boundary is tight. Quantization and pruning are not optimization tricks — they are coping mechanisms for silicon that hasn't caught up to parameter counts.</p>
+      <p><strong>2. Power is a design constraint.</strong> Datacenter GPUs draw hundreds of watts. A phone NPU has a budget in single digits. Always-on agents that listen, reason, and act locally have to reconcile ambition with battery chemistry.</p>
+      <p><strong>3. Heterogeneity breaks the abstraction.</strong> A modern device is a cluster of unlike processors — CPU cores, GPU shaders, NPU tiles — each with different programming models and memory domains. The OS schedules processes. It was not built to orchestrate a pipeline across four accelerator types for one inference request.</p>
+      <p><strong>4. Thermal limits become user-visible.</strong> Sustained inference generates heat. Heat triggers throttling. The agent that was fast for thirty seconds becomes slow for five minutes. Hardware reintroduces physics into an experience software trained users to treat as unlimited.</p>
+
+      <h2>The three things hardware was bundling</h2>
+      <p>To understand what changes, decompose what physical machines provide:</p>
+      <p><strong>1. Compute.</strong> Raw capacity to execute operations — the GHz, the cores, the FLOPS.</p>
+      <p><strong>2. Locality.</strong> Data and processing co-located in the same enclosure — at the speed of your bus, subject to your power supply.</p>
+      <p><strong>3. Persistence.</strong> Storage that outlasts a session. Hardware is where "remember this" becomes physical.</p>
+      <p>When intelligence is a cloud service, compute and locality split apart. Your data is local; your model is remote. As intelligence moves back down — on-device models, local vector stores, edge agents with resident weights — those three things need to cohere again within the same power envelope.</p>
+
+      <h2>What substrate-aware intelligence looks like</h2>
+      <p>Not every device running a frontier model. Something more adaptive:</p>
+      <p><strong>Hardware-aware routing.</strong> The system knows what accelerators are available, what fits in memory, and what the thermal headroom is — and chooses model size, precision, and execution target accordingly.</p>
+      <p><strong>Intelligence as a firmware layer.</strong> Models ship with the OS and expose capability through intent interfaces — not as an app you install but as a property of the machine, like the camera or the secure enclave.</p>
+      <p><strong>Edge devices as first-class citizens.</strong> Sensors and wearables with enough local inference to perceive, filter, and act without round-tripping every signal to a datacenter.</p>
+      <p>Hardware stops being a spec sheet and becomes a participant in the agent architecture — the floor that determines what "ambient intelligence" can afford to be always on.</p>
+
+      <h2>The transition state we're in</h2>
+      <p>What exists today is a split brain.</p>
+      <p>Cloud models are capable but disconnected. On-device models are present but limited. Marketing calls this "hybrid AI," but the user still picks local or cloud, and the two don't share state cleanly.</p>
+      <p>Silicon vendors ship NPUs ahead of the software. Model providers shrink weights ahead of the devices. The OS has barely begun to treat accelerators as schedulable resources.</p>
+      <p>Intelligence is moving down the stack faster than the stack can reorganize.</p>
+
+      <h2>What this implies for the next layer</h2>
+      <p>If files were scaffolding for data, apps for capability, browsers for expression, and the OS for trust — hardware is scaffolding for <em>presence</em>. It determines whether intelligence is something you visit or something that lives with you.</p>
+      <p>But presence raises a question the physical layer cannot answer: <em>whose</em> intelligence is this? The model on your NPU, trained by a vendor, updated on their schedule. The agent in the cloud, running on their GPUs, logging to their servers.</p>
+      <p>Hardware makes computation real. It does not make ownership clear.</p>
+      <p>When agents act continuously across devices and datacenters — signing, spending, speaking, remembering — the stack's deferred question finally surfaces: who is the user when the system acts on their behalf?</p>
+      <p>That is where the stack ends. Not with silicon, but with the entity the silicon serves.</p>
+
+      <div class="post-nav">
+        <a href="part4-operating-systems.html">← Part 4: Operating Systems</a>
+        <a href="part6-identity.html">Part 6: Identity →</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer wrap">
+    <span>David Lifschitz · 2026</span>
+    <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
+  </footer>
+  <script src="../scripts/site-nav.js" defer></script>
+</body>
+</html>

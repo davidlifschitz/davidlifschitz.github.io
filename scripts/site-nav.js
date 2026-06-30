@@ -70,17 +70,69 @@
       '<header class="site-header">\n' +
       '  <div class="wrap nav-inner">\n' +
       '    <a class="brand" href="' + base + 'index.html">David Lifschitz</a>\n' +
-      '    <nav class="nav-links" aria-label="Primary">\n' +
+      '    <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav-links">Menu</button>\n' +
+      '    <nav class="nav-links" id="site-nav-links" aria-label="Primary">\n' +
       '        ' + links + '\n' +
       '    </nav>\n' +
       '  </div>\n' +
       '</header>';
   }
 
+  function injectSkipLink() {
+    if (document.querySelector('.skip-link')) {
+      return;
+    }
+    var skip = document.createElement('a');
+    skip.className = 'skip-link';
+    skip.href = '#main-content';
+    skip.textContent = 'Skip to content';
+    document.body.insertBefore(skip, document.body.firstChild);
+  }
+
+  function setupMobileNav(header) {
+    var toggle = header.querySelector('.nav-menu-toggle');
+    var navLinks = header.querySelector('#site-nav-links');
+    if (!toggle || !navLinks) {
+      return;
+    }
+
+    function setOpen(open) {
+      header.classList.toggle('is-nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.textContent = open ? 'Close' : 'Menu';
+    }
+
+    function closeNav() {
+      setOpen(false);
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(!header.classList.contains('is-nav-open'));
+    });
+
+    navLinks.addEventListener('click', function (event) {
+      if (event.target.closest('a')) {
+        closeNav();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && header.classList.contains('is-nav-open')) {
+        closeNav();
+        toggle.focus();
+      }
+    });
+  }
+
   function initSiteNav() {
+    injectSkipLink();
     var placeholders = document.querySelectorAll('[data-site-nav]');
     for (var i = 0; i < placeholders.length; i++) {
       renderNav(placeholders[i]);
+    }
+    var headers = document.querySelectorAll('.site-header');
+    for (var j = 0; j < headers.length; j++) {
+      setupMobileNav(headers[j]);
     }
   }
 

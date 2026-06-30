@@ -13,6 +13,10 @@
     return;
   }
 
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
   const ctx = canvas.getContext("2d");
   const world = { width: 2200, height: 1500 };
   const state = {
@@ -204,14 +208,6 @@
       resize();
       updateFocus(true);
       requestAnimationFrame(frame);
-    }
-  }
-
-  function readSavedMode() {
-    try {
-      return window.localStorage && window.localStorage.getItem("david-space-mode") === "1";
-    } catch (error) {
-      return false;
     }
   }
 
@@ -667,5 +663,4 @@
 
   populateMenu();
   resize();
-  setActive(readSavedMode());
 })();
