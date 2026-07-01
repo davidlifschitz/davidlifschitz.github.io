@@ -58,8 +58,9 @@ Shared site chrome: `scripts/site-nav.js`, `styles/site.css`. Space mode is inte
 
 **ShortcutForge subdirectory:**
 - `shortcutforge/` is synced from `davidlifschitz/ShortcutForge` repo's `web` branch
-- Do **not** edit files in `shortcutforge/` for product/feature work — changes belong in the source repo
-- This deploy copy may still receive **intentional site-specific patches** (e.g. `.site-back` header/back-nav links into the main storefront). Preserve those when syncing; do not blindly overwrite with upstream
+- Do **not** edit files in `shortcutforge/` for product/feature work — changes belong in the source repo (then run `node scripts/sync-shortcutforge.mjs` or the sync workflow)
+- This deploy copy may still receive **intentional site-specific patches** (e.g. `.site-back` header/back-nav links into the main storefront). Preserve those when syncing; `shortcutforge/validate.mjs` checks them
+- ShortcutForge tests: `cd shortcutforge && npm test`; included in root `npm test`
 
 **Docs:**
 - `docs/` contains planning docs (ECOSYSTEM_PLAN.md, DASHBOARD_REDESIGN_SPEC.md, etc.) — useful for intent behind features but not authoritative on current state

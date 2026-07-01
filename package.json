@@ -4,6 +4,6 @@
   "type": "module",
   "scripts": {
     "validate": "node scripts/validate-site.mjs",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs shortcutforge/tests/*.test.mjs"
   }
 }

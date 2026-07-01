@@ -69,10 +69,10 @@ NVIDIA NIM: https://integrate.api.nvidia.com/v1/models
 
 ## Local preview
 
-From the repository root:
+From the repository root (deploy copy):
 
 ```bash
-cd web
+cd shortcutforge
 npm run validate
 npm run serve
 ```
@@ -83,19 +83,29 @@ Then open:
 http://localhost:4173
 ```
 
+To preview from the full storefront with shared navigation, serve the repo root instead (see root `CLAUDE.md`) and open `http://localhost:8080/shortcutforge/index.html`.
+
 ## Public deployment
 
-The source of truth remains this directory:
+The upstream source of truth lives in:
 
 ```text
-ShortcutForge/web/
+davidlifschitz/ShortcutForge (web branch)
 ```
 
-The public copy is synced into:
+This deploy copy is synced into:
 
 ```text
 davidlifschitz.github.io/shortcutforge/
 ```
+
+Manual or workflow sync:
+
+```bash
+node scripts/sync-shortcutforge.mjs
+```
+
+GitHub Actions: `.github/workflows/sync-shortcutforge.yml` (`workflow_dispatch`).
 
 Expected public URL after the sync workflow succeeds:
 
@@ -125,7 +135,7 @@ Edit `config.json`:
 
 `runnerInstallUrl` should point at the trusted iCloud Shortcut that users add to their Shortcuts app.
 
-`scheduleOsEndpoint` is intentionally blank for V1. Once ScheduleOS exposes a stable mobile endpoint, the runner can POST the generated payload there.
+`scheduleOsEndpoint` is blank by default. When set to an HTTPS URL, the payload section shows **Send to ScheduleOS** and the page CSP must include that origin (`validate.mjs` enforces the CSP/config coupling).
 
 ## V1 limitations
 

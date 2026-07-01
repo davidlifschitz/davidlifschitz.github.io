@@ -4,10 +4,12 @@
     <meta charset="utf-8" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; connect-src 'self' https://openrouter.ai https://integrate.api.nvidia.com; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+      content="default-src 'self'; connect-src 'self' https://openrouter.ai https://integrate.api.nvidia.com; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; worker-src 'self'; upgrade-insecure-requests"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#111827" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="ShortcutForge" />
     <meta name="description" content="ShortcutForge mobile web runner install and prompt launcher." />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
@@ -32,7 +34,7 @@
           <a id="installRunner" class="button primary" href="#" target="_blank" rel="noopener noreferrer">Open iCloud Runner Shortcut</a>
           <button id="copyRunnerLink" class="button secondary" type="button">Copy runner link</button>
         </div>
-        <p class="fine-print" id="runnerStatus">Loading runner configuration…</p>
+        <p class="fine-print" id="runnerStatus" aria-live="polite">Loading runner configuration…</p>
       </section>
 
       <section class="card steps" aria-labelledby="setup-title">
@@ -70,7 +72,7 @@
           Custom model ID
           <input id="customModelInput" type="text" autocomplete="off" placeholder="Paste custom model ID" />
         </label>
-        <p class="fine-print" id="modelStatus">Model list not loaded yet.</p>
+        <p class="fine-print" id="modelStatus" aria-live="polite">Model list not loaded yet.</p>
         <label>
           API key
           <input id="apiKeyInput" type="password" autocomplete="off" placeholder="Paste provider API key" />
@@ -88,7 +90,7 @@
           <button id="saveApiKey" class="button secondary" type="button">Save encrypted key on this device</button>
           <button id="clearApiKey" class="button secondary" type="button">Clear all local key data</button>
         </div>
-        <p class="fine-print" id="keyStatus">No saved key loaded yet.</p>
+        <p class="fine-print" id="keyStatus" aria-live="polite">No saved key loaded yet.</p>
       </section>
 
       <section class="card composer" aria-labelledby="composer-title">
@@ -108,8 +110,11 @@
         <p>
           The installed ShortcutForge Runner can consume this structured payload or use it to choose a supported local branch.
         </p>
-        <pre id="payloadPreview" tabindex="0">No payload yet.</pre>
-        <button id="copyPayload" class="button secondary" type="button">Copy payload JSON</button>
+        <pre id="payloadPreview" tabindex="0" aria-live="polite">No payload yet.</pre>
+        <div class="actions">
+          <button id="copyPayload" class="button secondary" type="button">Copy payload JSON</button>
+          <button id="submitToScheduleOS" class="button secondary" type="button" hidden>Send to ScheduleOS</button>
+        </div>
       </section>
     </main>
 
