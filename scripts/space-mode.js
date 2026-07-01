@@ -231,23 +231,11 @@
     root.classList.toggle("is-active", nextActive);
     root.setAttribute("aria-hidden", String(!nextActive));
     toggle.setAttribute("aria-pressed", String(nextActive));
-    writeSavedMode(nextActive);
     if (nextActive) {
       resize();
       updateFocus(true);
       requestAnimationFrame(frame);
     }
-  }
-
-  function writeSavedMode(nextActive) {
-    try {
-      if (window.localStorage) {
-        window.localStorage.setItem("david-space-mode", nextActive ? "1" : "0");
-      }
-    } catch (error) {
-      return false;
-    }
-    return true;
   }
 
   function populateMenu() {
@@ -306,7 +294,7 @@
       anchor.textContent = link.label;
       if (link.external) {
         anchor.target = "_blank";
-        anchor.rel = "noreferrer";
+        anchor.rel = "noopener noreferrer";
       }
       cardActions.appendChild(anchor);
     });

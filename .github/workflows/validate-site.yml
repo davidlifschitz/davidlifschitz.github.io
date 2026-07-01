@@ -21,4 +21,6 @@ jobs:
           node-version: '20'
 
       - name: Validate site
-        run: node scripts/validate-site.mjs
+        run: |
+          node scripts/validate-site.mjs
+          npm test

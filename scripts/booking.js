@@ -16,12 +16,23 @@
     hint.style.color = '';
   }
 
+  function showEmbedError(message) {
+    var container = document.getElementById('cal-embed-container');
+    container.classList.add('visible');
+    container.innerHTML = '<p class="cal-embed-error" role="alert">' + message + '</p>';
+  }
+
   function openCalEmbed() {
     if (!selectedCard) {
       document.getElementById('hint-text').textContent = '← Please select a session type first';
       document.getElementById('hint-text').style.color = '#8b0000';
       return;
     }
+    if (typeof Cal !== 'function') {
+      showEmbedError('The booking calendar could not load. Please refresh the page or email to schedule.');
+      return;
+    }
+
     var calLink = selectedCard.getAttribute('data-cal-link');
     var container = document.getElementById('cal-embed-container');
     container.innerHTML = '';
@@ -29,12 +40,17 @@
     setTimeout(function () {
       container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
-    Cal('inline', {
-      elementOrSelector: '#cal-embed-container',
-      calLink: calLink,
-      layout: 'month_view',
-      config: { theme: 'light', hideEventTypeDetails: '0', layout: 'month_view' }
-    });
+
+    try {
+      Cal('inline', {
+        elementOrSelector: '#cal-embed-container',
+        calLink: calLink,
+        layout: 'month_view',
+        config: { theme: 'light', hideEventTypeDetails: '0', layout: 'month_view' }
+      });
+    } catch (error) {
+      showEmbedError('The booking calendar failed to open. Please refresh the page or email to schedule.');
+    }
   }
 
   function init() {

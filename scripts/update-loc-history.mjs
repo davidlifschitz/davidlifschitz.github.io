@@ -1,27 +1,17 @@
 import fs from 'node:fs/promises';
+import { repoConfigs } from './ecosystem-repos.mjs';
 
 const DAYS_BACK = Number(process.env.DAYS_BACK || 21);
 const DATA_PATH = new URL('../data/loc-history.json', import.meta.url);
 const TOKEN = process.env.ECOSYSTEM_GH_TOKEN || process.env.GITHUB_TOKEN || '';
+const MAX_COMMIT_PAGES = 20;
 const BASE_HEADERS = {
   Accept: 'application/vnd.github+json',
-  'User-Agent': 'ecosystem-change-dashboard'
+  'User-Agent': 'ecosystem-change-dashboard',
 };
 if (TOKEN) {
   BASE_HEADERS.Authorization = `Bearer ${TOKEN}`;
 }
-
-const repoConfigs = [
-  { name: 'davidlifschitz/agentic-os', branch: 'main', visibility: 'private' },
-  { name: 'davidlifschitz/spec-to-repo', branch: 'main', visibility: 'public' },
-  { name: 'davidlifschitz/children-of-israel-agent-swarm', branch: 'main', visibility: 'public' },
-  { name: 'davidlifschitz/graphify', branch: 'v3', visibility: 'public' },
-  { name: 'davidlifschitz/ScheduleOS', branch: 'main', visibility: 'private' },
-  { name: 'davidlifschitz/ShortcutForge', branch: 'main', visibility: 'private' },
-  { name: 'davidlifschitz/article-education-website', branch: 'main', visibility: 'private' },
-  { name: 'davidlifschitz/ml-job-swarm', branch: 'main', visibility: 'private' },
-  { name: 'davidlifschitz/davidlifschitz.github.io', branch: 'main', visibility: 'public' }
-];
 
 function isoDaysAgo(days) {
   const date = new Date();
@@ -30,12 +20,27 @@ function isoDaysAgo(days) {
   return date.toISOString();
 }
 
-async function githubJson(url) {
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isRetryableStatus(status) {
+  return status === 403 || status === 429 || status >= 500;
+}
+
+async function githubJson(url, attempt = 1) {
   const response = await fetch(url, { headers: BASE_HEADERS });
   if (response.status === 404) {
     return { notFound: true };
   }
   if (!response.ok) {
+    if (isRetryableStatus(response.status) && attempt < 4) {
+      const retryAfter = Number(response.headers.get('retry-after') || 0);
+      const delayMs = retryAfter > 0 ? retryAfter * 1000 : 2 ** attempt * 1000;
+      console.warn(`GitHub ${response.status} for ${url}; retrying in ${delayMs}ms (attempt ${attempt})`);
+      await sleep(delayMs);
+      return githubJson(url, attempt + 1);
+    }
     const body = await response.text();
     throw new Error(`GitHub request failed (${response.status}): ${body}`);
   }
@@ -44,7 +49,7 @@ async function githubJson(url) {
 
 async function listCommits(repo, branch, since) {
   const commits = [];
-  for (let page = 1; page <= 10; page += 1) {
+  for (let page = 1; page <= MAX_COMMIT_PAGES; page += 1) {
     const url = `https://api.github.com/repos/${repo}/commits?sha=${encodeURIComponent(branch)}&since=${encodeURIComponent(since)}&per_page=100&page=${page}`;
     const pageData = await githubJson(url);
     if (pageData.notFound) {
@@ -67,7 +72,7 @@ async function fetchCommit(repo, sha) {
 }
 
 function ensureDayMap(daysBack, previousDays, repoNames) {
-  const byDate = new Map((previousDays || []).map(day => [day.date, day]));
+  const byDate = new Map((previousDays || []).map((day) => [day.date, day]));
   const result = [];
   for (let i = daysBack - 1; i >= 0; i -= 1) {
     const date = isoDaysAgo(i).slice(0, 10);
@@ -80,11 +85,29 @@ function ensureDayMap(daysBack, previousDays, repoNames) {
   return result;
 }
 
+async function loadPreviousData() {
+  try {
+    const raw = await fs.readFile(DATA_PATH, 'utf8');
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : { days: [] };
+  } catch (error) {
+    if (error && error.code === 'ENOENT') {
+      return { days: [] };
+    }
+    console.warn('Could not read existing loc-history.json; starting fresh:', error.message);
+    return { days: [] };
+  }
+}
+
+function repoFailureStatus(repo) {
+  return repo.visibility === 'private' && !TOKEN ? 'private-token-required' : 'error';
+}
+
 async function main() {
-  const previous = JSON.parse(await fs.readFile(DATA_PATH, 'utf8'));
-  const repoNames = repoConfigs.map(repo => repo.name);
+  const previous = await loadPreviousData();
+  const repoNames = repoConfigs.map((repo) => repo.name);
   const days = ensureDayMap(DAYS_BACK, previous.days, repoNames);
-  const byDate = new Map(days.map(day => [day.date, day]));
+  const byDate = new Map(days.map((day) => [day.date, day]));
   const since = isoDaysAgo(DAYS_BACK - 1);
 
   for (const repo of repoConfigs) {
@@ -119,9 +142,7 @@ async function main() {
       }
     } catch (error) {
       console.error(`Failed to update ${repo.name}:`, error.message);
-      const status = repo.visibility === 'private' && !process.env.ECOSYSTEM_GH_TOKEN
-        ? 'private-token-required'
-        : 'error';
+      const status = repoFailureStatus(repo);
       for (const day of days) {
         day.metrics[repo.name].status = status;
       }
@@ -132,13 +153,13 @@ async function main() {
     generated_at: new Date().toISOString(),
     days_back: DAYS_BACK,
     repos: repoConfigs,
-    days
+    days,
   };
 
   await fs.writeFile(DATA_PATH, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.error(error);
   process.exit(1);
 });

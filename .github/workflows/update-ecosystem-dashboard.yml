@@ -37,3 +37,6 @@ jobs:
           fi
           git commit -m "Update ecosystem dashboard data"
           git push
+
+      - name: Validate site after data update
+        run: node scripts/validate-site.mjs

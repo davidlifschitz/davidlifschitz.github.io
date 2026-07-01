@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy-Report-Only" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://app.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-src https://cal.com https://app.cal.com; base-uri 'self'; form-action 'self'" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>David Lifschitz</title>
   <meta name="description" content="Operator tooling, mobile utilities, and research surfaces — connected into one ecosystem." />
@@ -9,11 +10,13 @@
   <meta property="og:description" content="Operator tooling, mobile utilities, and research surfaces — connected into one ecosystem." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://davidlifschitz.github.io/" />
+  <link rel="canonical" href="https://davidlifschitz.github.io/" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/site.css" />
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@hyperframes/player"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@hyperframes/player" integrity="sha384-yoYPzY+l8Rqa5ZAKrrLZcP8Rxex6sY6a3relGYyjuR9toG27/yZfEmuNW0Dggqbi" crossorigin="anonymous"></script>
   <script src="scripts/hyperframes-fallback.js" defer></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 </head>
@@ -28,7 +31,7 @@
       <p class="hero-sub">Operator tooling, mobile utilities, and research surfaces.</p>
       <div class="btn-row">
         <a class="btn btn--primary" href="ecosystem.html">Explore Ecosystem</a>
-        <a class="btn btn--secondary" href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
+        <a class="btn btn--secondary" href="https://github.com/davidlifschitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
       </div>
     </section>
 
@@ -53,7 +56,7 @@
     <section class="surfaces" aria-labelledby="surfaces-heading">
       <h2 id="surfaces-heading" class="surfaces-label">Surfaces</h2>
       <div class="surface-list">
-        <a class="surface-row" href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noreferrer" aria-label="ScheduleOS — operator shell (opens in new tab)">
+        <a class="surface-row" href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noopener noreferrer" aria-label="ScheduleOS — operator shell (opens in new tab)">
           <span>ScheduleOS — operator shell</span><span class="arrow">→</span>
         </a>
         <a class="surface-row" href="shortcutforge/index.html">
@@ -74,22 +77,22 @@
     <section class="ia-section" id="products" aria-labelledby="products-heading">
       <h2 id="products-heading" class="ia-section-label">Products</h2>
       <div class="ia-grid">
-        <a class="ia-card" href="https://github.com/davidlifschitz/graphify" target="_blank" rel="noreferrer" aria-label="Graphify (opens in new tab)">
+        <a class="ia-card" href="https://github.com/davidlifschitz/graphify" target="_blank" rel="noopener noreferrer" aria-label="Graphify (opens in new tab)">
           <span>Graphify — context &amp; architecture mapping</span><span class="arrow">→</span>
         </a>
-        <a class="ia-card" href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noreferrer" aria-label="ScheduleOS — operator shell (opens in new tab)">
+        <a class="ia-card" href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noopener noreferrer" aria-label="ScheduleOS — operator shell (opens in new tab)">
           <span>ScheduleOS — operator shell</span><span class="arrow">→</span>
         </a>
         <a class="ia-card" href="shortcutforge/index.html">
           <span>ShortcutForge — mobile capture &amp; trigger flows</span><span class="arrow">→</span>
         </a>
-        <a class="ia-card" href="https://github.com/davidlifschitz/workout-planner" target="_blank" rel="noreferrer" aria-label="workout-planner (opens in new tab)">
+        <a class="ia-card" href="https://github.com/davidlifschitz/workout-planner" target="_blank" rel="noopener noreferrer" aria-label="workout-planner (opens in new tab)">
           <span>workout-planner — wellness product surface</span><span class="arrow">→</span>
         </a>
-        <a class="ia-card" href="https://github.com/davidlifschitz/Bttr" target="_blank" rel="noreferrer" aria-label="Bttr (opens in new tab)">
+        <a class="ia-card" href="https://github.com/davidlifschitz/Bttr" target="_blank" rel="noopener noreferrer" aria-label="Bttr (opens in new tab)">
           <span>Bttr — accountability product surface</span><span class="arrow">→</span>
         </a>
-        <a class="ia-card" href="https://github.com/davidlifschitz/fastest-growing-finance-repos" target="_blank" rel="noreferrer" aria-label="fastest-growing-finance-repos (opens in new tab)">
+        <a class="ia-card" href="https://github.com/davidlifschitz/fastest-growing-finance-repos" target="_blank" rel="noopener noreferrer" aria-label="fastest-growing-finance-repos (opens in new tab)">
           <span>fastest-growing-finance-repos — public finance intelligence product</span><span class="arrow">→</span>
         </a>
       </div>
@@ -116,7 +119,7 @@
 
   <footer class="site-footer wrap">
     <span>David Lifschitz · 2026</span>
-    <a href="https://github.com/davidlifschitz" target="_blank" rel="noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
+    <a href="https://github.com/davidlifschitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
   </footer>
 
   <div class="space-mode" data-space-mode-root aria-hidden="true">

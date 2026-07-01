@@ -36,6 +36,42 @@ const el = {
 
 const comparisonPalette = ['#5865f2', '#00a3ff', '#8b5cf6', '#0f9f6e', '#d84d57'];
 
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function validateDashboardData(data) {
+  if (!data || typeof data !== 'object') {
+    throw new Error('Dashboard data must be an object');
+  }
+  if (!Array.isArray(data.repos) || data.repos.length === 0) {
+    throw new Error('Dashboard data is missing repositories');
+  }
+  if (!Array.isArray(data.days)) {
+    throw new Error('Dashboard data is missing day history');
+  }
+  for (const repo of data.repos) {
+    if (!repo?.name || typeof repo.name !== 'string') {
+      throw new Error('Dashboard data contains an invalid repository entry');
+    }
+  }
+  return data;
+}
+
+function requireElements() {
+  const missing = Object.entries(el)
+    .filter(([, node]) => !node)
+    .map(([key]) => key);
+  if (missing.length) {
+    throw new Error(`Dashboard markup is missing required elements: ${missing.join(', ')}`);
+  }
+}
+
 function formatNumber(value) {
   return new Intl.NumberFormat().format(value || 0);
 }
@@ -123,9 +159,9 @@ function buildSummary(days) {
 
   el.summaryCards.innerHTML = cards.map(([label, value, footnote]) => `
     <article class="kpi-card">
-      <div class="kpi-label">${label}</div>
+      <div class="kpi-label">${escapeHtml(label)}</div>
       <div class="kpi-value mono">${formatNumber(value)}</div>
-      <div class="kpi-footnote">${footnote}</div>
+      <div class="kpi-footnote">${escapeHtml(footnote)}</div>
     </article>
   `).join('');
 }
@@ -169,16 +205,16 @@ function renderTable(days) {
   el.repoTableBody.innerHTML = rows.map(({ repo, totals, visibilityClass, status }) => `
       <tr>
         <td>
-          <a class="repo-link" href="https://github.com/${repo.name}" target="_blank" rel="noreferrer">${repo.name}</a>
+          <a class="repo-link" href="https://github.com/${encodeURIComponent(repo.name)}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name)}</a>
         </td>
-        <td><span class="badge ${visibilityClass}">${repo.visibility}</span></td>
-        <td class="mono">${repo.branch}</td>
+        <td><span class="badge ${visibilityClass}">${escapeHtml(repo.visibility)}</span></td>
+        <td class="mono">${escapeHtml(repo.branch)}</td>
         <td class="mono">${formatNumber(totals.additions)}</td>
         <td class="mono">${formatNumber(totals.deletions)}</td>
         <td class="mono">${formatNumber(totals.changes)}</td>
         <td class="mono">${formatNumber(totals.commits)}</td>
-        <td><span class="badge ${status.className}">${status.label}</span></td>
-        <td><a class="repo-link" href="https://github.com/${repo.name}/blame/${repo.branch}" target="_blank" rel="noreferrer">View</a></td>
+        <td><span class="badge ${status.className}">${escapeHtml(status.label)}</span></td>
+        <td><a class="repo-link" href="https://github.com/${encodeURIComponent(repo.name)}/blame/${encodeURIComponent(repo.branch)}" target="_blank" rel="noopener noreferrer">View</a></td>
         <td>${buildSparkline(totals.sparkline)}</td>
       </tr>
     `).join('');
@@ -189,10 +225,10 @@ function renderTable(days) {
       el.repoCardsMobile.innerHTML = rows.map(({ repo, totals, visibilityClass, status }) => `
           <article class="repo-mobile-card">
             <div class="repo-mobile-card-header">
-              <a class="repo-link" href="https://github.com/${repo.name}" target="_blank" rel="noreferrer">${repo.name}</a>
-              <span class="badge ${visibilityClass}">${repo.visibility}</span>
+              <a class="repo-link" href="https://github.com/${encodeURIComponent(repo.name)}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name)}</a>
+              <span class="badge ${visibilityClass}">${escapeHtml(repo.visibility)}</span>
             </div>
-            <div class="repo-mobile-card-meta mono">${repo.branch}</div>
+            <div class="repo-mobile-card-meta mono">${escapeHtml(repo.branch)}</div>
             <dl class="repo-mobile-stats">
               <div><dt>Additions</dt><dd class="mono">${formatNumber(totals.additions)}</dd></div>
               <div><dt>Deletions</dt><dd class="mono">${formatNumber(totals.deletions)}</dd></div>
@@ -200,8 +236,8 @@ function renderTable(days) {
               <div><dt>Commits</dt><dd class="mono">${formatNumber(totals.commits)}</dd></div>
             </dl>
             <div class="repo-mobile-card-footer">
-              <span class="badge ${status.className}">${status.label}</span>
-              <a class="repo-link" href="https://github.com/${repo.name}/blame/${repo.branch}" target="_blank" rel="noreferrer">Blame</a>
+              <span class="badge ${status.className}">${escapeHtml(status.label)}</span>
+              <a class="repo-link" href="https://github.com/${encodeURIComponent(repo.name)}/blame/${encodeURIComponent(repo.branch)}" target="_blank" rel="noopener noreferrer">Blame</a>
             </div>
           </article>
         `).join('');
@@ -426,7 +462,7 @@ function drawChart(days) {
     const hitWidth = Math.max(barWidth + 18, 32);
     const compareLines = seriesByRepo.map(entry => {
       const value = entry.series[index]?.plotNet || 0;
-      return `<div><span class="tooltip-key" style="background:${entry.color}"></span>${entry.repoName}: ${formatNumber(value)} net</div>`;
+      return `<div><span class="tooltip-key" style="background:${entry.color}"></span>${escapeHtml(entry.repoName)}: ${formatNumber(value)} net</div>`;
     }).join('');
 
     parts.push(`<rect class="chart-hitbox" data-index="${index}" x="${x - hitWidth / 2}" y="${padding.top}" width="${hitWidth}" height="${plotHeight}" fill="transparent" />`);
@@ -467,7 +503,10 @@ function drawChart(days) {
 }
 
 function populateControls() {
-  const repoOptions = state.data.repos.map(repo => `<option value="${repo.name}">${repo.name}</option>`).join('');
+  const repoOptions = state.data.repos.map(repo => {
+    const safeName = escapeHtml(repo.name);
+    return `<option value="${safeName}">${safeName}</option>`;
+  }).join('');
   el.repoSelect.innerHTML = repoOptions;
   el.compareSelect.innerHTML = `<option value="">No comparison</option>${repoOptions}`;
 
@@ -504,17 +543,26 @@ async function fetchLiveData() {
   return response.json();
 }
 
+function applyDashboardData(data) {
+  state.data = validateDashboardData(data);
+  populateControls();
+  render();
+}
+
 async function loadDashboard({ forceLive = false } = {}) {
   const cached = !forceLive ? getCachedPayload() : null;
   if (cached?.data) {
-    state.data = cached.data;
-    state.usingCache = true;
-    populateControls();
-    render();
+    try {
+      applyDashboardData(cached.data);
+      state.usingCache = true;
+      updateCacheBadge();
+    } catch (error) {
+      console.warn('Cached dashboard data failed validation:', error.message);
+    }
   }
 
   try {
-    const liveData = await fetchLiveData();
+    const liveData = validateDashboardData(await fetchLiveData());
     state.data = liveData;
     state.usingCache = false;
     saveCache(liveData);
@@ -572,4 +620,5 @@ window.addEventListener('resize', () => {
   }
 });
 
+requireElements();
 loadDashboard();
