@@ -14,7 +14,7 @@ The redesigned experience should feel like a real product dashboard rather than 
 
 ## Current State
 
-The current implementation is a single-file page with inline CSS and inline JavaScript. It already supports the core functional behavior needed for the dashboard:
+The live implementation uses `dashboard.html` with extracted `styles/dashboard.css` and `scripts/dashboard.js`, shared top navigation via `site-nav.js`, and the same underlying data contract as the original dashboard. It supports:
 
 - loads `data/loc-history.json`
 - supports repo filtering

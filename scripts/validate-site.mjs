@@ -2,10 +2,21 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { validateLocHistory } from './lib/loc-history-schema.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SHORTCUTFORGE_DIR = path.join(ROOT, 'shortcutforge');
 const FEED_PATH = path.join(ROOT, 'blog', 'feed.xml');
+const LOC_HISTORY_PATH = path.join(ROOT, 'data', 'loc-history.json');
+const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
+const ROBOTS_PATH = path.join(ROOT, 'robots.txt');
+const CLIENT_SCRIPT_PATHS = [
+  'scripts/site-nav.js',
+  'scripts/dashboard.js',
+  'scripts/booking.js',
+  'scripts/hyperframes-fallback.js',
+  'scripts/space-mode.js',
+];
 
 /** Pages with data-site-nav that intentionally omit id="main-content" on main. */
 const MAIN_CONTENT_EXCEPTIONS = new Set([
@@ -374,11 +385,137 @@ function parseWellFormedXml(content, label) {
   }
 }
 
+async function checkLocHistory() {
+  let content;
+
+  try {
+    content = await fs.readFile(LOC_HISTORY_PATH, 'utf8');
+  } catch {
+    fail(`Missing dashboard data file: ${relPath(LOC_HISTORY_PATH)}`);
+    return;
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(content);
+  } catch (error) {
+    fail(`Invalid JSON in ${relPath(LOC_HISTORY_PATH)}: ${error.message}`);
+    return;
+  }
+
+  for (const message of validateLocHistory(parsed)) {
+    fail(message);
+  }
+}
+
+async function checkSitemap() {
+  let content;
+
+  try {
+    content = await fs.readFile(SITEMAP_PATH, 'utf8');
+  } catch {
+    fail(`Missing sitemap: ${relPath(SITEMAP_PATH)}`);
+    return;
+  }
+
+  const locPattern = /<loc>([^<]+)<\/loc>/g;
+  let match;
+  const checked = new Set();
+
+  while ((match = locPattern.exec(content)) !== null) {
+    const loc = match[1].trim();
+    if (checked.has(loc)) {
+      continue;
+    }
+    checked.add(loc);
+
+    let pathname;
+    try {
+      pathname = new URL(loc).pathname;
+    } catch {
+      fail(`Invalid sitemap URL: ${loc}`);
+      continue;
+    }
+
+    let targetPath = path.join(ROOT, pathname.replace(/^\//, ''));
+    let exists = await pathExists(targetPath);
+    if (!exists && pathname.endsWith('/')) {
+      targetPath = path.join(ROOT, pathname.replace(/^\//, ''), 'index.html');
+      exists = await pathExists(targetPath);
+    }
+    if (!exists && !path.extname(targetPath)) {
+      exists = await pathExists(path.join(targetPath, 'index.html'));
+    }
+
+    if (!exists) {
+      fail(`Sitemap URL does not resolve to a local file: ${loc} (expected ${relPath(targetPath)})`);
+    }
+  }
+
+  try {
+    const robots = await fs.readFile(ROBOTS_PATH, 'utf8');
+    const sitemapRef = robots.match(/^Sitemap:\s*(.+)$/m);
+    if (!sitemapRef) {
+      fail('robots.txt must include a Sitemap directive');
+    }
+  } catch {
+    fail(`Missing robots.txt: ${relPath(ROBOTS_PATH)}`);
+  }
+}
+
+async function checkFeedEntries() {
+  let content;
+
+  try {
+    content = await fs.readFile(FEED_PATH, 'utf8');
+  } catch {
+    return;
+  }
+
+  const entryPattern = /<entry>[\s\S]*?<link href="([^"]+)"[\s\S]*?<\/entry>/g;
+  let match;
+
+  while ((match = entryPattern.exec(content)) !== null) {
+    const href = match[1].trim();
+    let pathname;
+    try {
+      pathname = new URL(href).pathname;
+    } catch {
+      fail(`Invalid feed entry URL: ${href}`);
+      continue;
+    }
+
+    const targetPath = path.join(ROOT, pathname.replace(/^\//, ''));
+    if (!(await pathExists(targetPath))) {
+      fail(`Feed entry URL does not resolve to a local file: ${href}`);
+    }
+  }
+}
+
+function checkClientScripts() {
+  for (const relativePath of CLIENT_SCRIPT_PATHS) {
+    const absolutePath = path.join(ROOT, relativePath);
+    const result = spawnSync('node', ['--check', absolutePath], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+
+    if (result.status !== 0) {
+      const output = [result.stdout, result.stderr].filter(Boolean).join('\n').trim();
+      fail(`JavaScript syntax check failed for ${relativePath}${output ? `: ${output}` : ''}`);
+    }
+  }
+}
+
 async function main() {
   await checkInternalHrefs();
   await checkMainContent();
   runShortcutforgeValidate();
   await checkBlogFeed();
+  await checkFeedEntries();
+  await checkLocHistory();
+  await checkSitemap();
+  checkClientScripts();
 
   if (errors.length > 0) {
     console.error('Site validation failed:\n');

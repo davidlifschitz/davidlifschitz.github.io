@@ -18,7 +18,7 @@ The site should explain the ecosystem quickly, separate public-facing surfaces f
 | GitHub | Technical visitor jump point | external link to profile and repos |
 | Book a Call | Consulting intake | booking form / scheduling CTA |
 
-Products, Research, and Mobile are homepage sections (`#products`, `#research`, `#mobile`) linked from primary nav, not separate routes.
+Products, Research, and Mobile are homepage sections (`#products`, `#research`, `#mobile`) grouped under **Home sections** in the nav (not top-level items), linked from `scripts/site-nav.js`.
 
 ## Navigation model
 
@@ -27,9 +27,10 @@ Primary navigation (via `scripts/site-nav.js`; ShortcutForge uses its own back-n
 - Ecosystem
 - Dashboard
 - ShortcutForge
-- Products → `index.html#products`
-- Research → `index.html#research`
-- Mobile → `index.html#mobile`
+- Home sections subgroup:
+  - Products → `index.html#products`
+  - Research → `index.html#research`
+  - Mobile → `index.html#mobile`
 - Writing
 - GitHub (external)
 - Book a Call (CTA)

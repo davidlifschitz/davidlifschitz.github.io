@@ -31,7 +31,7 @@
     var attrs = ['href="' + href + '"'];
 
     if (item.external) {
-      attrs.push('target="_blank"', 'rel="noreferrer"', 'aria-label="GitHub (opens in new tab)"');
+      attrs.push('target="_blank"', 'rel="noopener noreferrer"', 'aria-label="GitHub (opens in new tab)"');
     }
 
     var classes = [];
@@ -50,6 +50,9 @@
   }
 
   function spaceToggleMarkup() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return '';
+    }
     return (
       '<button class="space-toggle" type="button" data-space-mode-toggle aria-pressed="false">' +
       '<span class="space-toggle__track" aria-hidden="true"><span class="space-toggle__knob"></span></span>' +

@@ -6,6 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 node scripts/validate-site.mjs
+npm test
 cd shortcutforge && npm run validate
 ```
 
