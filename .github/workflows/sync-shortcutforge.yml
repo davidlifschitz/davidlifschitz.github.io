@@ -1,0 +1,46 @@
+name: Sync ShortcutForge deploy copy
+
+on:
+  workflow_dispatch:
+    inputs:
+      upstream_branch:
+        description: Upstream ShortcutForge branch to sync
+        required: false
+        default: web
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-shortcutforge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync ShortcutForge subtree from upstream
+        env:
+          SHORTCUTFORGE_UPSTREAM_BRANCH: ${{ inputs.upstream_branch }}
+        run: node scripts/sync-shortcutforge.mjs
+
+      - name: Validate site
+        run: |
+          node scripts/validate-site.mjs
+          npm test
+
+      - name: Create sync pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: Sync ShortcutForge deploy copy from upstream
+          title: Sync ShortcutForge deploy copy from upstream
+          body: |
+            Automated sync of `shortcutforge/` from `davidlifschitz/ShortcutForge:${{ inputs.upstream_branch }}`.
+            Deploy-only `.site-back` navigation patches were restored after sync.
+          branch: automation/sync-shortcutforge
+          delete-branch: true

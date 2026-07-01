@@ -16,6 +16,13 @@ const CLIENT_SCRIPT_PATHS = [
   'scripts/booking.js',
   'scripts/hyperframes-fallback.js',
   'scripts/space-mode.js',
+  'shortcutforge/app.js',
+  'shortcutforge/sw.js',
+  'shortcutforge/lib/constants.mjs',
+  'shortcutforge/lib/config-utils.mjs',
+  'shortcutforge/lib/crypto-api.mjs',
+  'shortcutforge/lib/network.mjs',
+  'shortcutforge/lib/payload.mjs',
 ];
 
 /** Pages with data-site-nav that intentionally omit id="main-content" on main. */
