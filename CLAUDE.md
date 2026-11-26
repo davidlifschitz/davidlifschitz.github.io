@@ -32,7 +32,7 @@ Static GitHub Pages site — raw HTML/CSS/JS, no framework, no SSG.
 
 **Pages:**
 
-- `index.html` — personal homepage / ecosystem launchpad; **space mode** (homepage-only interactive portfolio map via `data-space-toggle`); **projects reel** section (`#projects-reel`) embeds `hyperframes/projects-reel/` via `<hyperframes-player>`; also hero, surfaces strip, `#products`, `#research`, `#mobile`
+- `index.html` — one-screen proof page for AI engineering roles (hero + 4 project cards with demo slots). Self-contained: styles only from `styles/home.css` (not `site.css`), no `site-nav.js`, no external scripts or fonts, enforcing CSP with a sha256 hash for its one inline script (update the hash if you edit that script; `npm test` reports the expected value). Demo clips live in `assets/demos/` (see its README); OG image is `assets/og.png`. Contract tests: `tests/homepage.test.mjs`
 - `ecosystem.html` — ecosystem overview and layer map
 - `dashboard.html` — ecosystem activity dashboard (references `scripts/dashboard.js` and `styles/dashboard.css`)
 - `booking.html` — consulting intake (Cal.com embed)
@@ -44,7 +44,7 @@ Static GitHub Pages site — raw HTML/CSS/JS, no framework, no SSG.
 - `blog/part5-hardware.html` — Part 5: Hardware
 - `blog/part6-identity.html` — Part 6: Identity
 - `shortcutforge/index.html` — ShortcutForge mobile web runner (synced subtree; see below)
-- `hyperframes/projects-reel/index.html` — Hyperframes composition; embedded on homepage, not a standalone nav target
+- `hyperframes/projects-reel/index.html` — Hyperframes composition; no longer embedded on the homepage (kept for reference), not a standalone nav target
 - `robots.txt` — crawler rules; references sitemap URL
 - `sitemap.xml` — canonical public URLs
 - `404.html` — GitHub Pages not-found page

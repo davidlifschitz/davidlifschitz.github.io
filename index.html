@@ -2,154 +2,142 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy-Report-Only" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://app.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-src https://cal.com https://app.cal.com; base-uri 'self'; form-action 'self'" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>David Lifschitz</title>
-  <meta name="description" content="Operator tooling, mobile utilities, and research surfaces — connected into one ecosystem." />
-  <meta property="og:title" content="David Lifschitz" />
-  <meta property="og:description" content="Operator tooling, mobile utilities, and research surfaces — connected into one ecosystem." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://davidlifschitz.github.io/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-q0+iF+Xo6ur18e0uOdSnpEXOMGcgRBi1LJZbSVjwA9M='; style-src 'self'; img-src 'self'; media-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none'" />
+  <title>David Lifschitz | AI engineer building agent systems</title>
+  <meta name="description" content="Multi-agent pipelines, tools, and products, running live today. Looking for an AI engineering role." />
   <link rel="canonical" href="https://davidlifschitz.github.io/" />
-  <meta name="twitter:card" content="summary" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/site.css" />
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@hyperframes/player" integrity="sha384-yoYPzY+l8Rqa5ZAKrrLZcP8Rxex6sY6a3relGYyjuR9toG27/yZfEmuNW0Dggqbi" crossorigin="anonymous"></script>
-  <script src="scripts/hyperframes-fallback.js" defer></script>
+  <meta name="theme-color" content="#0a0a0b" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="David Lifschitz" />
+  <meta property="og:url" content="https://davidlifschitz.github.io/" />
+  <meta property="og:title" content="David Lifschitz | AI engineer building agent systems" />
+  <meta property="og:description" content="Multi-agent pipelines, tools, and products, running live today. Looking for an AI engineering role." />
+  <meta property="og:image" content="https://davidlifschitz.github.io/assets/og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="David Lifschitz: I build agent systems that ship." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="David Lifschitz | AI engineer building agent systems" />
+  <meta name="twitter:description" content="Multi-agent pipelines, tools, and products, running live today. Looking for an AI engineering role." />
+  <meta name="twitter:image" content="https://davidlifschitz.github.io/assets/og.png" />
+  <meta name="twitter:image:alt" content="David Lifschitz: I build agent systems that ship." />
+
+  <link rel="stylesheet" href="styles/home.css" />
 </head>
 <body>
-  <div data-site-nav data-active="home" data-space-toggle></div>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="wrap top">
+    <a class="top__name" href="./">David Lifschitz</a>
+    <nav aria-label="Contact">
+      <ul class="top__links">
+        <li><a href="https://github.com/davidlifschitz">GitHub</a></li>
+        <li><a href="mailto:david.p.lifschitz@gmail.com">Email</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main class="wrap" id="main-content">
-    <section class="hero" aria-labelledby="hero-heading">
-      <div class="hero-rule hero-rule--thick"></div>
-      <h1 id="hero-heading">Build fast.<br>Route smart.<br>Ship everything.</h1>
-      <div class="hero-rule"></div>
-      <p class="hero-sub">Operator tooling, mobile utilities, and research surfaces.</p>
-      <div class="btn-row">
-        <a class="btn btn--primary" href="ecosystem.html">Explore Ecosystem</a>
-        <a class="btn btn--secondary" href="https://github.com/davidlifschitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
+    <section class="hero" aria-labelledby="headline">
+      <h1 id="headline">I build agent systems that ship.</h1>
+      <p>Multi-agent pipelines, tools, and products, running live today. Looking for an AI engineering role.</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="mailto:david.p.lifschitz@gmail.com">Email me</a>
+        <a class="btn" href="https://github.com/davidlifschitz">GitHub</a>
       </div>
     </section>
 
-    <section class="ia-section projects-reel-embed" id="projects-reel" aria-labelledby="projects-reel-heading">
-      <h2 id="projects-reel-heading" class="ia-section-label">Projects</h2>
-      <div class="projects-reel-embed__frame">
-        <p class="projects-reel-embed__fallback">Projects reel requires JavaScript</p>
-        <hyperframes-player
-          src="hyperframes/projects-reel/index.html"
-          width="1920"
-          height="1080"
-          autoplay
-          loop
-          muted
-        ></hyperframes-player>
-        <noscript>
-          <p class="projects-reel-embed__fallback">Projects reel requires JavaScript</p>
-        </noscript>
-      </div>
-    </section>
+    <div class="cards">
+      <section class="card" aria-labelledby="p-app-factory">
+        <h2 id="p-app-factory">App Factory</h2>
+        <p>A 5-agent pipeline that turns an app idea into requirements, a plan, a build spec, a reviewed PR, and a Vercel + Supabase deploy, with me approving each step.</p>
+        <ul class="tags" aria-label="Stack"><li>[stack]</li></ul>
+        <ul class="links">
+          <li>Live <span class="ph">[live link]</span></li>
+          <li>Repo <span class="ph">[repo link]</span></li>
+        </ul>
+        <div class="demo" data-demo-slot="app-factory">20s demo coming</div>
+      </section>
 
-    <section class="surfaces" aria-labelledby="surfaces-heading">
-      <h2 id="surfaces-heading" class="surfaces-label">Surfaces</h2>
-      <div class="surface-list">
-        <a class="surface-row" href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noopener noreferrer" aria-label="ScheduleOS — operator shell (opens in new tab)">
-          <span>ScheduleOS — operator shell</span><span class="arrow">→</span>
-        </a>
-        <a class="surface-row" href="https://davidlifschitz.github.io/online-board-games/">
-          <span>TrainGames — offline subway arcade</span><span class="arrow">→</span>
-        </a>
-        <a class="surface-row" href="shortcutforge/index.html">
-          <span>ShortcutForge — mobile capture &amp; trigger flows</span><span class="arrow">→</span>
-        </a>
-        <a class="surface-row" href="ecosystem.html">
-          <span>Ecosystem overview</span><span class="arrow">→</span>
-        </a>
-        <a class="surface-row" href="dashboard.html">
-          <span>Dashboard &amp; metrics</span><span class="arrow">→</span>
-        </a>
-        <a class="surface-row" href="booking.html">
-          <span>Book a consulting call</span><span class="arrow">→</span>
-        </a>
-      </div>
-    </section>
+      <section class="card" aria-labelledby="p-traingames">
+        <h2 id="p-traingames">TrainGames</h2>
+        <p>Games for the train, not games about trains: a free browser arcade built to play on a commute.</p>
+        <ul class="tags" aria-label="Stack"><li>[stack]</li></ul>
+        <ul class="links">
+          <li><a href="https://os-online-board-games.vercel.app">Live<span class="vh"> TrainGames</span></a></li>
+          <li><a href="https://github.com/davidlifschitz/online-board-games">Repo<span class="vh"> TrainGames</span></a></li>
+        </ul>
+        <div class="demo" data-demo-slot="traingames">20s demo coming</div>
+      </section>
 
-    <section class="ia-section" id="products" aria-labelledby="products-heading">
-      <h2 id="products-heading" class="ia-section-label">Products</h2>
-      <div class="ia-grid">
-        <a class="ia-card" href="https://davidlifschitz.github.io/online-board-games/">
-          <span>TrainGames — offline subway arcade &amp; prompt playground</span><span class="arrow">→</span>
-        </a>
-        <a class="ia-card" href="https://github.com/davidlifschitz/graphify" target="_blank" rel="noopener noreferrer" aria-label="Graphify (opens in new tab)">
-          <span>Graphify — context &amp; architecture mapping</span><span class="arrow">→</span>
-        </a>
-        <a class="ia-card" href="https://github.com/davidlifschitz/ScheduleOS" target="_blank" rel="noopener noreferrer" aria-label="ScheduleOS — operator shell (opens in new tab)">
-          <span>ScheduleOS — operator shell</span><span class="arrow">→</span>
-        </a>
-        <a class="ia-card" href="shortcutforge/index.html">
-          <span>ShortcutForge — mobile capture &amp; trigger flows</span><span class="arrow">→</span>
-        </a>
-        <a class="ia-card" href="https://github.com/davidlifschitz/workout-planner" target="_blank" rel="noopener noreferrer" aria-label="workout-planner (opens in new tab)">
-          <span>workout-planner — wellness product surface</span><span class="arrow">→</span>
-        </a>
-        <a class="ia-card" href="https://github.com/davidlifschitz/Bttr" target="_blank" rel="noopener noreferrer" aria-label="Bttr (opens in new tab)">
-          <span>Bttr — accountability product surface</span><span class="arrow">→</span>
-        </a>
-        <a class="ia-card" href="https://github.com/davidlifschitz/fastest-growing-finance-repos" target="_blank" rel="noopener noreferrer" aria-label="fastest-growing-finance-repos (opens in new tab)">
-          <span>fastest-growing-finance-repos — public finance intelligence product</span><span class="arrow">→</span>
-        </a>
-      </div>
-    </section>
+      <section class="card" aria-labelledby="p-shorts">
+        <h2 id="p-shorts">YouTube Shorts agent workflow</h2>
+        <p>An agent workflow that runs a Shorts channel from niche research to scripted, voiced, captioned uploads, with a human approving every post.</p>
+        <ul class="tags" aria-label="Stack"><li>[stack]</li></ul>
+        <ul class="links">
+          <li>Live <span class="ph">[live link]</span></li>
+          <li>Repo <span class="ph">[repo link]</span></li>
+        </ul>
+        <div class="demo" data-demo-slot="shorts">20s demo coming</div>
+      </section>
 
-    <section class="ia-section" id="research" aria-labelledby="research-heading">
-      <h2 id="research-heading" class="ia-section-label">Research</h2>
-      <div class="ia-grid">
-        <a class="ia-card" href="blog/part1-files-folders.html">
-          <span>Unwrapping the Stack — start with Files &amp; Folders</span><span class="arrow">→</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="ia-section" id="mobile" aria-labelledby="mobile-heading">
-      <h2 id="mobile-heading" class="ia-section-label">Mobile</h2>
-      <div class="ia-grid">
-        <a class="ia-card" href="shortcutforge/index.html">
-          <span>ShortcutForge — mobile action layer</span><span class="arrow">→</span>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer wrap">
-    <span>David Lifschitz · 2026</span>
-    <a href="https://github.com/davidlifschitz" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">GitHub ↗</a>
-  </footer>
-
-  <div class="space-mode" data-space-mode-root aria-hidden="true">
-    <canvas id="space-mode-canvas" class="space-mode__canvas" aria-label="Interactive space map of David Lifschitz's portfolio"></canvas>
-
-    <div class="space-hud" aria-label="Space mode controls">
-      <div class="space-menu">
-        <button class="space-menu__button" type="button" data-space-menu-toggle aria-expanded="false">Menu ▾</button>
-        <div class="space-menu__list" data-space-menu-list hidden></div>
-      </div>
-      <button class="space-hud__button" type="button" data-space-mode-exit>Exit</button>
+      <section class="card" aria-labelledby="p-bettermta">
+        <h2 id="p-bettermta">BetterMTA</h2>
+        <p>[one line on what I built]</p>
+        <ul class="tags" aria-label="Stack"><li>[stack]</li></ul>
+        <ul class="links">
+          <li>Live <span class="ph">[live link]</span></li>
+          <li><a href="https://github.com/davidlifschitz/BetterMTA">Repo<span class="vh"> BetterMTA</span></a></li>
+        </ul>
+        <div class="demo" data-demo-slot="bettermta">20s demo coming</div>
+      </section>
     </div>
 
-    <section class="space-card" aria-live="polite" aria-labelledby="space-card-title">
-      <p class="space-card__eyebrow">Flight deck</p>
-      <h2 id="space-card-title" data-space-card-title>Launch sequence</h2>
-      <p data-space-card-body>Fly the astronaut to planets, moons, stations, and strange signals to explore the portfolio.</p>
-      <div class="space-card__actions" data-space-card-actions></div>
-    </section>
+    <div class="about">
+      <section aria-labelledby="about-h">
+        <h2 id="about-h">About</h2>
+        <p>[about: 2 sentences, to be supplied]</p>
+      </section>
+      <section aria-labelledby="contact-h">
+        <h2 id="contact-h">Contact</h2>
+        <p><a href="mailto:david.p.lifschitz@gmail.com">david.p.lifschitz@gmail.com</a> · <a href="https://github.com/davidlifschitz">GitHub</a> · <span class="ph">[LinkedIn URL]</span></p>
+      </section>
+    </div>
+  </main>
 
-    <p class="space-instructions">Click/Tap to fly • WASD/Arrows to steer • Drift close to destinations</p>
-  </div>
+  <footer class="wrap foot">
+    <nav aria-label="More">
+      <ul>
+        <li><a href="blog/">Writing</a></li>
+        <li><a href="ecosystem.html">Ecosystem</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </footer>
 
-  <script src="scripts/site-nav.js" defer></script>
-  <script src="scripts/space-mode.js" defer></script>
+  <script>
+(function () {
+  var clips = document.querySelectorAll('video[data-demo]');
+  if (!clips.length) return;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (still || !('IntersectionObserver' in window)) {
+    clips.forEach(function (v) { v.controls = true; });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target;
+      if (!e.isIntersecting) { v.pause(); return; }
+      var p = v.play();
+      if (p) p.catch(function () { v.controls = true; });
+    });
+  }, { threshold: 0.5 });
+  clips.forEach(function (v) { io.observe(v); });
+})();
+  </script>
 </body>
 </html>
